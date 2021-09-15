@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 40 of /storage/douyanmeiLab/TCGA_wu/snakemake_pipelines/MT2/Snakefile:
+Missing input files for rule GetPileupSummaries_normal:
+bam_links_control/322.control.bam
