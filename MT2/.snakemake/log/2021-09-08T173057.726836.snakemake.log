@@ -1,0 +1,7 @@
+Building DAG of jobs...
+MissingInputException in line 13 of /storage/douyanmeiLab/TCGA_wu/snakemake_pipelines/MT2/Snakefile:
+Missing input files for rule MT2:
+intervals/S31285117_Padded.list
+bam_links_tumor/317.tumor.bam
+bam_links_control/317.control.bam
+0.0001

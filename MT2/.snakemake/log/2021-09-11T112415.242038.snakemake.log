@@ -1,0 +1,24 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	CalculateContamination
+	1	FilterMutectCalls
+	1	GetPileupSummaries_normal
+	1	GetPileupSummaries_tumor
+	1	MT2
+	1	all
+	1	collect_artifact
+	7
+
+[Sat Sep 11 11:24:16 2021]
+rule MT2:
+    input: /storage/douyanmeiLab/yanmei/reference/GRCh38_full_analysis_set_plus_decoy_hla.fa, bam_links_tumor/test.tumor.bam, bam_links_control/test.control.bam, /storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Padded.list, /storage/douyanmeiLab/yanmei/resources/af-only-gnomad.hg38.vcf.gz, /storage/douyanmeiLab/yanmei/resources/1000g_pon.hg38.vcf.gz
+    output: vcfs/test.somatic.m2.vcf.gz, vcfs/test.tumor_vs_normal.bam
+    jobid: 3
+    wildcards: sample=test
+
+RuleException in line 14 of /storage/douyanmeiLab/TCGA_wu/snakemake_pipelines/MT2/Snakefile:
+'InputFiles' object has no attribute 'normal_nam'
