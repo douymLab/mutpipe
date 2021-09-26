@@ -1,0 +1,14 @@
+{
+	"__default__" :
+	{
+		"account" : "lulu",
+		"time" : "12:15:00",
+		"n" : 4,
+		"jobs":4,
+		"partition" : "intel-debug,amd-debug"
+	},
+	"compute1" :
+	{
+		"time" : "00:20:00"
+	}
+}

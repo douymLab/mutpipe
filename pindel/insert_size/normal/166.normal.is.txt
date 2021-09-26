@@ -1,0 +1,1 @@
+SN	insert size average:	279.1

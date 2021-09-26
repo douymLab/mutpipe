@@ -1,0 +1,529 @@
+####################################################################################################
+0	TD 202	NT 0 ""	ChrID chr22	BP 16529622	16529825	BP_range 16529622	16529825	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 20	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 6 0 1 1 1 1
+GTGTCTTGTCCCTGATGTAACCTGGTCTTACCATGGCCCTGTCCCTCCCCTGGCTCTGTCCTGGTCTTGTGCTGACCCTGACCCAGACCTTGGCCCTGCCCCAGCCTTGTCCTTGACCTTGTCATGGCCCTGCGTCTGCCCTGGACTGGCcctggccctgaactgaccctgccctgaccctggccctgaagtggatttgcaggtgtcttgtccctgatgtaacctggtcttaccatggccctgtccctcccctggctctgtcctggtcttgtgctgaccctgacccagaccttggccctg
+                                                                                                                            TGGCCCTGCGTCTGCCCTGGACTGGCGCTGGCCCTGAACTGACCCTGCCCTGACCCTGGCCCTGAAGTGGATTTGCAGGTGTCTTGTCCCTGATGTAACCTGGTCTTACCATGGCCCTGTCCCTCCCCTGGCTCTGTCCTGGTCTTGTGC
+	+	16529623	0	.5	@A00808:646:HWGVJDSXY:2:1170:22462:30154/1
+                                                               GTCTTGTGCTGACCCTGACCCAGACCTTGGCCCTGCCCCAGCCTTGTCCTTGACCTTGTCATGGCCCTGCGTCTGCCCTGGACTGGCGCTGGCCCTGAACTGACCCTGCCCTGACCCTGGCCCTGAAGTGGAGTTGCAGGTGTCTTGTCC
+	-	16529830	20	.5	@A00808:646:HWGVJDSXY:2:1170:22462:30154/2
+####################################################################################################
+1	TD 87	NT 0 ""	ChrID chr22	BP 16558546	16558634	BP_range 16558546	16558634	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 118	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 1 1 1 1
+CACCCAGCCAGCCAAGCCAGACAAGCCAGGCAGCCAGCCAAGGGAGCCAGCCAGCGAAGCCACCCAGCCAGCCAAGCCAGCCAAGCCACCCAGCCAGCCAAGCCAGCCAAGCCAGCCAGCCAGCCAAGCCAGCCAAGCCAGCCAAGCCAGccagccagccaagccagccaagccacccagccagccaagccagccaagccagccagccagccaagccagccaagccagccaagccagccagccagctaagccagccaagccagccagccagccaagccagccagccagctaagccagcca
+                                                                                         CCAGCCAGCCAAGCCAGCCAAGGCAGCCAGCCAGCCAAGCCAGCCAAGCCAGCCAAGCCAGCCAGCCAGCCAAGCCAGCCAAGCCACCCAGACAGCCAAGCCAGCCAAGCCACCCAGAC
+	+	16558572	59	.5	@A00808:646:HWGVJDSXY:2:2159:9598:10535/2
+                                                                                         CCAGCCAGCCAAGCCAGCCAAGGCAGCCAGCCAGCCAAGCCAGCCAAGCCAGCCAAGCCAGCCAGCCAGCCAAGCCAGCCAAGCCACCCAGACAGCCAAGCCAGCCAAGCCACCCAGAC
+	-	16558691	59	.5	@A00808:646:HWGVJDSXY:2:2159:9598:10535/1
+####################################################################################################
+2	TD 82	NT 29 "TGCCAATGTTTAGACAACGACGAAACAGG"	ChrID chr22	BP 15690346	15690429	BP_range 15690346	15690429	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 17	2	NumSupSamples 1	1	.1 4 8 0 0 0 0	.5 215 171 1 1 0 0
+TGCTTCCCCTGGTGCAGGGGGAGCGGCAAGAGCAACGTGGGCACTTCTGGAGACCACGACGATTCTGCTATGAAGACACTCAGGAGCAAGATGGGCAAGTGGTGCTGCCACTGCTTCCCCTGCTGCAGGGGGAGCGGCAAGAGCAACGTG                             tatgaagacactcaggagcaagatgggcaagtggtgctgccactgcttcccctgctgcagggggagcggcaagagcaacgtgggcacttctggagaccacgacgactctgctatgaagacactcaggagcaagatgggcaagtggtgctg
+                                                                              CTCAGGAGCAAGATGGGCAAGTGGTGCTGCCACTGCTTCCCCTGCTGCAGGGGGAGCGGCAAGAGCAACGTGTGCCAATGTTTAGACAACGACGAAACAGGTATGAAGACACTCAGGAGCAAGATGGCCAAGTGGTGCTGCCACTGCTTC
+	+	15690356	17	.5	@A00808:646:HWGVJDSXY:2:1376:5520:9455/1
+####################################################################################################
+3	TD 46	NT 89 "CAAGGCCAGGCGCTGTGGCTCACGCCTGTAATCCCAGCACTTTGGGAGGCCAAGGCGGGTGGATCACCTGAGTTCAGGAGTTTGAGACC"	ChrID chr22	BP 17396211	17396258	BP_range 17396211	17396258	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 4 3 0 0 1 1
+GGTGCGTTACTGCAGTGCCAGCTACTTGAGAGGGTGAGGTGGGAGGATTGCTTGAGCCCAGGAGGTTGAGGCTGTAGTAAGCCATGATCATACCACTGCACTCTAGCCTGGGCGACAAGAGTGAGACCCTTTCTCAAAAAAAAAAAAAAA                                                                                         agcctgggcgacaagagtgagaccctttctcaaaaaaaaaaaaaaaaacaaggccaggcgctgtggctcacgcctgtaatcccagcactttgggaggccaaggcgggtggatcacctgagttcaggagtttgagaccagcctggccaatg
+                                                                                                                       AGTGAGACCCTTTCTCAAAAAAAAAAAAAAACAAGGCCAGGCGCTGTGGCTCACGCCTGTAATCCCAGCACTTTGGGAGGCCAAGGCGGGTGGATCACCTGAGTTCAGGAGTTTGAGACCAGCCTGGCC
+	-	17396353	60	.5	@A00808:646:HWGVJDSXY:2:1227:29134:14904/2
+####################################################################################################
+4	TD 195	NT 0 ""	ChrID chr22	BP 20243200	20243396	BP_range 20243200	20243396	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 1 3 0 0 0 0	.5 37 63 2 2 0 0
+CCCCGGGAATCGCAGTGTTGGGATCCCTGCTTCACAGGCCTCATGGACGATGCTGGGCTAGAACATGCCTTGGAGCCATGCACTCCACCCTGGAAGCCACATCTGCAGACTCCCCATACCACACCCAGGAGCAGCCCACTGGGTCACCAGgggtctcaggaggacctggggctgggtccaagatgtggccaccacccccgggaatcgcagtgttgggatccctgcttcacaggcctcatggacgatgctgggctagaacatgccttggagccatgcactccaccctggaagccacatctg
+                                                                                                                              AGGAGCAGCCCACTGGGTCACCAGGGGTCTCAGGAGGACCTGGGGCTGGGTCCAAGATGTGGCCACCACCCCCGGGAATCGCAGTGTTGGGATCCCTGCTTCACAGGCCTCATGGACGATGCTGGGCTAGAACATGCCTTGGAGCCATGC
+	+	20243200	60	.5	@A00808:646:HWGVJDSXY:2:2338:28311:26130/1
+                                                                        GAGCCATGCACTCCACCCTGGAAGCCACATCTGCAGACTCCCCATACCACACCCAGGAGCAGCCCACTGGGTCACCAGGGGTCTCAGGAGGACCTGGGGCTGGGTCCAAGATGTGGCCACCACCCCCGGGAATCGCAGTGTTGGGATCCC
+	+	20243317	60	.5	@A00808:646:HWGVJDSXY:2:2338:28311:26130/2
+####################################################################################################
+5	TD 81	NT 0 ""	ChrID chr22	BP 20360736	20360818	BP_range 20360736	20360818	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 46	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 5 2 0 0 1 1
+TCCAGGGCGTCGCTAACGAGGACGCCGTCCAGGGCGTCGCTAACGAGGTTGAAGTCCAGGGCGTCGCACACGAGGACGCCGTCCAGGGCATCGCTAACGAGGACGCCGCCCACGGCATCGCTAACGAGGTCGCCGCCCACGGCATCGCGAacgaggacgccgtccagggcatcgctaacgaggacgccgcccacggcatcgctaacgaggtcgccgcccacggcatcgcgaacgaggacgccgcccagggcatcgcgaacgaggacgccgcccagggcattgcacacgaggacgccgtcc
+                                                                                GTCCAGGGCATCGCTAACGAGGACGCCGCCCACGGCATCGCTAACGAGGTCGCCGCCCACGGCATCGCGAACGAGGACGCCGTCCAGGGCATCGCTAACGAGGACGCCGTCCACGGC
+	-	20360864	46	.5	@A00808:646:HWGVJDSXY:2:1514:15953:23985/1
+####################################################################################################
+6	TD 41	NT 0 ""	ChrID chr22	BP 20992688	20992730	BP_range 20992688	20992730	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 40	2	NumSupSamples 1	1	.1 2 1 0 0 0 0	.5 27 29 1 1 0 0
+CTCTGAGGGTCTCCATGGCCCGTCATGCCCCACTCGCCTACATGGGTACCAGGTCCCACCTGTGTCTGTACCCAGGGGCCCTCATCCCTTGGGGACCCTGCCCCCTGGCCCTTCATGGCCATGAGGTGCCGCATCCTTGCCTTACCTGGCccttcatggccatgaggtgccgcatccttgccttacctggctgcaccagccgcactgtggaggctctgctcccccaccattccaccctgccttcttgtcccccagctgcccagtgggaggctcttccacgcggctgctgtcatctcggac
+                                                                                                                                              TACCTGGCCCTTCAGGGCCAGGAGGTGCCGCAT
+	+	20992682	40	.5	@A00808:646:HWGVJDSXY:2:1365:15302:2628/2
+####################################################################################################
+7	TD 92	NT 0 ""	ChrID chr22	BP 23095942	23096035	BP_range 23095942	23096035	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 2 2 0 0 0 0	.5 56 57 2 2 0 0
+GAGGCCTGCAAGGAGTACAAGCCCCTCATCATCTACAATGCCATCGACTCGCTGACCCGCATCATCCGGGCCCTGGCCGCCCTCAGGATCGACTTCCACAACCCCGACCGCGCCTACGACGCTGTGCAGCTCTTTGCGCTGACGGGCCCCgcatcatccgggccctggccgccctcaggatcgacttccacaaccccgaccgcgcctacgacgctgtgcagctctttgcgctgacgggccccgctgagagcaagggcgagatcacacccgagctgctgggtgtcatgcgacggctctggg
+                                                                                                                                             ACAGGACCCGCATCATCCGGGCCCTGGCCGCCCTCAGGATCGACTTCCACAACCCCGACCGCGCCTACGACGCTGTGC
+	+	23095937	60	.5	@A00808:646:HWGVJDSXY:2:2305:5493:29481/1
+                                                                                                                                             ACAGGACCCGCATCATCCGGGCCCTGGCCGCCCTCAGGATCGACTTCCACAACCCCGACCGCGCCTACGACGCTGTGC
+	+	23095937	60	.5	@A00808:646:HWGVJDSXY:2:2305:5493:29481/2
+####################################################################################################
+8	TD 259	NT 0 ""	ChrID chr22	BP 23744437	23744697	BP_range 23744437	23744697	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 9 5 0 0 0 0	.5 57 46 1 1 1 1
+GCACTCGTAGGGCTTCTCCCCGGTGTGGATGATCTGGTGCCTGAGCAGGTGGGAGCTCTGGCTGAAGGCCTTCCCGCACTCACAGCACTCATAGGGCTTCTCCCCAGTGTGGATCACCAGGTGTCGGAGCAGGTGCGAGCTCTGGCTGAAggctgaaatctttcccgcattccctgcactcgtagggcctctttccggtgtggatcttttggtgttgcgtgagggctgagctctggcggaaggccttcccacactcccggcactcgtagggcttctccccggtgtggatgatctggtgcc
+                                                                                                                ATCACCAGGTGTCGGAGCAGGTGCGAGCTCTGGCTGAAGGCTGAAATCTTTCCCGCATTCCCTGCACTCGTAGGGCCTCTTTCCGGTGTGGATCTTTTGGTGTTGCGTGAGGGCTGAGCTCTGGCGGAAGGCCTTCCCACACTCCCGGCA
+	+	23744437	60	.5	@A00808:646:HWGVJDSXY:2:1201:14190:9251/2
+                                TCTGGTGCCTGAGCAGGTGGGAGCTCTGGCTGAAGGCCTTCCCGCACTCACAGCACTCATAGGGCTTCTCCCCAGTGTGGATCACCAGGTGTCGGAGCAGGTGCGAGCTCTGGCTGAAGGCTGAAATCTTTCCCGCATTCCCTGCACTCG
+	-	23744699	60	.5	@A00808:646:HWGVJDSXY:2:1201:14190:9251/1
+####################################################################################################
+9	TD 88	NT 0 ""	ChrID chr22	BP 25296262	25296351	BP_range 25296262	25296351	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 52	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 1 1 0 0
+GTGATGATGAGGTTTGGCGTATGATTGATGCCATTGCGTAGGTAGTGAGCATAGTGCCCAATAGTGTTTCAACCCTTGCTCCCTTCCCTCCCTCCCCCCATTCATTCCTGGTGTCTATTGTTACCATCTTTATGTCCATGAGTACCCAGTagtgtttcaacccttgctcccttccctccctccccccattcattcctggtgtctattgttaccatctttatgtccatgagtacccagtgtttagctcccacttataaataagaacatgtggcatttggttttcttttcctgtgttaattt
+                                                                                                                                             GTATCCAGTAGTGTTTCAACCCTTGCTCCCTTCCCTCCCTCCCCCCATTCATTCCTGGTGTCTATTGTTACCATCTTTATGTCCATGAGTAC
+	+	25296261	52	.5	@A00808:646:HWGVJDSXY:2:1578:25391:34695/1
+####################################################################################################
+10	TD 232	NT 0 ""	ChrID chr22	BP 25357246	25357479	BP_range 25357246	25357479	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 119	2	NumSupSamples 1	1	.1 2 4 0 0 0 0	.5 31 32 1 1 1 1
+ACCCGAGGGAAGCATTGACCAGCACGCGCAGCTCCTGCCTGTCCAGGTTGGCACGCTTGATTTCAGGGTTCTCTCCCCAGTCTATCCAGTACGTGAGGCTGGAGAAGAAGCAGAAGTCCATGACCCCATGCATCTGTCTAGTTTCTGTGGagcctcacctcgatcttgtctgtcttggcatctccccagtagagcttcccttcctgcaggtccagggccaggccgttgggccacccgagggaagcattgaccagcacgcgcagctcctgcctgtccaggttggcacgcttgatttcaggg
+                                                                                                                         GACCCCATGCATCTGTCTAGTTTCTGTGGCACCTCACCTCGATCTTGTCTGTCTTGGCATCTCCCCAGTAGAGCTTCCCTTCCTGCAGGTCCAGGGCCAGGCCGTTGGGCCACCCGAGGGAAGCATTGACCAGCACGCGCAGCTCCTGCC
+	+	25357358	60	.5	@A00808:646:HWGVJDSXY:2:1512:3848:32268/2
+                              GCTCCTGCCTGTCCAGGTTGGCACGCTTGATTTCAGGGTTCTCTCCCCAGTCTATCCAGTACGTGAGGCTGGAGAAGAAGCAGAAGTCCATGACCCCATGCATCTGTCTAGTTTCTGTGGCACCTCACCTCGATCTTGTCTGTCTTGGCA
+	-	25357398	59	.5	@A00808:646:HWGVJDSXY:2:1512:3848:32268/1
+####################################################################################################
+11	TD 62	NT 0 ""	ChrID chr22	BP 25839111	25839174	BP_range 25839111	25839174	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 0 0 1 1
+GTGTGTATGTATGAGTGTATACATGTGTGTGCATGTGTGTATATGTATGTATATATGTATTAGTGTGTATACGTGTGTGCGTGTGTGTATATATGTATGAGTGTTTGTGTATATGTGTATGAGTGTGTATATATGTGTGTGCATGTGTGTatatatgtatgagtgtttgtgtatatgtgtatgagtgtgtatatatgtgtgtgcatgtgtgtatatatgtatgagtgtgtttgtatatgtgtgcacgtgtgtatatgtgtgtgtatatatgtatgagtgtgtttgtatatatgtgtgtgc
+                                                                                                                              GTATATATGTGTGTGCATGTGTGTATATATGTATGAGTGTTTGTGTATATGTGTATGAGTGTGTATATATG
+	-	25839158	60	.5	@A00808:646:HWGVJDSXY:2:2640:12120:34006/1
+####################################################################################################
+12	TD 215	NT 0 ""	ChrID chr22	BP 28975146	28975362	BP_range 28975146	28975362	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 68	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 3 2 1 1 1 1
+TTCAAGACCAGGCCAGGCGCAGTGGCTCACGCCTGTAATCCCAGCACTTTGGGAGGCCGAGGTGGGCGGATCACAAGGTCAGGAGTTCGAGACCAGCCTGGCCAATATGGTGAAACCCTATCTCTACTAAAAATACCAAAATTAGCCGGGagtggcttacgcctgtaatcctagcattttgggagtccgaggcgggcggatcatgacgtcaagagttcaagaccaggccaggcgcagtggctcacgcctgtaatcccagcactttgggaggccgaggtgggcggatcacaaggtcaggag
+                                                                                                         TATGGTGAAACCCTATCTCTACTAAAAATACCAAAATTAGCCGGGAGTGGCTTACGCCTGTAATCCTAGCATTTTGGGAGTCCGAGGCGGGCGGATCATGACGTCAAGAGTTCAAGACCAGGCCAGGCGCAGTGGCTCACGCCTGTAATC
+	+	28975146	36	.5	@A00808:646:HWGVJDSXY:2:1138:3170:27931/1
+                                                          GAGGTGGCCGGATCACAAGGTCAGGAGTTCGAGACCAGCCTGGCCAATATGGTGAAACCCTATCTCTACTAAAAATACCAAAATAAGCCGGGAGTGGCTTACGCCTGTAATCCTAGCATTTTGGGAGTCCGAGGCGGGCGGATCATGACG
+	-	28975366	32	.5	@A00808:646:HWGVJDSXY:2:1138:3170:27931/2
+####################################################################################################
+13	TD 98	NT 0 ""	ChrID chr22	BP 29487518	29487617	BP_range 29487518	29487617	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 44	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 1 4 1 1 0 0
+TACAAAAAAAAAAAAAATAGCTGGGCATGGTGGCACATGCCTTTAGTCTCAGCTACTCAGGAGGCTGACGTGGGAGGATCACCTGAGCCTGGGAGTTGGAGGCTTCAGTGAGCTATGATCGTGCCACTGCACTCCAGCCTGTCATCACAGctactcaggaggctgacgtgggaggatcacctgagcctgggagttggaggcttcagtgagctatgatcgtgccactgcactccagcctgtcatcacagagtgagacactgtctcaaaaataacaacaacacaacaacaacaaaagacaga
+                                                                                                                                         CCTGTAATCCCAGCTACCCAGGAGGCTGACGTGGGAGGATCACCTGAGCCTGGGAGTTGGAGGCTTCAGTGAGCTATGATCGTGCCACTGCACTCCAGCCTGTCATCAC
+	+	29487515	44	.5	@A00808:646:HWGVJDSXY:2:1239:26178:9721/2
+####################################################################################################
+14	TD 60	NT 0 ""	ChrID chr22	BP 29489847	29489908	BP_range 29489847	29489908	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 0	2	NumSupSamples 1	1	.1 1 1 0 0 0 0	.5 40 32 1 1 0 0
+GAAGGCCAAGTCCCCAGTGAAGGAAGAAGCAAAGTCCCCTGAGAAGGCCAAGTCCCCAGTGAAGGAAGAAGCAAAGACCCCCGAGAAGGCCAAGTCCCCAGTGAAGGAAGAAGCTAAGTCCCCAGAGAAGGCCAAGTCCCCAGAGAAGGCcaagtccccagtgaaggaagaagctaagtccccagagaaggccaagtccccagagaaggccaagactcttgatgtgaagtctccagaagccaagactccagcgaaggaggaagcaaggtcccctgcagacaaattccctgaaaaggccaa
+                                                                                                                                 GGCCAAGTCCCCTGAGAAGGCCAAGTCCCCAGTGAAGGAAGAAGC
+	+	29489704	0	.5	@A00808:646:HWGVJDSXY:2:1610:26440:4382/2
+####################################################################################################
+15	TD 45	NT 71 "AATTTGGTCAAATCCGCCGACAGCGGCCGAGCCTGGAACGTCCTCCTCCTGACCTCGGGCTTAGCCTCTGA"	ChrID chr22	BP 25029516	25029562	BP_range 25029516	25029562	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 1 1 0 0 0 0	.5 17 12 0 0 1 1
+GCCGGAGAAAGGGGTTGTGAGCGTTCAGGAACGGATCAGAGGCTGGACTGCCGAGAGCTCAGAGGCTAAGCCCGAGGTCAGGAGGAGGACGTTCCAGGCTCGGCCGCTGTCGGCGGATTTGACCAAATTGTAAGTAGGCACATCCCACAC                                                                       gctgtcggcggatttgaccaaattgtaagtaggcacatcccacacccctctctcagccgcccacccacacaccctgaggaagacggaaccaggctccatgctgggcacttgtcaccccccctcagtttacccatagcccaagaggaggta
+                                                                                                                         ACCAAATTGTAAGTAGGCACATCCCACACAATTTGGTCAAATCCGCCGACAGCGGCCGAGCCTGGAACGTCCTCCTCCTGACCTCGGGCTTAGCCTCTGAGCTCTCGGC
+	-	25029569	60	.5	@A00808:646:HWGVJDSXY:2:1277:27832:23140/1
+####################################################################################################
+16	TD 82	NT 106 "CGGTGTTGGTATCGTGGGCTCGGTTTTGTTTATAAGAGACAGACCCTGCAGTGAGCCGAGATCACGCCACTGCACTCCAGCCTGGGCGACAGCGAGACTCCATCTC"	ChrID chr22	BP 28729545	28729628	BP_range 28729545	28729628	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 1 1 0 0
+CCCTGCAGTGAGCCGAGATCACGCCACTGCACTCCAGCCTGGGCGACAGCGAGACTCCATCTCAAAAAAAAAAAAAAAAAAAAAAAAAGAATTAACCCAGGAAAGCTTGGTTGGTTTAACATCTGAAAACCAATTAATATAATACACGAT                                                                                                          aaaaaaaaaaaaaaaaaaaagaattaacccaggaaagcttggttggtttaacatctgaaaaccaattaatataatacacgataacaatagaatataggaaaatagacacagaaaaaaattttggcaaaatgcaacacccttttataacaa
+                                                                                                                                             ATACGCGATCGGTGTTGGTATCGTGGGCTCGGTTTTGTTTATAAGAGACAGACCCTGCAGTGAGCCGAGATCACGCCACTGCACTCCAGCCTGGGCGACAGCGAGACTCCATCTCAAAAAAAAAAAAAAAAAAAAGAATTAACCCAGGAA
+	+	28729476	60	.5	@A00808:646:HWGVJDSXY:2:2437:24379:22013/1
+####################################################################################################
+17	TD 184	NT 0 ""	ChrID chr22	BP 30002834	30003019	BP_range 30002834	30003019	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 3 3 0 0 0 0	.5 18 17 1 1 1 1
+CTTCTCTTTAGATTATGTGGTAGCTATCCTCAAGAGCTCATAGTGCCTGCCTGGATCACTGACAAAGAACTGGAAAGTGTATCAAGTTTCAGGTCCTGGAAGCGCATCCCTGCCGTCATCTACAGGTAAGTTAAACTGGACCAGTCCCAGctctcttatccccttgactctccccacttctcatcttctctttagattatgtggtagctatcctcaagagctcatagtgcctgcctggatcactgacaaagaactggaaagtgtatcaagtttcaggtcctggaagcgcatccctgccgt
+                                                                                                        CATCCCTGCCGTCATCTACAGGTAAGTTAAACTGGACCAGTCCCAGCTCTCTTATCCCCTTGACTCTCCCCACTTCTCATCTTCTCTTTAGATTATGTGGTAGCTATCCTCAAGAGCTCATAGTGCCTGCCTGGATCACTGACAAAGAAC
+	+	30002834	60	.5	@A00808:646:HWGVJDSXY:2:1447:5638:3803/1
+                                                            GACAAAGAACTGGAAAGTGTATCAAGTTTCAGGTCCTGGAAGCGCATCCCTGCCGTCATCTACAGGTAAGTTAAACTGGACCAGTCCCAGCTCTCTTATCCCCTTGACTCTCCCCACTTCTCATCTTCTCTTTAGATTATGTGGTAGCTA
+	-	30003020	60	.5	@A00808:646:HWGVJDSXY:2:1447:5638:3803/2
+####################################################################################################
+18	TD 97	NT 0 ""	ChrID chr22	BP 30546611	30546709	BP_range 30546611	30546709	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 3 2 0 0 0 0	.5 59 31 1 1 1 1
+TTGAGTCCTGCCCTTCCCCGTGGCAGAAGGAGAAACTGAGGCTGGTGTAGGAGTCTCTCCCTTCACTCACCTGGGCCAGCGACTTCTCCTGCGATGGGCTCAGGTCACCCACTTGTCCACTCATGCTGCCCATGAATGGGTCCAGGCTCCtctctcccttcactcacctgggccagcgacttctcctgcgatgggctcaggtcacccacttgtccactcatgctgcccatgaatgggtccaggctccactctgtggctccctccaggtggcctgccttttgccagctggtagccatgccc
+                                                                                                                     CACTCATGCTGCCCATGAATGGGTCCAGGCTCCACTCTCCCTTCACTCACCTGGGCCAGCGACTTCTCCTGCGATGGGCTCAGGTCACCCACTTGTCCACTCATGC
+	+	30546612	60	.5	@A00808:646:HWGVJDSXY:2:2267:25735:27586/1
+                                                                                                                     CACTCATGCTGCCCATGAATGGGTCCAGGCTCCACTCTCCCTTCACTCACCTGGGCCAGCGACTTCTCCTGCGATGGGCTCAGGTCACCCACTTGTCCACTCATGC
+	-	30546718	60	.5	@A00808:646:HWGVJDSXY:2:2267:25735:27586/2
+####################################################################################################
+19	TD 78	NT 0 ""	ChrID chr22	BP 31655705	31655784	BP_range 31655705	31655784	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 2 0 2 2 0 0
+TTTGTTTTGTTTTGTTTTTGAGATGCAGTCTCGCTCCGTCACCCAGGCTGGAGTTCAGTGGCGTGATCTCAACTCACTGCAACCTCCGCCTCCTGGGTTCAAGCAGTTCTTCTGCCTCAGCCTCCCAAGTAGCTGGGATTACAGGCACAActcactgcaacctccgcctcctgggttcaagcagttcttctgcctcagcctcccaagtagctgggattacaggcacaagccaccacacccagctaatttttgtgtttttttagtagagacagggtttcgccatgttggccaggctgggct
+                                                                                                                                            ACAGTCTCAACTCACTGCAACCTCCGCCTCCTGGGTTCAAGCAGTTCTTCTGCCTCAGCCTCCCAAGTAGCTGGGATTACAG
+	+	31655699	60	.5	@A00808:646:HWGVJDSXY:2:2162:17607:5838/2
+                                                                                                                                            ACAGTCTCAACTCACTGCAACCTCCGCCTCCTGGGTTCAAGCAGTTCTTCTGCCTCAGCCTCCCAAGTAGCTGGGATTACAG
+	+	31655699	60	.5	@A00808:646:HWGVJDSXY:2:2162:17607:5838/1
+####################################################################################################
+20	TD 368	NT 0 ""	ChrID chr22	BP 34362174	34362543	BP_range 34362174	34362543	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 1 0 2 2 0 0
+TGGCTGTCATGGTGGGATGGGCTTTAGGGCAGGGTAAATGGAGAGGTAACTGCTAGACAGTATTGACCTTCTAGTTGACCTTCCTTCTAGTCTATTTGCTCCTATGTGATCTGCCTGGTGACCTAGGAGCCCTCTGACTTCTGAAGTCCCacctacctcctatagcactttcttgagtttaaaaggaaaagttatctccaaattggtgctcagcctcctgccagtcatgggctctatttactctttgggacaaattttcaaaagcgtggtgtcctagtagtgctgtcattctttccacct
+                                                                                                                                  CCTCTGACTTCTGAAGTCCCCCCTACCTCCTATAGCACTTTCTTGAGTTTAAAAGGAAAAGTTATCTCCAAATTGGTGCTCAGCCTCCTGCCAGTCATGGGCTCTATTTACTCTTTGGGACAAATTTTCAAAAGCGTGGTGTCCTAGTAG
+	+	34362175	60	.5	@A00808:646:HWGVJDSXY:2:1218:17571:3740/2
+                                                 CTGCTAGACAGTATTGACCTTCTAGTTGACCTTCCTTCTAGTCTATTTGCTCCTATGTGATCTGCCTGGTGACCTAGGAGCCCTCTGACTTCTGAAGTCCCCCCTACCTCCTATAGCACTTTCTTGAGTTTAAAAGGAAAAGTTATCTCC
+	+	34362441	60	.5	@A00808:646:HWGVJDSXY:2:1218:17571:3740/1
+####################################################################################################
+21	TD 74	NT 10 "GCCCTCCTTC"	ChrID chr22	BP 30361769	30361844	BP_range 30361769	30361844	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 2 2 0 0 1 1
+TCCCTAACTTTTCAGAGCCTCAGTTTCCTCCTCTGTAGAAATGAGGCAGATTCAGGGAAGTGGCACACAGTAGGTTCTTCAGTCGAAGCCAGCACTATTGAAGAGTACCCTCTGCTCAGGCTGAAGGCAGGCAGCCCACCTGCCCCTTCT          cttcagtcgaagccagcactattgaagagtaccctctgctcaggctgaaggcaggcagcccacctgccccttctctcccctccttccttcagtctggaaccccttctccttcctggacagccttctaccctgctctcaggaagccctgcc
+                                                                                 GTCGAAGCCAGCACTATTGAAGAGTACCCTCTGCTCAGGCTGAAGGCAGGCAGCCCACCTGGCCCTTCTGCCCTCCTTCCTTCAGTC
+	-	30361859	60	.5	@A00808:646:HWGVJDSXY:2:1220:26124:21026/1
+####################################################################################################
+22	TD 175	NT 0 ""	ChrID chr22	BP 35321881	35322057	BP_range 35321881	35322057	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 1 1 0 0 0 0	.5 16 54 1 1 1 1
+TTAGGTAAGGGGGCTCTATTCCTAAGCCCACCCTTTTTCTTGTCCTCCTTAGTCCCAAAGATGCCCTCCGAGCAGTAAAGAAGAGAATCGTGGGGAATAAGAACTTCCACGAGGTGATGCTGGCTCTCACAGTGAGTGCCCCATCTGTCTttccaactctccagggtctctggtgttaggtaagggggctctattcctaagcccaccctttttcttgtcctccttagtcccaaagatgccctccgagcagtaaagaagagaatcgtggggaataagaacttccacgaggtgatgctggct
+                                                                           TAAAGAAGAGAATCGTGGGGAATAAGAACTTCCACGAGGTGATGCTGGCTCTCACAGTGAGTGCCCCATCTGTCTGTCCAACTCTCCAGGGTCTCTGGTGTTAGGTAAGGGGGCTCTATTCCTAAGCCCACCCTTTTTCTTGTCCTCCTT
+	+	35321947	60	.5	@A00808:646:HWGVJDSXY:2:1533:1208:2926/2
+                                         GTCCTCCTTAGTCCCAAAGATGCCCTCCGAGCAGTAAAGAAGAGAATCGTGGGGAATAAGAACTTCCACGAGGTGATGCTGGCTCTCACAGTGAGTGCCCCATCTGTCTGTCCAACTCTCCAGGGTCTCTGGTGTTAGGTAAGGGGGCTC
+	-	35322131	60	.5	@A00808:646:HWGVJDSXY:2:1533:1208:2926/1
+####################################################################################################
+23	TD 285	NT 0 ""	ChrID chr22	BP 36505884	36506170	BP_range 36505884	36506170	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 5 6 0 0 0 0	.5 41 82 1 1 1 1
+TGTCCGCGAAGTCACCCAGGTAGCGCACCATGTCGCGGGCGTCGGGGAAGTAGGCACGCGAGTAGTGTCTGAAGAGCAGCCGGGGGTCGTGGCTGAGCAGAGAGTTCCAGTCGTGGCGGAGGTTGAACTCGGCGTTAGCCTTGCCCGTGTaccggccttacctgcactgatgcacctggcccttctggtcagttaggatgaagtagtggccattccaggcctgtcggtccttgtccagagtgacgtgggcgatggtggtgttgtactggacacggagccccagcgtgtccgcgaagtcac
+                                                                                           GCTGAGCAGAGAGTTCCAGTCGTGGCGGAGGTTGAACTCGGCGTTAGCCTTGCCCGTGTACCGGCCTTACCTGCACTGATGCACCTGGCCCTTCTGGTCAGTTAGGATGAAGTAGTGGCCATTCCAGGCCTGTCGGTCCTTGTCCAGAGT
+	+	36505884	60	.5	@A00808:646:HWGVJDSXY:2:2607:23900:22968/2
+                                                                GTGTCTGAAGAGCAGCCGGGGGTCGTGGCTGAGCAGAGAGTTCCAGTCGTGGCGGAGGTTGAACTCGGCGTTAGCCTTGCCCGTGTACCGGCCTTACCTGCACTGATGCACCTGGCCCTTCTGGTCAGTTAGGATGAAGTAGTGGCCATT
+	-	36506173	60	.5	@A00808:646:HWGVJDSXY:2:2607:23900:22968/1
+####################################################################################################
+24	TD 228	NT 0 ""	ChrID chr22	BP 36894396	36894625	BP_range 36894396	36894625	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 2 2 2 0 0
+CTAGAGGGAAGCTGTGAGCTGTGAGGTTGGAGGAAGAGAGGACTTGCACCTTCCTGCCTACTTGCTGCTCCAGTGAGCCTCACTGTAGGAATACTTCTTCACCCTTCACCCTAGCAGCAGCAATTATTTCCTGTGGCAGCATTTAAATCCttgttgtgatactggatttgggacttcccaaccacagtgatgtcagctggttcctggtaccctctgccaacttgggtgctagagggaagctgtgagctgtgaggttggaggaagagaggacttgcaccttcctgcctacttgctgctcca
+                                                                                                                               TTCCTGTGGCAGCATTTAAATCCTTGTTGTGATACTGGATTTGGGACTTCCCAACCACAGTGATGTCAGCTGGTTCCTGGTACCCTTTGCCAACTTGGGTGCTAGAGGGAAGCTGTGAGCTGTGAGGTTGGTGGAAGAGAGGACTTGCAC
+	+	36894396	60	.5	@A00808:646:HWGVJDSXY:2:2678:9860:31313/1
+                                        GACTTGCACCTTCCTGCCTACTTGCTGCTCCAGTGAGCCTCACTGTAGGAATACTTCTTCACCCTTCACCCTAGCAGCAGCAATTATTTCCTGTGGCAGCATTTAAATCCTTGTTGTGATACTGGATTTGGGACTTCCCAACCACAGTGA
+	+	36894514	60	.5	@A00808:646:HWGVJDSXY:2:2678:9860:31313/2
+####################################################################################################
+25	TD 72	NT 0 ""	ChrID chr22	BP 37723715	37723788	BP_range 37723715	37723788	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 51	2	NumSupSamples 1	1	.1 20 19 0 0 0 0	.5 61 42 0 0 1 1
+AGGACAACCCCCAAACTTCTTTTCCTACTTGTACTCCCCAGCGGGAAAACCCCAGGACACCCTGTGTCCAGCAGGACGATCCCAGAGCCTCCTCTCCCAACAGAACCACTCAACGAGAGAATTCCAGAACATCCTGTGCCCAGCGGGACAatcccagagcctcctctcccaacagaaccactcaacgagagaattccagaacatcctgtgcccagcgggacaatcccaaagcctccagaacctcctctcccaatagagccacacgagacaaccccagaacatcctgcgcccagcgggaca
+                                                                                                 CAACAGAACCACTCAACGAGAGAATTCCAGAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCTCTCCCAATAGAGC
+	-	37723806	51	.5	@A00808:646:HWGVJDSXY:2:1151:27064:10347/2
+####################################################################################################
+26	TD 69	NT 0 ""	ChrID chr22	BP 37724259	37724329	BP_range 37724259	37724329	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 57	2	NumSupSamples 1	1	.1 23 17 0 0 0 0	.5 177 138 1 1 0 0
+CAATAGAGCTGCACGAGACAACCCCACAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCAGAACCTCCTCTCCCAATAGAGCCACACGAGACAACCCCAGAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCTCTCCCAAtagagccacacgagacaaccccagaacatcctgtgcccagcgggacaatcccagagcctcctctcccaatagagctacacgagacaaccccacaacatcctgtgcccagcgggacaatcccagagcctccagaacctcctctcccaatag
+                                                                                         CACGAGACAACCCCAGAACATCCTGCGCCCAGCGGGACAATCCCAGAGCCTCCTCTCCCAATAGAGCTGCACGAGACAACCCCACAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCTCTCCC
+	+	37724128	57	.5	@A00808:646:HWGVJDSXY:2:2666:32958:8093/1
+####################################################################################################
+27	TD 69	NT 0 ""	ChrID chr22	BP 37724282	37724352	BP_range 37724282	37724352	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 0	2	NumSupSamples 1	1	.1 24 14 0 0 0 0	.5 172 133 2 2 0 0
+CCACAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCAGAACCTCCTCTCCCAATAGAGCCACACGAGACAACCCCAGAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCTCTCCCAATAGAGCTACACGAGACAACCCCAgaacatcctgtgcccagcgggacaatcccagagcctcctctcccaatagagctacacgagacaaccccacaacatcctgtgcccagcgggacaatcccagagcctccagaacctcctctcccaatagagccacacgagataaccccagaa
+                                                                                                                        CTCCCAATAGAGCTACACGAGACAACCCCACAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCTCTCCCAAT
+	+	37724252	0	.5	@A00808:646:HWGVJDSXY:2:1669:32072:13291/2
+                                                                                                                        CTCCCAATAGAGCTACACGAGACAACCCCACAACATCCTGTGCCCAGCGGGACAATCCCAGAGCCTCCTCTCCCAAT
+	+	37724252	0	.5	@A00808:646:HWGVJDSXY:2:1669:32072:13291/1
+####################################################################################################
+28	TD 88	NT 0 ""	ChrID chr22	BP 39220328	39220417	BP_range 39220328	39220417	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 0	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 0 0 1 1
+GGTGACAACAACAGAGCCTGGGAGTAAGTGAGGGTGAAAAATAGAAAAGGGAGGAAGAAAGAGGATGGATGGATGGATGGATGGATGGATGGATGGATGGACAGGTAGATGGATGGATGGATGGATGGATGGATGGATGGACAGGTGGATggatggatggatggatggatggatggatggatggatggacaggtagatggatggatggatggatggatggatggatggacaggtggatggacagatggatggacggatggatggatggatggacaggtagatggatggatggatggatgg
+                                                                                      GGATGGATGGATGGACAGGTGGATGGATGGATGGATGGATGGATGGATGGATGGACAGGTGGATGGATGGATGGATGGATGGATGGATGGATGGATGGATGGACAGGTGGATGGATGGATG
+	-	39220497	0	.5	@A00808:646:HWGVJDSXY:2:2476:15465:4601/2
+####################################################################################################
+29	TD 99	NT 18 "AGAGGAAAAAATACGAGC"	ChrID chr22	BP 36880273	36880373	BP_range 36880273	36880373	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 0 0 1 1
+CTTCAAACCACATTCACGGCCAAAAGTAAGGGGTGAAACCAATCTAATTGAGGGGGCTTCAGCACAACTTTTCACCAATAGGTGGTTTATGCAGACCCAGGTGCAACCTCTAGGAAACCAGGATAAGAGAGAAAAAAAAAAAAAAAAACA                  gggggcttcagcacaacttttcaccaataggtggtttatgcagacccaggtgcaacctctaggaaaccaggataagagagaaaaaaaaaaaaaaaaacacaagaggaaaaaatacgagcgggggcatcataagctacacattgtagggga
+                                                     GGGCTTCAGCACAACTTTTCACCAATAGGTGGTTTATGCAGACCCAGGTGCAACCTCTAGGAAACCAGGATAAGAGAGAAAAAAAAAAAAAAACACAAGAGGAAAAAATACGAGCGGGGGCATCA
+	-	36880398	60	.5	@A00808:646:HWGVJDSXY:2:2626:5520:19664/1
+####################################################################################################
+30	TD 42	NT 114 "GTGGGAGGCTAGAGACTGGCAGCCCAGATGCATCCATCCCACTGCAGCCCCTCCTGCCTGTCCCCTCCCGGCCCTGGAAGACCCCTCCAGGCTCCCCAAGGGCAGTGGGCAGCA"	ChrID chr22	BP 39177275	39177318	BP_range 39177275	39177318	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 4 5 1 1 0 0
+CCCTAGTTTCAGGCCCAGAGCAGTCTGGGGAGAAGCTGGGAGCTGGAGGCTTCAGAGACCTCCACTCTGCAGGAGACCAAGCCCGCTCCCCATGCTGCCCTCTGCCCTTGGGGAGCCTGGAGGGGTCTTCCAGGGCCGGGAGGGGACAGG                                                                                                                  tggggagcctggaggggtcttccagggccgggaggggacaggcaggaggggctgcagtgggatggatgcatctgggctgccagtctctagcctcccaccctctccctcccctctcctgctggctcgaggaccaccccaagcccctgccca
+                                                                                                                                             GGGGAGAGGGTGGGAGGCTAGAGACTGGCAGCCCAGATGCATCCATCCCACTGCAGCCCCTCCTGCCTGTCCCCTCCCGGCCCTGGAAGACCCCTCCAGGCTCCCCAAGGGCAGTGGGCAGCATGGGGAGCCTGGAGGGGTCTTCCAGGG
+	+	39177251	60	.5	@A00808:646:HWGVJDSXY:2:1646:7988:22122/2
+####################################################################################################
+31	TD 417	NT 0 ""	ChrID chr22	BP 40379548	40379966	BP_range 40379548	40379966	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 2 2 2 0 0
+CTCCCACCTCAGCTTCCTGAGTAATCTGGGACTACAGATTTGCACCACCACGCCCAGCTAATTTTTGTATTTTTTTGTAGAGATTGGGTTTCGTCATGTTGCCCAGGGTGGTCTCAAACTCCTGGGCTCAAGTGATCCACCCTCCTCGGCctccctaagtcttgctcagttcaggcccgtgcagtgcctgctgcagcatatgcatatccctcagtgagttattaagtaaatatcttcctccttcatgaaggcttttccatatcaacctgtagttatctctttatttctttgaactttggt
+                                                                                                            TGGTCTCAAACTCCTGGGCTCAAGTGATCCACCCTCCTCGGCCTCCCTAAGTCTTGCTCAGTTCAGGCCCGTGCAGTGCCTGCTGCAGCATATGCATATCCCTCAGTGAGTTATTAAGTAAATATCTTCCTCCTTCATGAAGGCTTTTCC
+	+	40379548	60	.5	@A00808:646:HWGVJDSXY:2:2335:27923:36041/1
+                                              ACCACGCCCAGCTAATTTTTGTATTTTTTTGTAGAGATTGGGTTTCGTCATGTTGCCCAGGGTGGTCTCAAACTCCTGGGCTCAAGTGATCCACCCTCCTCGGCCTCCCTAAGTCTTGCTCAGTTCAGGCCCGTGCAGTGCCTGCTGCAG
+	+	40379861	60	.5	@A00808:646:HWGVJDSXY:2:2335:27923:36041/2
+####################################################################################################
+32	TD 261	NT 0 ""	ChrID chr22	BP 40381165	40381427	BP_range 40381165	40381427	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 88	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 2 1 1 1 1 1
+AGCTGGGACTACAGGTGTGCACCACCACACTCAGCTAATTTTTTAAATTTTTTGTAGTGATGAAGCCTCACTATGTTGCCGAGGCTGGTCTCAAACTCTTGGGCTCAAGTGATCCTTCTGCCTTGGCCTTCCAAAGTGCTGGGATAAGAGgagacagggcctcattctgttgcccaggttggagtgaagtggtatgattttggctcattgcaacctccacctccagggctcaggcagtcctcccacctgagcctcccaagtagctgggactacaggtgtgcaccaccacactcagctaat
+                                                                                                TCTTGGGCTCTAGTGATCCTTCTGCCTTGGCCTTCCAAAGTGCTGGGATAAGAGGAGACAGGGCCTCATTCTGTTGCCCAGGTTGGAGTGAAGTGGTATGATTTTGGCTCATTGCAACCTCCACCTCCAGGGCTCAGGCAGTCCTCCCAC
+	+	40381165	60	.5	@A00808:646:HWGVJDSXY:2:2174:1687:12148/1
+                                                          GATGAAGCCTCACTATGTTGCCGAGGCTGGTCTCAAACTCTTGGGCTCAAGTGATCCTTCTGCCTTGGCCTTCCAAAGTGCTGGGATAAGAGGAGACAGGGCCTCATTCTGTTGCCCAGGTTGGAGTGAAGTGGTATGATTTTGGCTCAT
+	-	40381428	28	.5	@A00808:646:HWGVJDSXY:2:2174:1687:12148/2
+####################################################################################################
+33	TD 159	NT 0 ""	ChrID chr22	BP 41298060	41298220	BP_range 41298060	41298220	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 12	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 4 5 1 1 1 1
+CTGGTCTCGAACTCCCTACCTCAGGTGATCCACCCGCCTCTGCCTCCCAAAGTGCTGGGATTACAGGCATGAGCCACCGTGCCTGGCCACGCCCAGCTAATTTTTGTATTTTTAGTAGAGACAGGGTTTCACCATATTGGCTAGGCTGGTttggccaggctggtctcgaactccctacctcaggtgatccacccgcctctgcctcccaaagtgctgggattacaggcatgagccaccgtgcctggccacgcccagctaatttttgtatttttagtagagacagggtttcaccatattggc
+                                                                           ACCGTGCCTGGCCACGCCCAGCTAATTTTTGTATTTTTAGTAGAGACAGGGTTTCACCATATTGGCTAGGCTGGTTTGGCCAGGCTGGTCTCGAACTCCCTACCTCAGGTGATCCACCCGCCTCTGCCTCCCAAAGTGCTGGGATTACAG
+	-	41298294	0	.5	@A00808:646:HWGVJDSXY:2:2533:10746:12461/2
+                                                         GGATTACAGGCATGAGCCACCGTGCCTGGCCACGCCCAGCTAATTTTTGTATTTTTAGTAGAGACAGGGTTTCACCATATTGGCTAGGCTGGTTTGGCCAGGCTGGTCTCGAACTCCCTACCTCAGGTGATCCACCCGCCTCTGCCTCCC
+	+	41298060	12	.5	@A00808:646:HWGVJDSXY:2:2533:10746:12461/1
+####################################################################################################
+34	TD 236	NT 0 ""	ChrID chr22	BP 41467971	41468208	BP_range 41467971	41468208	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 1 0 0 0 0 0	.5 5 20 2 2 0 0
+TTTGCTGGTTCCACAGAAAACTGGGAGTGGGAAGGGTGGGTTGTTGGGACGGTGTGTTCCACTCACATTTTTCACACAGTCTTCCGATGGCTGCAAGATGAAAGATGGTAAAAAGTACAATTAGAATAAAGGTTTTGAGAAAGAGGAGAAgagttagaggggcctttggctaaagtgcagcattcagtgttcacatacttccaggcacatctactcaaagccctctttgtggcacttttgctggttccacagaaaactgggagtgggaagggtgggttgttgggacggtgtgttccactc
+                                                                                                                               AAAGGTTTTGAGAAAGAGGAGAAGAGTTAGAGGGGCCTTTGGCTAAAGTGCAGCATTCAGTGTTCACATACTTCCAGGCACATCTACTCAAAGCCATCTTTGTGGCACTTTTGCTGGTTCCAAAGAAAACTGGGAGTGGGAAGGGTGGGT
+	+	41467971	60	.5	@A00808:646:HWGVJDSXY:2:2113:31910:23782/2
+                                AGGGTGGGTTGTTGGGACGGTGTGTTCCACTCACATTTTTCACACAGTCTTCCGATGGCTGCAAGATGAAAGATGGTAAAAAGTACAATTAGAATAAAGGTTTTGAGAAAGAGGAGAAGAGTTAGAGGGGCCTTTGGCTAAAGTGCAGCA
+	+	41468089	60	.5	@A00808:646:HWGVJDSXY:2:2113:31910:23782/1
+####################################################################################################
+35	TD 208	NT 0 ""	ChrID chr22	BP 41905048	41905257	BP_range 41905048	41905257	Supports 2	2	+ 0	0	- 2	2	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 0 2 0 0 0 0	.5 27 31 0 0 2 2
+AGAAGCCCGAGGCCGCCCTTGGTGGGTTGCAGGGGTTGGGGTGGTCATGGGTCATGCTGTGATCAGGGAAGGAGGGTTGGGGTGGCGTCCCAGCACAGGTGCAGGCATAGAAGCAGAAGCTCGAGCCAGGTCATGTGGGCCCATCTCAGCcccagctcccacatctggcattggtgcccagcacacctctcgcctctctgagaatgaaagaagcccgaggccgcccttggtgggttgcaggggttggggtggtcatgggtcatgctgtgatcagggaaggagggttggggtggcgtccca
+                                                                            TTGGGGTGGCGTCCCAGCACAGGTGCAGGCATAGAAGCAGAAGCTCGAGCCAGGTCATGTGGGCCCATCTCAGCCCCAGCTCCCACATCTGGCATTGGTGCCCAGCACACCTCTCGCCTCTCTGAGAATGAAAGAAGCCCGAGGCCGCCC
+	-	41905332	60	.5	@A00808:646:HWGVJDSXY:2:1340:13801:15530/1
+         AGGCCGCCCTTGGTGGGTTGCAGGGGTTGGGGTGGTCATGGGTCATGCTGTGATCAGGGAAGGAGGGTTGGGGTGGCGTCCCAGCACAGGTGCAGGCATAGAAGCAGAAGCTCGAGCCAGGTCATGTGGGCCCATCTCAGCCCCAGCTCC
+	-	41905124	60	.5	@A00808:646:HWGVJDSXY:2:1340:13801:15530/2
+####################################################################################################
+36	TD 61830	NT 0 ""	ChrID chr22	BP 42514605	42576436	BP_range 42514605	42576436	Supports 9	9	+ 9	9	- 0	0	S1 10	SUM_MS 384	2	NumSupSamples 2	2	.1 18 3 2 2 0 0	.5 83 37 7 7 0 0
+GGCGGGGAGGGCACGGACCTGCTGGCGCTGCCTCCTTCTCCACTGTAGACCATGTGGAGACTACATGTGTCACCCAACCAGGCAGCCCAGGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCgccctccctctggggcgccaccttcccacagccacacgggcgatgcggggctcggccgaccccgcggggcctctacctcagcgatcttctggtcatatgcctccatgaacgtgtccacttccaccctcagggcctcagggtcgggcacag
+                                                                                                                                            GGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCC
+	+	42576425	33	.5	@A00808:646:HWGVJDSXY:2:2524:7753:27445/1
+                                                                                                                                  GCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGG
+	+	42576415	49	.5	@A00808:646:HWGVJDSXY:2:1623:24523:27117/2
+                                                                                                               GCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCGGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCAGGGCTCGGCCGACCCCGCGGGGCCTCTACCTCAGCGATCTTCTGGTCATATGCCTCCATGACCG
+	+	42576324	60	.1	@A00881:658:HYKNLDSXY:3:2135:24135:26944/2
+                                                                                                               GCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCCCACGGGCGATGCAGGGCTCGGCCGACCCCGCGGGGCCTCTACCTCAGCGATCTTCTGGTCATATGCCGCCATGAACG
+	+	42576396	47	.5	@A00808:646:HWGVJDSXY:2:2215:19913:13839/1
+                                                                                    GCCCAGGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCGCCCTCTGGGGCGCCACCTTCCCACCGCCACACGGGCGATGCGGGGC
+	+	42576369	48	.5	@A00808:646:HWGVJDSXY:2:2433:32244:6480/2
+                                                                             CCAGGCAGCCCAGGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAAC
+	+	42576336	27	.5	@A00808:646:HWGVJDSXY:2:1531:1967:11318/1
+                                                                             CCAGGCAGCCCAGGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAAC
+	+	42576324	60	.5	@A00808:646:HWGVJDSXY:2:1150:8269:3756/1
+                                                                      CACCCAGCCAGGCAGCCCAGGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGC
+	+	42576345	0	.5	@A00808:646:HWGVJDSXY:2:1325:28944:22216/1
+                                       CCACTGTAGACCATGTGGAGACTACATGTGTCACCCAGCCAGGCAGCCCAGGATCCAGCAGGGAAACTGGGAGCCTGGCCTCTACTGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCCCACGG
+	+	42576324	60	.1	@A00881:658:HYKNLDSXY:3:2135:24135:26944/1
+####################################################################################################
+37	TD 61831	NT 0 ""	ChrID chr22	BP 42514679	42576511	BP_range 42514679	42576511	Supports 40	40	+ 34	34	- 6	6	S1 245	SUM_MS 1359	2	NumSupSamples 2	2	.1 21 3 3 3 0 0	.5 106 25 31 31 6 6
+AACCAGGCAGCCCAGGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGACGCGGGGCTCGGCCGACCCCGCGGGGCCTCTAacctcagcgatcttctggtcatatgcctccatgaacgtgtccacttccaccctcagggcctcagggtcgggcacagagtctgcgtagtcactgatccactctgaggaaaagggagccagggaaacggggcttcctcaggcctggcatttg
+                                                                                                                                            GGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATCCATTCTGAGGAAAAGGGAGCCAGGGAAACGGGGCTTCCTCAGGC
+	+	42576374	47	.5	@A00808:646:HWGVJDSXY:2:1141:28809:9549/2
+                                                                                                                                GGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATCCATTCTGAGGAAAAGGGAGCCAGGGAAACGGG
+	+	42576488	47	.5	@A00808:646:HWGVJDSXY:2:1556:23592:16767/1
+                                                                                                                       GCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATCCATTCTGAGGAAAAGGGAGCCAG
+	+	42576479	47	.5	@A00808:646:HWGVJDSXY:2:1610:1488:4883/2
+                                                                                                                     ATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATCCATTCTGTGGAAAAGGGAGCC
+	+	42576477	43	.1	@A00881:658:HYKNLDSXY:3:1171:4933:4836/1
+                                                                                                                     ATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGT
+	-	42514747	21	.5	@A00808:646:HWGVJDSXY:2:2548:4996:21042/2
+                                                                                                                 GGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATCCATTCTGAGGAAAAGGG
+	+	42576473	27	.5	@A00808:646:HWGVJDSXY:2:2671:2383:5744/1
+                                                                                                  TCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATCCA
+	+	42576458	0	.5	@A00808:646:HWGVJDSXY:2:1321:31593:26584/2
+                                                                                                  TCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATCCA
+	-	42514932	0	.5	@A00808:646:HWGVJDSXY:2:1367:9932:9862/2
+                                                                                                CTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATC
+	+	42576415	7	.5	@A00808:646:HWGVJDSXY:2:1435:3396:19022/1
+                                                                                                CTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCGTAGTCACTGATC
+	+	42576405	7	.5	@A00808:646:HWGVJDSXY:2:1163:5837:15421/2
+                                                                                    CTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAGTCTGCG
+	+	42576284	33	.5	@A00808:646:HWGVJDSXY:2:2331:5249:33630/1
+                                                                                CCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCC
+	-	42514732	48	.5	@A00808:646:HWGVJDSXY:2:1232:17400:13182/2
+                                                                              CTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAG
+	+	42576438	0	.5	@A00808:646:HWGVJDSXY:2:1262:8793:34319/1
+                                                                              CTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAG
+	+	42576274	27	.5	@A00808:646:HWGVJDSXY:2:2120:26178:19711/1
+                                                                              CTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGTCGGGCACGGAG
+	-	42514969	0	.5	@A00808:646:HWGVJDSXY:2:1471:10059:8265/1
+                                                                   ACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGGT
+	+	42576369	33	.1	@A00881:658:HYKNLDSXY:3:1351:3351:31469/1
+                                                                  GACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGGG
+	+	42576400	39	.5	@A00808:646:HWGVJDSXY:2:1222:11098:2801/1
+                                                                 GGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAGG
+	+	42576425	43	.5	@A00808:646:HWGVJDSXY:2:1545:8431:24737/1
+                                                                 GGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATC
+	+	42576425	33	.5	@A00808:646:HWGVJDSXY:2:2510:15338:6699/2
+                                                                 GGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATC
+	+	42576425	33	.5	@A00808:646:HWGVJDSXY:2:2510:15338:6699/1
+                                                                AGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCCTCAG
+	+	42576405	47	.5	@A00808:646:HWGVJDSXY:2:1571:15700:19820/2
+                                                            GGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGCC
+	+	42576400	47	.5	@A00808:646:HWGVJDSXY:2:1603:24623:29387/1
+                                                            GGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACG
+	+	42576420	47	.5	@A00808:646:HWGVJDSXY:2:1126:11234:1908/1
+                                                            GGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACG
+	+	42576420	47	.5	@A00808:646:HWGVJDSXY:2:1126:11234:1908/2
+                                                           AGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCAGGGC
+	+	42576278	60	.5	@A00808:646:HWGVJDSXY:2:1666:26558:27070/2
+                                                       GCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCA
+	+	42576415	7	.5	@A00808:646:HWGVJDSXY:2:1435:3396:19022/2
+                                                       GCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACTTCCACCCTCA
+	-	42514776	7	.5	@A00808:646:HWGVJDSXY:2:2635:1759:27649/2
+                                             CTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACT
+	+	42576405	47	.5	@A00808:646:HWGVJDSXY:2:2527:13051:4335/2
+                                             CTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACT
+	+	42576405	47	.5	@A00808:646:HWGVJDSXY:2:2639:27199:4695/2
+                                             CTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACT
+	+	42576405	7	.5	@A00808:646:HWGVJDSXY:2:1163:5837:15421/1
+                                             CTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACT
+	+	42576405	47	.5	@A00808:646:HWGVJDSXY:2:1571:15700:19820/1
+                                             CTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCCACT
+	-	42514776	7	.5	@A00808:646:HWGVJDSXY:2:1516:21721:20353/1
+                                          CCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCC
+	+	42576402	47	.1	@A00881:658:HYKNLDSXY:3:1652:17544:25676/2
+                                          CCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGTCC
+	+	42576402	47	.5	@A00808:646:HWGVJDSXY:2:1453:26530:12054/1
+                                        GGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGT
+	+	42576400	39	.5	@A00808:646:HWGVJDSXY:2:1222:11098:2801/2
+                                        GGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTCATATGCCTCCATGAACGTGT
+	+	42576400	47	.5	@A00808:646:HWGVJDSXY:2:1603:24623:29387/2
+                    AGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTCTGGTC
+	+	42576204	60	.5	@A00808:646:HWGVJDSXY:2:2169:17327:13870/1
+               GATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTTC
+	+	42576327	60	.5	@A00808:646:HWGVJDSXY:2:2114:28230:2409/2
+              GGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCTT
+	+	42576374	47	.5	@A00808:646:HWGVJDSXY:2:1141:28809:9549/1
+             AGGATCCAGCAGGGAAACAGGGAGCCTGGCCTCTACAGAGTGGCCAAGGACAGGACACCACCGCCCTCCCTCTGGGGCGCCACCTTCCCACAGCCACACGGGCGATGCGGGGCTCGGCTGACCCCGCGGGGCCTCTAACCTCAGCGATCT
+	+	42576319	60	.5	@A00808:646:HWGVJDSXY:2:2110:4146:12837/1
+####################################################################################################
+38	TD 136	NT 0 ""	ChrID chr22	BP 42635351	42635488	BP_range 42635351	42635488	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 4 1 1 1 1
+TCATGATCTGCCCTCCTCGGCCTCCCAAAGTGCTGAGATTACAGGTGTGAGCCACCACGCCTGGCCTAATTTTCGTATTGTTAGTAGAGATGGGGTTTCACCATGTCGGCCAGGCTGGTCTTGAACTCCTGACCTCAGGTGATCCACCGGcctcggcctcccaaagtgctgagattacaggtgtgagccaccacgcctggcctaattttcgtattgttagtagagatggggtttcaccatgtcggccaggctggtcttgaactcctgacctcaggtgatccaccggcctcggcctcccaa
+                                                                                                                          GAACTCCTGACCTCAGGTGATCCACCGGCCTCGGCCTCCCAAAGTGCTGAGATTACAGGTGTGAGCCACCACGCCTGGCCTAATTTTCGTATTGTTAGTAGAGATGGGGTTTCACCATGTCGGCCAGGCTGGTCTTGAACTCCTGACCTC
+	+	42635373	60	.5	@A00808:646:HWGVJDSXY:2:1256:8386:7153/2
+                                    GATTACAGGTGTGAGCCACCACGCCTGGCCTAATTTTCGTATTGTTAGTAGAGATGGGGTTTCACCATGTCGGCCAGGCTGGTCTTGAACTCCTGACCTCAGGTGATCCACCGGCCTCGGCCTCCCAAAGTGCTGAGATTACAGGTGTGA
+	-	42635501	60	.5	@A00808:646:HWGVJDSXY:2:1256:8386:7153/1
+####################################################################################################
+39	TD 51	NT 0 ""	ChrID chr22	BP 43470201	43470253	BP_range 43470201	43470253	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 1 1 1 1
+AAATCATCCATCCATCCATCCATCCATCCATTCATCCATCTATATATACATCTATATATCCATACATATATAAAGCATCCATCCATAAACCATCCATCTATCCATTCATCCATCCATGTATGCATCTATATATCCATCCGTCTACAAAGCatccattcatccatccatgtatgcatctatatatccatccgtctacaaagcatccattcatccatctattcatctatctataaaccatccattcatccatccattcatccataaaccagccatctatccattcatccatccatgtatgca
+                                                                                                                     GTATGCATCTATATATCCATCCGTCTACAAAGCATCCATTCATCCATCCATGTATGCATCTATATATC
+	-	43470287	60	.5	@A00808:646:HWGVJDSXY:2:2518:14326:26553/1
+                                                                                                                     GTATGCATCTATATATCCATCCGTCTACAAAGCATCCATTCATCCATCCATGTATGCATCTATATATC
+	+	43470201	0	.5	@A00808:646:HWGVJDSXY:2:2518:14326:26553/2
+####################################################################################################
+40	TD 416	NT 0 ""	ChrID chr22	BP 44163519	44163936	BP_range 44163519	44163936	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 3 0 0 0 0	.5 1 33 1 1 1 1
+TCCTCCAGCAGTGGGCCGTGTGTGGGAACGACTGTTGGACCCTAACGCTGACCCACCCCCCTTCCTTGGCAGGTCCACAATGTGTCCTTCGCCTTTGAGCTGATGCTGGACGGAGGCCTCAAGAAACCCAAGGCTCGTCCTGAAGGTAATgcccctgtgacttctcatcaggtggctggcatctggggcagagcaggctcttggtggccgtgagccctcgagagcaggccgggcacctcatccttccatctctcagcccagatcactggtgtgaggggtgagaaccacctagtaagcgca
+                                                                                                                              CCCAAGGCTCGTCCTGAAGGTAATGCCCCTGTGACTTCTCATCAGGTGGCTGGCATCTGGGGCAGAGCAGGCTCTTGGTGGCCGTGAGCCCTCGAGAGCAGGCCGGGCACCTCATCCTTCCATCTCTCAGCCCAGATCACTGGTGTGAGG
+	+	44163519	60	.5	@A00808:646:HWGVJDSXY:2:1629:1660:27884/2
+                                                             TTCCTTGGCAGGTCCACAATGTGTCCTTCGCCTTTGAGCTGATGCTGGACGGAGGCCTCAAGAAACCCAAGGCTCGTCCTGAAGGTAATGCCCCTGTGACTTCTCATCAGGTGGCTGGCATCTGGGGCAGAGCAGGCTCTTGGTGGCCGT
+	-	44163942	60	.5	@A00808:646:HWGVJDSXY:2:1629:1660:27884/1
+####################################################################################################
+41	TD 425	NT 0 ""	ChrID chr22	BP 44847709	44848135	BP_range 44847709	44848135	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 2 0 0 0 0	.5 5 24 1 1 1 1
+AGGGCCTGTTCCGGAGATCCGCCAGCGTGCAGACCGTCCGCGAGATCCAGAGGCTCTACAACCAAGGTGAGGGTGTCCCGCAGTCCTGAGCCCCGAGCTGCCTGGTCAGCGAGCACAGCGCTCCGGGGCCTCAGAGCGGAGGCAGGGAAGctgaggtcacacagctggtaggcagagctggactagagcctaggtctgtctgagattagagtctatttccgctttccctttccatggaccacagaggtgggaaatcgggtgggttggggaatatggaaaggatttgaggaacaaataaat
+                                                                                                                               GCCTCAGAGCGGAGGCAGGGAAGCTGAGGTCACACAGCTGGTAGGCAGAGCTGGACTAGAGCCTAGGTCTGTCTGAGATTAGAGTCTATTTCCGCTTTCCCTTTCCATGGACCACAGAGGTGGGAAATCGGGTGGGTTGGGGAATATGGA
+	+	44848007	60	.5	@A00808:646:HWGVJDSXY:2:2131:17933:26193/2
+                       AGCGTGCAGACCGTCCGCGAGATCCAGAGGCTCTACAACCAAGGTGAGGGTGTCCCGCAGTCCTGAGCCCCGAGCTGCCTGGTCAGCGAGCACAGCGCTCCGGGGCCTCAGAGCGGAGGCAGGGAAGCTGAGGTCACACAGCTGGTAGGC
+	-	44847859	60	.5	@A00808:646:HWGVJDSXY:2:2131:17933:26193/1
+####################################################################################################
+42	TD 68	NT 80 "GTAGAGTCTGGGTCTCATTATATTGCCCAGGCTGGTCTTGAACTGCTGGGCTCAAGAGATCCACGTGCCTTGGACTTCCG"	ChrID chr22	BP 41721504	41721573	BP_range 41721504	41721573	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 2 0 0 0 1 1
+TTTAGTAGAGACGGGGTTTCACCGTGTTAGCCAGGACAGTCTCCATCTCCTGACCTCGTGATTCGCCTGCCTTGGCCTCCCAAAGTGCTGGGATTACAGGTATGAGTCACCGTGCCCAGCCCGTGCCTGGCTAATTAAAAAATTTTTTTT                                                                                aagtgctgggattacaggtatgagtcaccgtgcccagcccgtgcctggctaattaaaaaatttttttttgtagagtctgggtctcattatattgcccaggctggtcttgaactgctgggctcaagagatccacgtgccttggacttccga
+                                                                                                  GGTATGAGTCACCGTGCCCAGCCCGTGCCTGGCTAATTAAAAAATTTTTTTTGTAGAGTCTGGGTCTCATTATATTGCCCAGGCTGGTCTTGAACTGCTGGGCTCAAGAGATCCACGTGCCTTGGACTTCCGAAGTGCTGGGATTACAGG
+	-	41721669	60	.5	@A00808:646:HWGVJDSXY:2:2427:8205:6778/1
+####################################################################################################
+43	TD 71	NT 113 "ACAAAACTGTTTTTGTTTGGGGCTGCGTTTTTTTTTTTTTACAACCCCCCGCGGGTGGGGGGGCCCTGTGTCCCCGGGGCTAACTGTGGGGGTGGTGGGGGGGGGGGGGGCAT"	ChrID chr22	BP 41833379	41833451	BP_range 41833379	41833451	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 6 1 1 1 0 0
+GAGACCATGGAGACCCTCACGGAGCTGGGCGACGAGCTGACCCTGGGAGACATCGACGGTGAGTGGTGGGTGGGTGGGAGTGCGGGGGCCGCGCGGGGAGGAAGGGGTTACGGCGGCGCGCCCGGGTGCGCGTGCGCCCACCCCCCGACA                                                                                                                 gtgcgggggccgcgcggggaggaaggggttacggcggcgcgcccgggtgcgcgtgcgcccaccccccgacagccccggttcgcgcgggaagaaccccgtgcgcacggtgcccccggcggtcctcaacccttccggcgctgcgagcgtgag
+                                                                                                                                            CCCCCCCACAACAAAACTGTTTTTGTTTGGGGCTGCGTTTTTTTTTTTTTACAACCCCCCGCGGGTGGGGGGGCCCTGTGTCCCCGGGGCTAACTGTGGGGGTGGTGGGGGGGGGGGGGGCATGTGCGGGGGCCGCGCGGGGAGGAAGGG
+	+	41833316	60	.5	@A00808:646:HWGVJDSXY:2:1619:14479:31548/2
+####################################################################################################
+44	TD 56	NT 113 "GAGATGGAGTTTCGCTCTTGTTGCCCAGGCTGGAGTGCAATGGACCAGTCTCAGCTCACTGCAACCTCTGCCTCCCGGGTTCAAGTGATTCTTCTGCCTTAGCCTCCCAAGTA"	ChrID chr22	BP 41895395	41895452	BP_range 41895395	41895452	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 2 0 1 1 0 0
+GCTAATTTTTTGTATTTTTAGTAGAGACGAGGTTTCACCATGTTAGCCAGGATGGTCTCGACCTCGTGATCCGCCTGCCTCAGCCTCCCAAAGTGCTGGGATTACAGGCGTGAGCCACCATGCCCAGGCCTTTTTTTTTTTTTTTTTTTT                                                                                                                 gctgggattacaggcgtgagccaccatgcccaggcctttttttttttttttttttttgagatggagtttcgctcttgttgcccaggctggagtgcaatggaccagtctcagctcactgcaacctctgcctcccgggttcaagtgattctt
+                                                                                                                               GCATTTTTTTTTTTTTTTTTTTTGAGATGGAGTTTCGCTCTTGTTGCCCAGGCTGGAGTGCAATGGACCAGTCTCAGCTCACTGCAACCTCTGCCTCCCGGGTTCAAGTGATTCTTCTGCCTTAGCCTCCCAAGTAGCTGGGATTACAGG
+	+	41895371	60	.5	@A00808:646:HWGVJDSXY:2:1640:8829:18129/1
+####################################################################################################
+45	TD 78	NT 0 ""	ChrID chr22	BP 45208406	45208485	BP_range 45208406	45208485	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 1 1 1 1
+AGCTGTGAGAACAGGCAGAACCACCGACTCCACATGCACGAGCTGTAAGAACAGGTAGAACCCGCCAACTCCACACACACGAGCTGTGAGAACAGGCAGAACCCAACTCCACACGCAGGAGCTGTGAGAACAGGCAGAACCACCGACTCCacacacacgagctgtgagaacaggcagaacccaactccacacgcaggagctgtgagaacaggcagaaccaccgactccacacgcacgagctgtaagaacaggcagaacccaccgactccacatgcaggagctgtgagaacaggcagaacc
+                                                                                                                   CAGGAGCTGTGAGAACAGGCAGAACCACCGACTCCACACGCACGAGCTGTGAGAACAGGCAGAACCCAACTCCACACGCAGGAGC
+	+	45208449	60	.5	@A00808:646:HWGVJDSXY:2:2611:24632:32221/2
+                                                                                                                   CAGGAGCTGTGAGAACAGGCAGAACCACCGACTCCACACGCACGAGCTGTGAGAACAGGCAGAACCCAACTCCACACGCAGGAGC
+	-	45208531	60	.5	@A00808:646:HWGVJDSXY:2:2611:24632:32221/1
+####################################################################################################
+46	TD 97	NT 0 ""	ChrID chr22	BP 45291416	45291514	BP_range 45291416	45291514	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 2 2 0 0
+AGTGGTGTGGGTGGTGTATGTGTGTGTGGTGTGTGGGTGGTGTGAGAGTGTGTATTGTATGTGTGTGGTGTGTGTGGTGTGAGAGTGTGGCAGGTGTGTGTGTGAGTTTGAGTTGTGTGATGTGTGTGGTGTGTGAGTGTGAGAGTGTGTattgtatgtgtgtggtgtgtgtggtgtgagagtgtggcaggtgtgtgtgtgagtttgagttgtgtgatgtgtgtggtgtgtgagtgtgagagtgtgtgtgtgagttggaatgtgtgttgtgtggtgtgttagagtgtggcagtgtgtgtg
+                                                                                                                                    GTGTATGTGAGAGTGTGTATTGTATGTGTGTGGTGTGTGTGGTGTGAGAGTGTGGCAGGTGTGTGTGTGAGTTTGAGTTGTGTGATGTGTGTGGTGTGTGAG
+	+	45291403	60	.5	@A00808:646:HWGVJDSXY:2:1311:32461:25770/1
+                                                                                                                                    GTGTATGTGAGAGTGTGTATTGTATGTGTGTGGTGTGTGTGGTGTGAGAGTGTGGCAGGTGTGTGTGTGAGTTTGAGTTGTGTGATGTGTGTGGTGTGTGAG
+	+	45291403	60	.5	@A00808:646:HWGVJDSXY:2:1311:32461:25770/2
+####################################################################################################
+47	TD 82	NT 0 ""	ChrID chr22	BP 45328012	45328095	BP_range 45328012	45328095	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 3	2	NumSupSamples 1	1	.1 4 1 0 0 0 0	.5 66 69 0 0 1 1
+TCAGCCTGATGGACAGGGGCGCCATGGTCCTGACCACCAACTATGACAACCTGCTGGAGGCCTTTGGCCGGCGGCAGAACAAGCCCATGGAGTCCCTGGACTTGAAGGACAAGACCAAGGTATGGGCTGGGGGTGCGGGAGGCCTTTGGCcggcggcagaacaagcccatggagtccctggacttgaaggacaagaccaaggtatgggctgggggtgcgggaggcctttggccggcggcagaacaagcccatggagtccctggacttgaaggacaagaccaaggtatgggctgggggtgc
+                                                                         GCAGAACAAGCCCATGGAGTCCCTGGACTTGAAGGACAAGACCAAGGTATGGGCTGGGGGTGCGGGAGGAATTAGGCCGGCGGCAGAACAAGCCCATGGAGTCCCTGGACTTGAAGGACAAGACCAAGGTATGGGCGGGGGGTGCGGGAG
+	-	45328153	3	.5	@A00808:646:HWGVJDSXY:2:1651:7844:36746/1
+####################################################################################################
+48	TD 176	NT 0 ""	ChrID chr22	BP 45452622	45452799	BP_range 45452622	45452799	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 6 2 1 1 1 1
+GAGGATGGGTCGTTGAGAATGACTGAAAGGGGAGGGGCCAGACAGGGGCAGAGCCAGCTTGAGAAGCACCTTGGAAGGCGGGCCAAGAGCTGGATCCATGCCCGTGGGCTGGGGGTGATGGCAGAGCATTAGCAGGACAGGGAATGGGTGaggcagtccctgcagtgaggggctctgaggatgggtcgttgagaatgactgaaaggggaggggccagacaggggcagagccagcttgagaagcaccttggaaggcgggccaagagctggatccatgcccgtgggctgggggtgatggcag
+                                                                           AGGCGGGCCAAGAGCTGGATCCATGCCCGTGGGCTGGGGGTGATGGCAGAGAATTAGCAGGACAGGGAATGGGTGGTGCAGTCCCTGCAGTGAGGGGCTCTGAGGATGGGTCGTTGAGAATGACTGAAAGGGGAGGGGCCAGACAGGGGC
+	+	45452688	60	.5	@A00808:646:HWGVJDSXY:2:1631:16911:26866/1
+                                        GACAGGGGCAGAGCCAGCTTGAGAAGCACCTTGGAAGGCGGGCCAAGAGCTGGATCCATGCCCGTGGGCTGGGGGTGATGGCAGAGCATTAGCAGGACAGGGAATGGGTGGTGCAGTCCCTGCAGTGAGGGGCTCTGAGGATGGGTCGTT
+	-	45452873	60	.5	@A00808:646:HWGVJDSXY:2:1631:16911:26866/2
+####################################################################################################
+49	TD 39	NT 0 ""	ChrID chr22	BP 45942900	45942940	BP_range 45942900	45942940	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 2 0 0 1 1
+CCGTCTCCAAGCAGGCCTGGACCCTGGGCCTCATGGTCCTGGCCTGGGTGCAGCCTGAGTGGGTGCTGTGTGTGTGTGTGTGCGTGTGTGCATGTATGTGCGTGTGTGTGCGCGCGTGTGTGCAGTGTGCACGTGTGTGCATGTGTGTAGgcgcgtgtgtgcagtgtgcacgtgtgtgcatgtgtgtaggcgtgtatgtgtgcagtgtgcatgtgtgtgtgcgtgtgtgcagtgtgcatgtgtgtaggcgtgtatgtgtgcagtgtgcatgtgtatgtgtgtgcgcgtgtgtgcagcatg
+                                                                                                                  CGTGTGTGCAGTGTGCACATGTGTGCATGTGTGTAGGCGTGTATGTGCAG
+	-	45942953	60	.5	@A00808:646:HWGVJDSXY:2:1427:15456:1955/1
+####################################################################################################
+50	TD 97	NT 0 ""	ChrID chr22	BP 46606602	46606700	BP_range 46606602	46606700	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 0	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 1 1 1 0 0
+ATGTCTGCATGGGCCTATGGCCGGTGCTGAGCATCTCTGCATGGGTTTATTGACCGGTGCTGAGCATGTCTGCATGGGCTTATGGCAGGTGCTGAGCATCTCTGCATGGGTTTATTGACCGGTGCTGAGCATGTCTGCATGGGTTTATGGccggtgctgagcatgtctgcatgggcttatggcaggtgctgagcatctctgcatgggtttattgaccggtgctgagcatgtctgcatgggtttatggttggtgctgagcatctcttcatgggctcatgcccagtgctgagcatctctgcg
+                                                        GTGCTGAGCATGTCTGCATGGGCTTATGGCAGGTGCTGAGCATCTCTGCATGGGTTTATTGACCGGTGCTGAGCATCTCTGCATGGGCTTATGGCCGGTGCTGAGTATGTCTGCATGGGCTGATGGCCGGTGCTGAGCATCTCTGCATGG
+	+	46606605	0	.5	@A00808:646:HWGVJDSXY:2:1304:25482:32941/1
+####################################################################################################
+51	TD 71	NT 0 ""	ChrID chr22	BP 46628564	46628636	BP_range 46628564	46628636	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 0	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 4 2 2 0 0
+GTGCGTTGGTGTCTGAGGGGCGGGTGGACTGAGTGTGTGCGTGGTGTCTGAGGGGCAGGTGGACTGAGTGTGTGCGTGGTGTCTGAGGGGCAGGTGGACTGAGTGTGTGCGTGGTGTCTGAGGGGCGGGTGGACTGAGTGTGTGCGTTGGtgtctgaggggcaggtggactgagtgtgtgcgtggtgtctgaggggcgggtggactgagtgtgtgcgttggtgtctgaggggcaggtggagggctgcagtgagggggccagggccagggttgcaggtattggtctggttggagcagcagg
+                                                                                                                 GTGTCTGTGGGGCGGGTGGACTGAGTGTGTGCGTTGGTGTCTGAGGGGCGGGTGGACTGAGTGTGTGCGTGGTGTCTGAGGGGCAGGTGGAC
+	+	46628493	0	.5	@A00808:646:HWGVJDSXY:2:2248:9941:30138/1
+                                                                                                                 GTGTCTGAGGGGCGGGTGGACTGAGTGTGTGCGTTGGTGTCTGAGGGGCGGGTGGACTGAGTGTGTGCGTGGTGTCTGAGGGGCAGGTGGAC
+	+	46628493	0	.5	@A00808:646:HWGVJDSXY:2:2248:9941:30138/2
+####################################################################################################
+52	TD 66	NT 0 ""	ChrID chr22	BP 46963310	46963377	BP_range 46963310	46963377	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 24	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 2 2 1 1 1 1
+AAAAAAAAAAAAAATCAGTGCCTGATCACCTTACCCCATGGTGTCTTGGACATGCCCTATAGACCCTGCCTGGGCCACGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAGTGctcatcacactgcctgccctgggtcccgcagtgctcatcacactgcctgccctgggtcccgcagtgcccaaggctggaaaggcccagggagccttcagagagctctcaggcctccacgattgtgtggtgttctgctttctcccggccaag
+                                                                                                          GTCCCGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAG
+	+	46963303	12	.5	@A00808:646:HWGVJDSXY:2:1221:18936:33317/2
+                                                                                                          GTCCCGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAGTGCTCATCACACTGCCTGCCCTGGGTCCCGCAG
+	-	46963411	12	.5	@A00808:646:HWGVJDSXY:2:1221:18936:33317/1
+####################################################################################################
+53	TD 84	NT 0 ""	ChrID chr22	BP 47549002	47549087	BP_range 47549002	47549087	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 3 1 1 1 1
+ATAAGAAAAAAAATCCTCATTTCCCTCACTGCCTACAGAACATGTGTGAAGGCCAAGCCTGATTGAAGGCCCTGAGCTCCTGGGGGCCTGAGCTCCTGGGGGCCCTGAGCTCCTGGAGGCCCTGAGCTCCTGAAGGCCCTGAGCTCCTGGaggccctgagctcctgggggcctgagctcctgggggccctgagctcctggaggccctgagctcctgaaggccctgagctcctgggggccctgagctcctgggggcctgctgggcttgcagtggggaaacggtggacaggacagcaggatc
+                                                                                                          GAGCTCCTGGAGGCCCTGAGCTCCTGAAGGCCCTGAGCTCCTGGGGGCCCTGAGCTCCTGGGGGCCTGAGCTCCTGGGGGCCCTGAGCTCCTGGAGGCCCTGAGCTCCTGAAGGCCCTGAGCTCCTG
+	+	47549003	60	.5	@A00808:646:HWGVJDSXY:2:2142:8919:35008/1
+                                                                                                          GAGCTCCTGGAGGCCCTGAGCTCCTGAAGGCCCTGAGCTCCTGGGGGCCCTGAGCTCCTGGGGGCCTGAGCTCCTGGGGGCCCTGAGCTCCTGGAGGCCCTGAGCTCCTGAAGGCCCTGAGCTCCTG
+	-	47549130	60	.5	@A00808:646:HWGVJDSXY:2:2142:8919:35008/2
+####################################################################################################
+54	TD 57	NT 0 ""	ChrID chr22	BP 47628369	47628427	BP_range 47628369	47628427	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 3 4 1 1 1 1
+GTACAAGCCTGCATGAATGTGTATGTGAACATGTTAGTGTGTGCATGTGTGTGTGTTGTGGCGGTGTATGAGTGTGTGTGGAGGGTGTATAAGTGTGCATGAGTGCATGTGTGTGTTTTGTGGGGTATATGTGTGTGGAGGGTGTATAAAtgtgcatgagtgcatgtgtgtgttttgtggggtatatgtgtgtggagggtgtataaatgtgcatgagtgtgtatatgaacatgtgttaatgtgtgcatgtgagtgtgtgttggggtgtgtgagttgtgttgagggtttataagcgtgcat
+                                                                                                                          GGGTATATGTGTGTGGAGGGTGTATAAATGTGCATGAGTGCATGTGTGTGTTTTGTGGGGTATATG
+	+	47628348	60	.5	@A00808:646:HWGVJDSXY:2:1105:12454:7592/1
+                                                                                                                          GGGTATATGTGTGTGGAGGGTGTATAAATGTGCATGAGTGCATGTGTGTGTTTTGTGGGGTATATG
+	-	47628414	60	.5	@A00808:646:HWGVJDSXY:2:1105:12454:7592/2
+####################################################################################################
+55	TD 80	NT 0 ""	ChrID chr22	BP 47679655	47679736	BP_range 47679655	47679736	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 4	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 0 0 1 1
+CATCCATCCATCCACACATCCATCCATCCATCCATCCATCCATCCATCCATCATCCATCCATCCATCCATCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCACACACCCATCCATCCACCCATCCATCcatccatccatccatccatccatccatccatccatccatccatccatccatccacacacccatccatccacccatccatccatccacacacccatccatccatccatccatccatccatccatccatccatccatccatccacacaccca
+                                                                                                              CATCTATCCATCCACACACCCATCCATCCACACATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCATCCAC
+	-	47679782	4	.5	@A00808:646:HWGVJDSXY:2:2566:18141:5885/2
+####################################################################################################
+56	TD 215	NT 0 ""	ChrID chr22	BP 49195851	49196067	BP_range 49195851	49196067	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 1 1 1 1 1 1
+AGACTGAGCCTCCGACCGCCCTGCCAGCGTGGTCTCTGTGTGAGGAGAAGGGTCCCAGGGGAGAACAACAGCCAGAGTGCTGGATCCCGCAGCCCCCGATGTGAGGTCACACAGGAGGTCAGGCTGGGCCATGCTGATGGAGCTTCTGACgggtggctatggggctttggctgcgccgagtcctttggtgagtgctgccccgctcactcctcccgagactgagcctccgaccgccctgccagcgtggtctctgtgtgaggagaagggtcccaggggagaacaacagccagagtgctggat
+                                                                                                                      TCAGGCTGGGCCATGCTGATGGAGCTTCTGACGGGTGGCTATGGGGCTTTGGCTGCGCCGAGTCCTTTGGTGAGTGCTGCCCCACTCACTCCTCCCGAGACTGAGCCTCCGACCGCCCTGCCAGCGTGGTCTCTGTGTGAGGAGAAGGGT
+	+	49195851	60	.5	@A00808:646:HWGVJDSXY:2:2547:1696:34773/2
+                                            GAGAAGGATCCCAGGGGAGAACAACAGCCAGAGTGCTGGATCCCGCAGCCCCCGATGTGAGGTCACACAGGAGGTCAGGCTGGGCCATGCTGATGGAGCTTCTGACGGGTGGCTATGGGGCTTTGGCTGCGCCGAGTCCTTTGGTGAGTG
+	-	49196071	60	.5	@A00808:646:HWGVJDSXY:2:2547:1696:34773/1
+####################################################################################################
+57	TD 89	NT 0 ""	ChrID chr22	BP 49973729	49973819	BP_range 49973729	49973819	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 1 1 1 1
+ATATATCATGTGTGTTGTGTGTGATGTGTGTCATGCATTTACTGGTGTGTGCTGTGTGTGTATGGTGTGTGTTGTGCGTGTGTGGTGTTTTGTGGTGTGTGGTGTTTGTGTGTGGTGTGTATATATCATGTGTGGTGTTGTGTGTTGTGTatggtgtgtgttgtgcgtgtgtggtgttttgtggtgtgtggtgtttgtgtgtggtgtgtatatatcatgtgtggtgttgtgtgttgtgtttgtgtggtgtgtgctgtgtgtgtgtggttgtttgtggtgtgtggtgnnnnnnnnnnnnnn
+                                                                                                                  GTGTGTATATATCCTGTGTGGTGTTGTGTGTTGTGTTTGGTGTGTGTTGCGCGTGTGTGGTGTTTTGTGGTGTGTGGTGTTTGTGTGTGGTGTGTAT
+	+	49973724	60	.5	@A00808:646:HWGVJDSXY:2:2474:27208:14418/1
+                                                                                                                  GTGTGTATATATCCTGTGTGGTGTTGTGTGTTGTGTTTGGTGTGTGTTGCGCGTGTGTGGTGTTTTGTGGTGTGTGGTGTTTGTGTGTGGTGTGTAT
+	-	49973821	60	.5	@A00808:646:HWGVJDSXY:2:2474:27208:14418/2
+####################################################################################################
+58	TD 41	NT 48 "GCACACCCTCCCCTCACACACGATGCCGTCCCCTCGCACACGCGTGTG"	ChrID chr22	BP 48641594	48641636	BP_range 48641594	48641636	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 2 0 0 1 1
+AGGCAGCTTTGTTCTTTTCCATTCTGATGGTGGCTGCCCCTCCCCACTGCACTCCCTCCCCTCGCACACGATGCCCTCCCCTTCCCCCTGCACGCCCTCCCCTCCACCCCACACGCCCTCCGCTCGCACACAACACCCTCCCTTCCCCCC                                                cacacgccctccgctcgcacacaacaccctcccttcccccccgcacaccctcccctcacacacgatgccgtcccctcgcacacgcgtgtgcacacggcctcgctaactgggagccctcggaggcccccggtccaggccaacccagcggaa
+                                                                                                                     CTCCGCTCGCACACAACACCCTCCCTTCCCCCCGCACACCCTCCCCTCACACACGATGCCGTCCCCTCGCACACGCGTGTGCACACGGCCT
+	-	48641692	60	.5	@A00808:646:HWGVJDSXY:2:2106:17589:30608/2
+####################################################################################################
+59	TD 87	NT 0 ""	ChrID chr22	BP 50028935	50029023	BP_range 50028935	50029023	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 0	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 2 0 0 1 1
+CACCATCCTAAAGACCCCACATACCCTCGTAAAGACCCCCATCACACCGTCCTGAAGACCCCCACACACCCTCGTAAAGACCCCATCACACCGTCCTGAAGACCCCCACACACACTCGTAAAGACCCCATCACACCATCCTGAAGACCCCacacaccctcgtaaagaccccatcacaccgtcctgaagacccccacacacactcgtaaagaccccatcacaccatcctgaagaccccacacaccctcgtaaagaccccatcacaccgtcctgaagaccccacacacactcgtaaagaccc
+                                                                                                       CCCCACACACACTCGTAAAGACCCCATCACACCGTCCTGAAGACCCCACACACCCTCGTAAAGACCCCATCACACCGTCCTGAAGACCCCCACAC
+	-	50029198	0	.5	@A00808:646:HWGVJDSXY:2:1510:14253:22889/1
+####################################################################################################
+60	TD 63	NT 0 ""	ChrID chr22	BP 50063780	50063844	BP_range 50063780	50063844	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 0 0 0 0 1 1
+CTCTCACCTCCCTGGCTGAGCACCCCTGTGGGCCACTCACCTCCCCAGTGCCCCCACCCCACAGGCTTCTCACCTCCCTGGCTGGGCCCCCCATGGGCCACTCACCTCCCCAGCACCTGCACCGCAGGCCACTCACCTCCCCGGCTGGGCcccccatgggccactcacctccccagcacctgcaccgcaggccactcacctccccggctgggcacccctgtgggctactcacctccccagcaccccctccccctgcaggccactcacctccccggctgggcacccctgtgggccactcac
+                                                                                                                              GGCCACTCACCTCCCCGGCTGGGCACCCCGTGGGCCACTCACCTCCCCAGCACCTGCACCGCAGGCCACTCACCTCCCCGGCT
+	-	50063844	60	.5	@A00808:646:HWGVJDSXY:2:2535:29333:28682/2
+####################################################################################################
+61	TD 81	NT 0 ""	ChrID chr22	BP 50220605	50220687	BP_range 50220605	50220687	Supports 1	1	+ 0	0	- 1	1	S1 2	SUM_MS 60	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 68 67 0 0 1 1
+CGGAGGGATGGGTACATGGGTGTTCCACCGTGGCCGGGTGGAAACCACATCCGACACAGGCTCCCCCAAGCTGATGCTGGCGTCGGACACGTGTCCATGGGTGTTGCACCGTGACCGGATGGGAGCCACGTCCGATACGTTCTCCCCAACgctgatgctggcgtcggacacgtgtccatgggtgttgcaccgtgaccggatgggagccacgtccgatacgttctccccaaccctgatgctggtgtcagacacatgtccgtgggtgttccaccgtggccgggtgggagccatgtctgacac
+                                                                                                    GTGTTGCACCGTGACCGGATGGGAGCCACGTCCGATACGTTCTCCCCAACCCTGATGCTGGCGTTGGAC
+	-	50220705	60	.5	@A00808:646:HWGVJDSXY:2:2517:2853:24972/1
+####################################################################################################
+62	TD 81	NT 0 ""	ChrID chr22	BP 50220876	50220958	BP_range 50220876	50220958	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 54	2	NumSupSamples 1	1	.1 0 2 0 0 0 0	.5 76 68 1 1 0 0
+CGTGGCCGGGCGGGAGCCATGTCTGACACAGACTCCCCCAAGCTGATGCTGGCATCGGACACGTGTCCATGGGTGTTCCACCGTGGCCGGGTGGGAGCCACGTCCGACACGTTCTCCCCAACCCTGATGCTGGCGTTGGACACGTGCCCGtgggtgttccaccgtggccgggtgggagccacgtccgacacgttctccccaaccctgatgctggcgttggacacgtgcccgtgggtattccaccgtggcctggtgggagccacatctgacacattctccccgaccctgatgctggcgttg
+                                                                                          GTGGGAGCCACGTCCGACACCTTCTCCCCCACCCTGATGCTGGCGTTTGACACGTGCCCGTGGGTGTTCCACCGTGGCCGGGTG
+	+	50220897	54	.5	@A00808:646:HWGVJDSXY:2:1476:20600:26428/2
+####################################################################################################
+63	TD 40	NT 0 ""	ChrID chr22	BP 50276365	50276406	BP_range 50276365	50276406	Supports 1	1	+ 1	1	- 0	0	S1 2	SUM_MS 9	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 4 1 1 1 0 0
+CTGTGGGCACGGCCGTGGGTGCAGCCGCAGGGAGGGGGCGCTGTGGACACGGCCGTGGATGGAGCCGCAGGGAGGGGGCGCTGTGGGCACGGCCGAGGGTGCAGCCGCAGGGAGGGGGCGCTGTGGGCACGGCCGTGGGTGCAGCCGCAGggagggggcgctgtgggcacggccgtgggtgcagccgcagggagggggcgctgtgggcagggcctggctccaagcaggagcagctcatactccccacacgcagctgtggctcacttcacatggccgagcccacctcgaggtcccgcccca
+                                                                                                                                   GCCCTGGGTGCAGCCGCAGGGAGGGGGCACTGTGGGCACGGCCGTGGGTGCAGCCAC
+	+	50276351	9	.5	@A00808:646:HWGVJDSXY:2:2419:5249:3161/2
+####################################################################################################
+64	TD 448	NT 0 ""	ChrID chr22	BP 50283807	50284256	BP_range 50283807	50284256	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 2 1 0 0 0 0	.5 85 38 1 1 1 1
+CCCCCCACTGCGCCCGTGGCCCCCACCATGGAGCTTGCTGTCGATATTCTTGCCGTAAGACTTGACGTAGAGGTGCAGGGGCAGCGTCTCGTTGGCATCGTGGGACAGCTGGGGGACACGCAGGGGCACACTGCACTTCCTGCCCCCACAgtaggccaggcttcgaggggctcaccctggtgatgacgggcggcgggcactcggaggtggtgttgcacagggcctcatacacgcacctgctctggcccccgcaccacgcacacctgtagtcggggttagcggcccggcacaggctgcagt
+                                                                                                      GGACAGCTGGGGGACACGCAGGGGCACACTGCACTTCCTGCCCCCACAGTAGGCCAGGCTTCGAGGGGCTCACCCTGGTGATGACGGGCGGCGGGCACTCGGAGGTGGTGTTGCACAGGGCCTCATACACGCACCTGCTCTGGCCCCCGC
+	+	50283807	60	.5	@A00808:646:HWGVJDSXY:2:2346:28420:30827/2
+                                                                ACGTAGAGGTGCAGGGGCAGCGTCTCGTTGGCATCGTGGGACAGCTGGGGGACACGCAGGGGCACACTGCACTTCCTGCCCCCACAGTAGGCCAGGCTTCGAGGGGCTCACCCTGGTGATGACGGGCGGCGGGCACTCGGAGGTGGTGTT
+	-	50284256	60	.5	@A00808:646:HWGVJDSXY:2:2346:28420:30827/1
+####################################################################################################
+65	TD 165	NT 0 ""	ChrID chr22	BP 50287968	50288134	BP_range 50287968	50288134	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 92 17 1 1 1 1
+GCACTGGGTGCAGGTCGGGTAGCTCAGGCACTCCTGCACCGGCAGCCGGAACACCTAGGGCAGCGGGGCCGTGAGTGGGACCACAGCAGAGGCCGCACGGGCCTTCCGCAGACCCCAGATGTCCCCAGACCGCCAGCTTGACCCAGCTCTgtcctgggagtcgcggcactgggtgcaggtcgggtagctcaggcactcctgcaccggcagccggaacacctagggcagcggggccgtgagtgggaccacagcagaggccgcacgggccttccgcagaccccagatgtccccagaccgcca
+                                                                                         AGGCCGCACGGGCCTTCCGCAGACCCCAGATGTCCCCAGACCGCCAGCTTGACCCAGCTCTGTCCTGGGAGTCGCGGCACTGGGTGCAGGTCGGGTAGCTCAGGCACTCCTGCACCGGCAGCCGGAACACCTAGGGCAGCGGGGCCG
+	+	50287968	60	.5	@A00808:646:HWGVJDSXY:2:1618:20717:1204/1
+                                                              GCGGGGCCGTGAGTGGGACCACAGCAGAGGCCGCACGGGCCTTCCGCAGACCCCAGATGTCCCCAGACCGCCAGCTTGACCCAGCTCTGTCCTGGGAGTCGCGGCACTGGGTGCAGGTCGGGTAGCTCAGGCACTCCTGCACCGGCAGCC
+	-	50288137	60	.5	@A00808:646:HWGVJDSXY:2:1618:20717:1204/2
+####################################################################################################
+66	TD 348	NT 0 ""	ChrID chr22	BP 50522524	50522873	BP_range 50522524	50522873	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 2 0 0 0 0	.5 45 79 1 1 1 1
+AGGCCTGGGTTAGAGGGAGACGGGGAGGGGAGGGGGACAGGTGAGCGGTGCCCAGGCCCCTGCTTGGGAGGCAGTAGCTCCTGCTGATCCTCCCCTAGGAGCTCTTCATCGCCACCTCCCAGAAGTTTGTCCAGGAGACAGAGCTGAGCCacatggagcccgagggagcagaccccagggaagccgctgaccttggtaggtgggcagcgggctaggagtgctgaggggccactggagctgggggcaggggagagcgtggccccttagctgcccagctcacagctaccccttcccagacgc
+                                                                            GCTCCTGCTGATCCTCCCCTAGGAGCTCTTCATCGCCACCTCCCAGAAGTTTGTCCAGGAGACAGAGCTGAGCCACATGGAGCCCGAGGGAGCAGACCCCAGGGAAGCCGCTGACCTTGGTAGGTGGGCAGCGGGCTAGGAGTGCTGAGG
+	+	50522524	60	.5	@A00808:646:HWGVJDSXY:2:1248:23448:17581/2
+                                                 GCCCAGGCCCCTGCTTGGGAGGCAGTAGCTCCTGCTGATCCTCCCCTAGGAGCTCTTCATCGCCACCTCCCAGAAGTTTGTCCAGGAGACAGAGCTGAGCCACATGGAGCCCGAGGGAGCAGACCCCAGGGAAGCCGCTGACCTTGGTAG
+	-	50522873	60	.5	@A00808:646:HWGVJDSXY:2:1248:23448:17581/1
+####################################################################################################
+67	TD 418	NT 0 ""	ChrID chr22	BP 50527146	50527565	BP_range 50527146	50527565	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 0 0 0 0	.5 23 43 1 1 1 1
+ACCTGGTGGGTTGAGTATCAGGCCACCCCACATGGTGGTGGTCAGGCATCTTGTGATGGGGGTAGGGGGGCACACGGTCAGGTGACGGGTAACTCCTAACGAGAGGCCCTTGACTTGAGTTTGGAGGTCAGGAGCCTGTGAACATGCAGAaaaggccacaccgctcaccagcgtctttgccagctcccgggcctgctcctggttggggaagacggcggcccctccgaacttaacgtccaccaccagagcggacagcccctccacgagtttcttactgagaatggaggctttgggggaggc
+                                                                                                  ACGAGAGGCCCTTGACTTGAGTTTGGAGGTCAGGAGCCTGTGAACATGCAGAAGAGGCCACACCGCTCACCAGCGTCTTTGCCAGCTCCCGGGCCTGCTCCTGGTTGGGGAAGACGGCGGCCCCTCCGAACTTAACGTCCACCACCAGAG
+	+	50527148	60	.5	@A00808:646:HWGVJDSXY:2:2548:2446:13213/2
+                                                           GGGTAGGGGGGCACACGGTCAGGTGACGGGTAACTCCTAACGAGAGGCCCTTGACTTGAGTTTGGAGGTCAGGAGCCTGTGAACATGCAGAAGAGGCCACACCGCTCACCAGCGTCTTTGCCAGCTCCCGGGCCTGCTCCTGGTTGGGGA
+	-	50527566	60	.5	@A00808:646:HWGVJDSXY:2:2548:2446:13213/1
+####################################################################################################
+68	TD 260	NT 0 ""	ChrID chr22	BP 50531059	50531320	BP_range 50531059	50531320	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 0 0 1 1 1 1	.5 49 55 0 0 0 0
+GATGGGCCGTTCTGACCTCACCTGGGCTCTGCTGTTCCGCCTGGACACCCCAGTTTCGGGGAGCAATGGTGTGCCGAGGCGCACTGGGGTACGTCGCGTTCCCCGCTCGCTCCGGGAAGTACCTGCCTGCGGGGCGGATCAAGGGTGTGGtggggaggaggcagggctcgggggtagtgggtctccgcggacaggcgcagggtggtcccagctcccggagggcggtccccggtctcgagtgggaaggcccacagttctgggatgggccgttctgacctcacctgggctctgctgttccgc
+                                                                                                                                                 TGTGGGGGGGAGGAGGCAGGGCTCGGGGGTAGTGGGTCTCCGCGGACAGGCGCAGGGTGGTCCCAGCTCCCGGAGGGCGGTCCCCGGTCTCGAGTGGGAAGGCCCACAGTTCTGGGATGGGCCGTTCTGACCTCACCTGGGCTCTGCTG
+	+	50531194	60	.1	@A00881:658:HYKNLDSXY:3:1224:32145:34084/2
+                         GCTCTGCTGTTCCGCCTGGACACCCCAGTTTCGGGGAGCAATGGTGTGCCGAGGCGCACTGGGGTACGTCGCGTTCCCCGCTCGCTCCGGGAAGTACCTGCCTGCGGGGCGGATCAAGGGTGTGGGGGGGAGGAGGCAGGGCTCGGGGGT
+	-	50531209	60	.1	@A00881:658:HYKNLDSXY:3:1224:32145:34084/1
+####################################################################################################
+69	TD 245	NT 0 ""	ChrID chr22	BP 50570183	50570429	BP_range 50570183	50570429	Supports 2	2	+ 2	2	- 0	0	S1 3	SUM_MS 120	2	NumSupSamples 1	1	.1 0 1 0 0 0 0	.5 6 51 2 2 0 0
+TCAGGAGCACTCACAGGGCCAAAGCCACCTCCAGCGCCCAGGTGATTGGGGTGCTGCTCTGGGTCGAACATGCGGATCTGGGATTGGGGGATCTGGCTGGTGGAGAGACGCCAGGGTTCCGAGAGCACCTGCAATGGAGGCCACAGCTGGtcctctaagcaaggtgctcctgcctctcgtctgacctcagggcctgcactcgccactgaaaccctcagggccctggtgctgcccacccacccccttcaggagcactcacagggccaaagccacctccagcgcccaggtgattggggtgct
+                                                                                                                                         AGGCCGCAGCTGGTCCTCTAAGCAAGGTGCTCCTGCCTCTCGTCTGACCTCAGGGCCTGCACTCGCCACTGAAACCCTCAGGGCCCTGGTGCTGCCCACCCACCCCCTTCAGGAGCACTCACAGGGCCAAAGCCACCTCCAGCGCCCAGG
+	+	50570183	60	.5	@A00808:646:HWGVJDSXY:2:1234:1814:27398/1
+                                 GCGCCCAGGTGATTGGGGTGCTGCTCTGGGTCGAACATGCGGATCTGGGATTGGGGGATCTGGCTGGTGGAGAGACGCCAGGGTTCCGAGAGCACCTGCAATGGAGGCCGCAGCTGGTCCTCTAAGCAAGGTGCTCCTGCCTCTCGT
+	+	50570311	60	.5	@A00808:646:HWGVJDSXY:2:1234:1814:27398/2
+####################################################################################################
+70	TD 159	NT 0 ""	ChrID chr22	BP 50626845	50627005	BP_range 50626845	50627005	Supports 2	2	+ 1	1	- 1	1	S1 4	SUM_MS 120	2	NumSupSamples 1	1	.1 1 2 0 0 0 0	.5 67 51 1 1 1 1
+GAAGGGGCGATCCTGGCGCTGGGCGTCGGCCATGAGGTCATGGGCGAAAGCCATGTAGCGGGCCTCTAGTCCGGGCAGCCAGGGGGGCTGCGCCTCCACGGACAGGTTGGCCAACAGTGGGATGGGGACCAGGCCCTGGTCACAGCCACCgtacaggaagaaggggcgatcctggcgctgggcgtcggccatgaggtcatgggcgaaagccatgtagcgggcctctagtccgggcagccaggggggctgcgcctccacggacaggttggccaacagtgggatggggaccaggccctggtc
+                                                                                AGGGGGGCTGCGCCTCCACGGACAGGTTGGCCAACAGTGGGATGGGGACCAGGCCCTGGTCACAGCCACCGTACAGGAAGAAGGGGCGATCCTGGCGCTGGGCGTCGGCCATGAGGTCATGGGCGAAAGCCATGTAGCGGGCCTCTAGTC
+	+	50626845	60	.5	@A00808:646:HWGVJDSXY:2:1248:23032:9408/2
+                                                              CCTCTAGTCCGGGCAGCCAGGGGGGCTGCGCCTCCACGGACAGGTTGGCCAACAGTGGGATGGGGACCAGGCCCTGGTCACAGCCACCGTACAGGAAGAAGGGGCGATCCTGGCGCTGGGCGTCGGCCATGAGGTCATGGGCGAAAGCCA
+	-	50627006	60	.5	@A00808:646:HWGVJDSXY:2:1248:23032:9408/1

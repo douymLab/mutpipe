@@ -1,0 +1,73 @@
+import socket
+sample_IDs, =glob_wildcards("/storage/douyanmeiLab/lulu/data/38_bam_vcf/BQSR/BQSRbam/tumor/{sample}.tumor.bam")
+#print(str(panel))
+#print(str(sample_IDs))
+rule all:
+	input:
+		expand("vcf/sample_{sample}.vcf", sample=sample_IDs)
+
+rule calculate_insert_size:
+	input:
+		tumor_bam = expand("/storage/douyanmeiLab/lulu/data/38_bam_vcf/BQSR/BQSRbam/tumor/{sample}.tumor.bam", sample=sample_IDs),
+                normal_bam = expand("/storage/douyanmeiLab/lulu/data/38_bam_vcf/BQSR/BQSRbam/normal/{sample}.normal.bam", sample=sample_IDs)
+	output:
+		tumor_insert_size = "insert_size/tumor/{sample}.tumor.is.txt",
+		normal_insert_size = "insert_size/normal/{sample}.normal.is.txt"
+	shell:
+		"""
+		samtools stats {input.tumor_bam} | grep "insert size average" >> {output.tumor_insert_size}
+		samtools stats {input.normal_bam} | grep "insert size average" >> {output.normal_insert_size}
+		"""
+rule generate_bam_config:
+	input:
+		tumor_bam = "/storage/douyanmeiLab/lulu/data/38_bam_vcf/BQSR/BQSRbam/tumor/{sample}.tumor.bam",
+		normal_bam = "/storage/douyanmeiLab/lulu/data/38_bam_vcf/BQSR/BQSRbam/normal/{sample}.normal.bam",
+		tumor_insert_size = "insert_size/tumor/{sample}.tumor.is.txt",
+                normal_insert_size = "insert_size/normal/{sample}.normal.is.txt"
+		
+	output:
+		bam_config_file="bam_config/sample_{sample}_config"	
+	params:
+		sample = "{sample}"
+	shell:
+		"python generate_bam_config.py --tumor {input.tumor_bam} --tumor_insert_size {input.tumor_insert_size} --normal {input.normal_bam} --normal_insert_size {input.normal_insert_size} --sample {params.sample} -o {output.bam_config_file}"
+
+rule CallIndel:
+	input:
+		fa="/storage/douyanmeiLab/yanmei/reference/Homo_sapiens_assembly38.fasta",
+		bam_config_file="bam_config/sample_{sample}_config",
+	output:
+		BP="output/sample_{sample}/sample_{sample}_BP", #unassigned breakpoints
+		CloseEndMapped="output/sample_{sample}/sample_{sample}_CloseEndMapped", 
+		D="output/sample_{sample}/sample_{sample}_D", #deletion
+		INT_final="output/sample_{sample}/sample_{sample}_INT_final",
+		INV="output/sample_{sample}/sample_{sample}_INV", #inversion
+		LI="output/sample_{sample}/sample_{sample}_LI", #large insertion
+		RP="output/sample_{sample}/sample_{sample}_RP", 
+		SI="output/sample_{sample}/sample_{sample}_SI", #short insertion
+		TD="output/sample_{sample}/sample_{sample}_TD" #tandem duplication
+	params:
+		chr="chr22",
+		out="output/sample_{sample}/sample_{sample}"	
+	shell:
+		"pindel -f {input.fa} -i {input.bam_config_file} -c {params.chr} -o {params.out}"
+
+rule Convert2Vcf:
+	input:
+		fa="/storage/douyanmeiLab/yanmei/reference/Homo_sapiens_assembly38.fasta",
+		BP="output/sample_{sample}/sample_{sample}_BP",
+		CloseEndMapped="output/sample_{sample}/sample_{sample}_CloseEndMapped",
+		D="output/sample_{sample}/sample_{sample}_D",
+		INT_final="output/sample_{sample}/sample_{sample}_INT_final",
+		INV="output/sample_{sample}/sample_{sample}_INV",
+		LI="output/sample_{sample}/sample_{sample}_LI",
+		RP="output/sample_{sample}/sample_{sample}_RP",
+		SI="output/sample_{sample}/sample_{sample}_SI",
+		TD="output/sample_{sample}/sample_{sample}_TD"
+	output:
+		vcf="vcf/sample_{sample}.vcf"
+	params:
+		indel_file="output/sample_{sample}/sample_{sample}",
+	shell:
+		"pindel2vcf -P {params.indel_file} -r {input.fa} -R GRCh38 -d 20131223 -v {output.vcf} -G"
+
