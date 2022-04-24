@@ -1,0 +1,184 @@
+#Downstream varints analysis
+
+import socket
+shell.prefix("module load gcc; source /home/douyanmeiLab/lujinhong/miniconda3/etc/profile.d/conda.sh; conda activate base;")
+
+sample_IDs, =glob_wildcards("vcf_links_Mutect2/{sample}.somatic.mt2.SNVs.vcf.gz")
+#https://github.com/parklab/MSIprofiler
+type=["octopus","strelka"]
+
+rule all:
+    input:
+        expand("temp/{sample}/{sample}.mt2.filter.SNVs.vcf",sample=sample_IDs),
+        expand("temp/{sample}/{sample}.mt2.filter.Indels.vcf",sample=sample_IDs),
+        expand("temp/{sample}/{sample}.strelka.filter.SNVs.vcf",sample=sample_IDs),
+        expand("temp/{sample}/{sample}.strelka.filter.Indels.vcf",sample=sample_IDs),
+        expand("temp/{sample}/{sample}.snv.{type}.hg38_multianno.txt",sample=sample_IDs,type=type),
+        expand("temp/{sample}/{sample}.indel.{type}.hg38_multianno.txt",sample=sample_IDs,type=type),
+        expand("result/{sample}/{sample}.tumor.SNV.out",sample=sample_IDs),
+        expand("result/{sample}/{sample}.tumor.INDEL.out",sample=sample_IDs),
+        expand("result/{sample}/{sample}.Indel.variant_function",sample=sample_IDs),
+        expand("result/{sample}/{sample}.Indel.exonic_variant_function",sample=sample_IDs),
+        expand("result/{sample}/{sample}.SNV.variant_function",sample=sample_IDs),
+        expand("result/{sample}/{sample}.SNV.exonic_variant_function",sample=sample_IDs)
+
+
+rule MT2_SNVs:
+    input:
+        "vcf_links_Mutect2/{sample}.somatic.mt2.SNVs.vcf.gz"
+    output:
+        "temp/{sample}/{sample}.mt2.filter.SNVs.vcf"
+    shell:
+        " zcat {input}|grep -v \"#\"|awk '$7==\"PASS\"' >> {output} "
+
+rule MT2_Indels:
+    input:
+        "vcf_links_Mutect2/{sample}.somatic.mt2.INDELs.vcf.gz"
+    output:
+        "temp/{sample}/{sample}.mt2.filter.Indels.vcf"
+    shell:
+        " zcat {input}|grep -v \"#\"|awk '$7==\"PASS\"' >> {output} "
+
+rule strelka_SNVs:
+    input:
+        "vcf_links_strelka/{sample}_strelka/results/variants/somatic.snvs.vcf.gz"
+    output:
+        "temp/{sample}/{sample}.strelka.filter.SNVs.vcf"
+    shell:
+        "zcat {input}|grep -v \"#\"|awk '$7==\"PASS\"' >> {output} "
+
+rule strelka_Indels:
+    input:
+        "vcf_links_strelka/{sample}_strelka/results/variants/somatic.indels.vcf.gz"
+    output:
+        "temp/{sample}/{sample}.strelka.filter.Indels.vcf"
+    shell:
+        "zcat {input}|grep -v \"#\"|awk '$7==\"PASS\"' >> {output} "
+
+rule octopus_PASS:
+    input:
+        "vcf_links_octopus/{sample}.vcf.gz"
+    output:
+        snv="temp/{sample}/{sample}.octopus.PASS.SNVs.vcf",
+        indel="temp/{sample}/{sample}.octopus.PASS.Indels.vcf"
+    shell:
+        "zcat {input}|grep -v \"#\"|grep \"SOMATIC\"|awk '$5!~/,/&&length($4)==length($5)&&$7==\"PASS\"' >> {output.snv}; "
+        "zcat {input}|grep -v \"#\"|grep \"SOMATIC\"|awk '$5!~/,/&&length($4)!=length($5)&&$7==\"PASS\"' >> {output.indel} "
+
+rule convert_SNV:
+    input:
+        octopus="temp/{sample}/{sample}.octopus.PASS.SNVs.vcf",
+        strelka="temp/{sample}/{sample}.strelka.filter.SNVs.vcf",
+        Mutect2="temp/{sample}/{sample}.mt2.filter.SNVs.vcf",
+        convert="/storage/douyanmeiLab/lujinhong/tools/annovar/convert2annovar.pl"
+    output:
+        octopus="temp/{sample}/{sample}.octopus.SNV.avinput",
+        strelka="temp/{sample}/{sample}.strelka.SNV.avinput",
+        Mutect="temp/{sample}/{sample}.mt2.SNV.avinput"
+    shell:
+        "perl {input.convert} -format vcf4old {input.octopus} -out {output.octopus}; "
+        "perl {input.convert} -format vcf4old {input.Mutect2} -out {output.Mutect}; "
+        "perl {input.convert} -format vcf4old {input.strelka} -out {output.strelka};"
+
+rule convert_Indel:
+    input:
+        octopus="temp/{sample}/{sample}.octopus.PASS.Indels.vcf",
+        Mutect2="temp/{sample}/{sample}.mt2.filter.Indels.vcf",
+        strelka="temp/{sample}/{sample}.strelka.filter.Indels.vcf",
+        convert="/storage/douyanmeiLab/lujinhong/tools/annovar/convert2annovar.pl"
+    output:
+        octopus="temp/{sample}/{sample}.octopus.Indel.avinput",
+        strelka="temp/{sample}/{sample}.strelka.Indel.avinput",
+        Mutect2="temp/{sample}/{sample}.mt2.Indel.avinput"
+    shell:
+        "perl {input.convert} -format vcf4old {input.Mutect2} -out {output.Mutect2}; "
+        "perl {input.convert} -format vcf4old {input.strelka} -out {output.strelka}; "
+        "perl {input.convert} -format vcf4old {input.octopus} -out {output.octopus}; "
+
+rule annovar_SNV:
+    input:
+        octopus_input="temp/{sample}/{sample}.octopus.SNV.avinput",
+        strelka_input="temp/{sample}/{sample}.strelka.SNV.avinput",
+        annovar="/storage/douyanmeiLab/lujinhong/tools/annovar/table_annovar.pl",
+        humandb="/storage/publicdata/ANNOVAR/humandb"
+    output:
+        "temp/{sample}/{sample}.snv.octopus.hg38_multianno.txt",
+        "temp/{sample}/{sample}.snv.strelka.hg38_multianno.txt"
+    shell:
+        "perl {input.annovar} {input.octopus_input} {input.humandb} -buildver hg38 "
+        "-out temp/{wildcards.sample}/{wildcards.sample}.snv.octopus -remove -protocol gnomad30_genome "
+        "-operation f -nastring . -polish;"
+        "perl {input.annovar} {input.strelka_input} {input.humandb} -buildver hg38 "
+        "-out temp/{wildcards.sample}/{wildcards.sample}.snv.strelka -remove -protocol gnomad30_genome "
+        "-operation f -nastring . -polish;"
+
+rule annovar_Indel:
+    input:
+        octopus_input="temp/{sample}/{sample}.octopus.Indel.avinput",
+        strelka_input="temp/{sample}/{sample}.strelka.Indel.avinput",
+        annovar="/storage/douyanmeiLab/lujinhong/tools/annovar/table_annovar.pl",
+        humandb="/storage/publicdata/ANNOVAR/humandb"
+    output:
+        "temp/{sample}/{sample}.indel.octopus.hg38_multianno.txt",
+        "temp/{sample}/{sample}.indel.strelka.hg38_multianno.txt"
+    shell:
+        "perl {input.annovar} {input.octopus_input} {input.humandb} -buildver hg38 "
+        "-out temp/{wildcards.sample}/{wildcards.sample}.indel.octopus -remove -protocol gnomad30_genome "
+        "-operation f -nastring . -polish;"
+        "perl {input.annovar} {input.strelka_input} {input.humandb} -buildver hg38 "
+        "-out temp/{wildcards.sample}/{wildcards.sample}.indel.strelka -remove -protocol gnomad30_genome "
+        "-operation f -nastring . -polish;"
+
+rule merge_SNV:
+    input:
+        octopus_input="temp/{sample}/{sample}.snv.octopus.hg38_multianno.txt",
+        strelka_input="temp/{sample}/{sample}.snv.strelka.hg38_multianno.txt",
+        Mutect2_input="temp/{sample}/{sample}.mt2.SNV.avinput"
+    output:
+        "result/{sample}/{sample}.tumor.SNV.out"
+    shell:
+        "cat {input.Mutect2_input} "
+        "<(cat {input.strelka_input}| awk '$6<=0.0001') "
+        "<(cat {input.octopus_input}| awk '$6<=0.0001') "
+        """| awk '{{print $1,$2,$3,$4,$5}}'|sort|uniq -c """
+        """| awk '$1>=2 {{print $2,$3,$4,$5,$6}}' >> {output}"""
+
+rule merge_INDEL:
+    input:
+        octopus_input="temp/{sample}/{sample}.indel.octopus.hg38_multianno.txt",
+        strelka_input="temp/{sample}/{sample}.indel.strelka.hg38_multianno.txt",
+        Mutect2_input="temp/{sample}/{sample}.mt2.Indel.avinput"
+    output:
+        "result/{sample}/{sample}.tumor.INDEL.out"
+    shell:
+        "cat {input.Mutect2_input} "
+        "<(cat {input.strelka_input}| awk '$6<=0.0001') "
+        "<(cat {input.octopus_input}| awk '$6<=0.0001') "
+        """| awk '{{print $1,$2,$3,$4,$5}}'|sort|uniq -c """
+        """| awk '$1>=2 {{print $2,$3,$4,$5,$6}}' >> {output}"""
+
+rule anno_SNV:
+    input:
+        input="result/{sample}/{sample}.tumor.SNV.out",
+        anno="/storage/douyanmeiLab/lujinhong/tools/annovar/annotate_variation.pl",
+        humandb="/storage/publicdata/ANNOVAR/humandb/"
+    output:
+        "result/{sample}/{sample}.SNV.exonic_variant_function",
+        "result/{sample}/{sample}.SNV.variant_function",
+        "result/{sample}/{sample}.SNV.log"
+    shell:
+        "perl {input.anno} -out result/{wildcards.sample}/{wildcards.sample}.SNV "
+        "-build hg38 {input.input} {input.humandb}"
+
+rule anno_Indel:
+    input:
+        input="result/{sample}/{sample}.tumor.INDEL.out",
+        anno="/storage/douyanmeiLab/lujinhong/tools/annovar/annotate_variation.pl",
+        humandb="/storage/publicdata/ANNOVAR/humandb/"
+    output:
+        "result/{sample}/{sample}.Indel.exonic_variant_function",
+        "result/{sample}/{sample}.Indel.variant_function",
+        "result/{sample}/{sample}.Indel.log"
+    shell:
+        "perl {input.anno} -out result/{wildcards.sample}/{wildcards.sample}.Indel "
+        "-build hg38 {input.input} {input.humandb}"
