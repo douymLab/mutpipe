@@ -1,0 +1,3 @@
+NameError in line 621 of /home/douyanmeiLab/lujinhong/mutpipe/MSIprofiler/Snakefile:
+name 'unpahsed_MSIprofiler_Y' is not defined
+  File "/home/douyanmeiLab/lujinhong/mutpipe/MSIprofiler/Snakefile", line 621, in <module>
