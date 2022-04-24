@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 34 of /home/douyanmeiLab/lujinhong/mutpipe/VariantList/Snakefile:
-Missing input files for rule MT2_Indels:
-vcf_links_Mutect2/test.somatic.mt2.INDELs.vcf.gz

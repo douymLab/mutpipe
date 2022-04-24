@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 619 of /home/douyanmeiLab/lujinhong/mutpipe/MSIprofiler/Snakefile:
-Missing input files for rule filterMSI:
-result/test/test.chr\*.unphased_unphased.txt

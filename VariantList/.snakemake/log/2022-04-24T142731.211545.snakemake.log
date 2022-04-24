@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 50 of /home/douyanmeiLab/lujinhong/mutpipe/VariantList/Snakefile:
-Missing input files for rule strelka_Indels:
-vcf_links_strelka/test_strelka/results/variants/somatic.indels.vcf.gz

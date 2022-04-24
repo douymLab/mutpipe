@@ -1,3 +1,0 @@
-AttributeError in line 621 of /home/douyanmeiLab/lujinhong/mutpipe/MSIprofiler/Snakefile:
-'Rules' object has no attribute 'unpahsed_MSIprofiler_Y'
-  File "/home/douyanmeiLab/lujinhong/mutpipe/MSIprofiler/Snakefile", line 621, in <module>
