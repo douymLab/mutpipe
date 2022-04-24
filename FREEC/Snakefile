@@ -1,0 +1,98 @@
+##GATK: v4.2.2.0
+import socket
+shell.prefix("module load gcc; module load jdk/11.0.10; source ~/.bashrc; source /storage/douyanmeiLab/lulu/tools/miniconda3/etc/profile.d/conda.sh; conda activate mutpipe; module load samtools/1.13;module load R/4.1.2;")
+#donor_sample_IDs = "YC_017"
+donor_sample_IDs, =glob_wildcards("bam_links/tumor/{sample}.tumor.bam")
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		expand("config/{sample}.config",sample=donor_sample_IDs),
+		expand("result/{sample}.tumor.bam_CNVs",sample=donor_sample_IDs),
+		expand("result/{sample}.tumor.bam_CNVs.p.value.txt",sample=donor_sample_IDs),
+		expand("result/{sample}.tumor.bam_ratio.txt.png",sample=donor_sample_IDs),
+		#expand("result/{sample}.cnv_ratio_all_chr",sample=donor_sample_IDs),
+		#expand("result/{sample}.cnv_ratio_all_chr_xy",sample=donor_sample_IDs),
+		#expand("result/{sample}.cnv_all_chr",sample=donor_sample_IDs),
+		#expand("result/{sample}.cnv_all_chr_xy",sample=donor_sample_IDs),
+rule config:
+	input:
+		fai="/storage/douyanmeiLab/reference/Homo_sapiens_assembly38.fasta.fai",
+		tumor="bam_links/tumor/{sample}.tumor.bam",
+		normal="bam_links/normal/{sample}.normal.bam"
+	output:
+		config="config/{sample}.config"
+	params:
+		outputdir="result"
+	shell:
+		"""
+		python /home/douyanmeiLab/lulu/tools/gen_freec_config.py -fai {input.fai} -tumor {input.tumor} -normal {input.normal} -dir {params.outputdir} -config {output.config}
+		"""
+rule freec:
+	input: 
+		conf="config/{sample}.config",
+		sample="bam_links/tumor/{sample}.tumor.bam",
+		control="bam_links/normal/{sample}.normal.bam"
+	output:
+		cnv="result/{sample}.tumor.bam_CNVs",
+		ratio="result/{sample}.tumor.bam_ratio.txt"
+	shell:
+		"freec -conf {input.conf} -sample {input.sample} -control {input.control}"
+rule assessSignificance:
+	input:
+		cnv="result/{sample}.tumor.bam_CNVs",
+		ratio="result/{sample}.tumor.bam_ratio.txt"
+	output:
+		pvalue="result/{sample}.tumor.bam_CNVs.p.value.txt"
+	shell:
+		"""
+		cat ~/tools/FREEC-11.6/scripts/assess_significance.R | R --slave --args {input.cnv} {input.ratio}
+		"""
+rule makeGraph:
+	input:
+		ratio="result/{sample}.tumor.bam_ratio.txt"
+	output:
+		png="result/{sample}.tumor.bam_ratio.txt.png"
+	shell:
+		"""
+		cat ~/tools/FREEC-11.6/scripts/makeGraph.cn.R | R --slave --args 2 {input.ratio}
+		"""
+rule join:
+	input:
+		ratio="result/{sample}.tumor.bam_ratio.txt",
+		hg37_len_sorted="/storage/douyanmeiLab/lulu/mutpipe/freec/DO52556/depth/hg37_len_sorted.txt"
+	output:
+		cnv_all_chr="result/{sample}.cnv_ratio_all_chr"
+	shell:
+		"""
+		grep -v "Start" {input.ratio} | grep '^[0-9 X Y]'|sort -n > ratio_no_head
+		join -1 1 -2 1 ratio_no_head {input.hg37_len_sorted} -a 1|awk '{{printf "%s\\t%s\\t%s\\t%s\\t%s\\n",$1,$2+$8,$3,$4,$5}}' > {output.cnv_all_chr}
+		"""
+rule xy:
+	input:
+		cnv_all_chr="result/{sample}.cnv_ratio_all_chr"
+	output:
+		xy="result/{sample}.cnv_ratio_all_chr_xy"
+	shell:
+		"""
+		awk '/^[0-9 X Y]/{{print}}' {input.cnv_all_chr}|sed 's/^X/23/g'|sed 's/^Y/24/g'|grep '^[0-9]' > {output.xy}
+		"""
+rule cnv_join:
+	input:
+		ratio="result/{sample}.tumor.bam_CNVs",
+		hg37_len_sorted="/storage/douyanmeiLab/lulu/mutpipe/freec/DO52556/depth/hg37_len_sorted.txt"
+	output:
+		cnv_all_chr="result/{sample}.cnv_all_chr"
+	shell:
+		"""
+		grep -v "Start" {input.ratio} | grep '^[0-9 X Y]'|sort -n > cnv_no_head
+		join -1 1 -2 1 cnv_no_head {input.hg37_len_sorted} -a 1|awk '{{printf "%s\\t%s\\t%s\\t%s\\t%s\\n",$1,$2+$8,$3+$8,$4,$5}}' > {output.cnv_all_chr}
+		"""
+rule cnv_xy:
+	input:
+		cnv_all_chr="result/{sample}.cnv_all_chr"
+	output:
+		xy="result/{sample}.cnv_all_chr_xy"
+	shell:
+		"""
+		awk '/^[0-9 X Y]/{{print}}' {input.cnv_all_chr}|sed 's/^X/23/g'|sed 's/^Y/24/g'|grep '^[0-9]' > {output.xy}
+		"""
