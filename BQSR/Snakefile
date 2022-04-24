@@ -1,0 +1,72 @@
+##GATK: v4.1.0.0
+import socket
+shell.prefix("module load gcc; module load jdk/1.8.0; source /storage/douyanmeiLab/lujuntin/software/miniconda3/etc/profile.d/conda.sh; conda activate bioinfo; ")
+sample_IDs, =glob_wildcards("bam_links_tumor/{id}.tumor.bam")
+types=['tumor', 'normal']
+
+localrules:all
+
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		expand("BQSRbam/{type}/{sample}.{type}.bam.bai",sample=sample_IDs, type=types)
+
+rule BaseRecalibrator:
+	input:
+		bam="bam_links_{type}/{sample}.{type}.bam"
+	params:
+		PON="/storage/douyanmeiLab/TCGA_wu/resources/1000g_pon.hg38.vcf.gz",
+		interval="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Padded.list",
+		germline_resource="/storage/douyanmeiLab/TCGA_wu/resources/af-only-gnomad.hg38.vcf.gz",
+		snp_1000g="/storage/douyanmeiLab/lujuntin/reference/reference.hg38/1000G_phase1.snps.high_confidence.hg38.vcf",
+		Mills="/storage/douyanmeiLab/lujuntin/reference/reference.hg38/Mills_and_1000G_gold_standard.indels.hg38.vcf",
+		fa="/storage/douyanmeiLab/TCGA_wu/resources/Homo_sapiens_assembly38.fasta"
+	output:
+		table="BQSRout/{sample}.{type}_recal.table"
+	log:
+		"logs/BQSR/{sample}.{type}.log"
+	shell:
+		"gatk BaseRecalibrator -I {input.bam} -R {params.fa} "
+		"--known-sites {params.germline_resource} --known-sites {params.PON} "
+		"--known-sites {params.Mills} --known-sites {params.snp_1000g} -O {output.table} 2> {log}"
+
+rule ApplyBQSR:
+	input:
+		table="BQSRout/{sample}.{type}_recal.table",
+		bam="bam_links_{type}/{sample}.{type}.bam"
+	params:
+		fa="/storage/douyanmeiLab/TCGA_wu/reference/GRCh38_full_analysis_set_plus_decoy_hla.fa",
+                interval="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Padded.list"
+	output:
+		temp("BQSRbam_tmp/{type}/{sample}.{type}.bam")
+	log:
+		"logs/ApplyBQSR/{sample}.{type}.log"
+	shell:
+		"gatk ApplyBQSR -I {input.bam} --bqsr {input.table} -R {params.fa} -O {output} 2> {log}"
+
+rule ChangeRG:
+	input:
+		"BQSRbam_tmp/{type}/{sample}.{type}.bam"
+	output:
+		protected("BQSRbam/{type}/{sample}.{type}.bam")
+	log:
+		"logs/ChangeRG/{sample}.{type}.log"
+	shell:
+		"java -jar $JARPATH/picard.jar "
+		"AddOrReplaceReadGroups -I {input} -O {output} "
+		"-RGSM {wildcards.sample}.{wildcards.type} "
+		"-RGLB {wildcards.sample}.{wildcards.type} "
+		"-RGPL ILLUMINA "
+		"-RGPU ILLUMINA > {log} 2>&1 ; "
+		#"samtools index {output}"
+
+rule index:
+	input:rules.ChangeRG.output
+	output:"BQSRbam/{type}/{sample}.{type}.bam.bai"
+	shell:"samtools index {input}"
+
+onsuccess:
+	print("Workflow finished with no error")
+
+onerror:
+	print("An error occurred")

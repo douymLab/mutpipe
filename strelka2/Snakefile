@@ -1,0 +1,34 @@
+##GATK: v4.1.0.0
+shell.prefix("module load gcc; module load jdk/1.8.0; source /storage/douyanmeiLab/yanmei/tools/miniconda3/etc/profile.d/conda.sh; conda activate base; ")
+
+sample_IDs, =glob_wildcards("bam_links_tumor/{id}.tumor.bam")
+
+#localrules:all
+
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		expand("strelka_somatic/{sample}_strelka/results/variants/somatic.snvs.vcf.gz",sample=sample_IDs),
+		expand("strelka_somatic/{sample}_strelka/results/variants/somatic.indels.vcf.gz",sample=sample_IDs)
+
+rule StrelkaSomaticWorkflow:
+	input:
+		normal_bam="bam_links_normal/{sample}.normal.bam",
+		tumor_bam="bam_links_tumor/{sample}.tumor.bam",
+		fa="/storage/douyanmeiLab/TCGA_wu/resources/Homo_sapiens_assembly38.fasta",
+		bed="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/Padded_addchrM.sorted.bed.gz"
+	params:
+		rundir="strelka_somatic/{sample}_strelka"
+	output:
+		"strelka_somatic/{sample}_strelka/runWorkflow.py"
+	shell:
+		"/storage/douyanmeiLab/yanmei/tools/strelka-2.9.2.centos6_x86_64/bin/configureStrelkaSomaticWorkflow.py --normalBam {input.normal_bam} --tumorBam {input.tumor_bam} --referenceFasta {input.fa} --exome --callRegions {input.bed} --runDir {params.rundir}"
+
+rule call:
+	input:
+		"strelka_somatic/{sample}_strelka/runWorkflow.py"
+	output:
+		snvs="strelka_somatic/{sample}_strelka/results/variants/somatic.snvs.vcf.gz",
+		indels="strelka_somatic/{sample}_strelka/results/variants/somatic.indels.vcf.gz"
+	shell:
+		"strelka_somatic/{wildcards.sample}_strelka/runWorkflow.py -m local -j 2"
