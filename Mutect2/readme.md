@@ -1,4 +1,5 @@
 # Quick Start 
+![avatar](https://github.com/douymLab/mutpipe/blob/main/Mutect2/Mutect2.png)
 ## Dependency:  
 
 we strongly suggest installing dependencies via conda:
