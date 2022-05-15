@@ -4,11 +4,11 @@
 
 we strongly suggest installing dependencies via conda:
 
-  > $ conda create -n gatk4 --file environment.yaml
+  > $ conda create -n mutpipe_mutect2 --file environment.yaml
 
-Then you could activate the environment "gatk" through this command:
+Then you could activate the environment "mutpipe_mutect2" through this command:
  
-  > $ conda activate gatk4
+  > $ conda activate mutpipe_mutect2
 
 ## Resource:
 To run this pipeline, the below resources must exit under the "resources" folder:
@@ -23,7 +23,7 @@ To run this pipeline, the below resources must exit under the "resources" folder
     + af-only-gnomad.hg38.vcf.gz
     + af-only-gnomad.hg38.vcf.gz.tbi
 - WES interval list: S31285117_Padded.list  
-Note: The interval list is based on our WES kit is Sureselect Human All Exon V7.
+Note: The interval list is based on our WES kit is Sureselect Human All Exon V7. The list and other version kit's list can download form https://earray.chem.agilent.com/suredesign/
 
 The required resource could be downloaded through running:
 
@@ -31,7 +31,7 @@ The required resource could be downloaded through running:
 
  Or you also can soft-link the file into the "resources" folder.
 
-## Run on slrum
+## Run on slurm
 
 1. Change all directory names in the "Snakefile".
 2. dry run test
