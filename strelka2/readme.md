@@ -1,4 +1,5 @@
 # Quick Start 
+![avatar](https://github.com/douymLab/mutpipe/blob/main/strelka2/strelka2.png)
 ## Dependency:  
 
 we strongly suggest installing dependencies via conda:
