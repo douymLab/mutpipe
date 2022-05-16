@@ -1,44 +1,40 @@
-import socket
-#sample_IDs = "YC_017"
-sample_IDs, =glob_wildcards("bam_links_tumor/{sample}.tumor.bam")
-#configfile: "config.yaml"
-#print(str(panel))
-#print(str(sample_IDs))
+
+sample_IDs, =glob_wildcards("path/to/input/{sample}.tumor.bam")
 
 rule all:
 	input:
-		expand("output/{sample}.vcf.gz", sample=sample_IDs),
-		expand("filtered_vcf/{sample}.vcf.gz", sample=sample_IDs),
+		expand("path/to/output/filter/{sample}.vcf.gz", sample=sample_IDs),
 
 rule octopus:
 	input:
-		fa = "/storage/douyanmeiLab/yanmei/reference/Homo_sapiens_assembly38.fasta",
-		tumor_bam = "bam_links_tumor/{sample}.tumor.bam",
-        normal_bam = "bam_links_normal/{sample}.normal.bam",
-		region = "/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Padded_addchrM.list"
+		fa = "resources/Homo_sapiens_assembly38.fasta",
+		tumor_bam = "path/to/input/{sample}.tumor.bam",
+        normal_bam = "path/to/input/{sample}.normal.bam",
+		region = "resources/S31285117_Padded_addchrM.list"
 	output:
-		out = "output/{sample}.vcf.gz"
+		out = "path/to/output/output/{sample}.vcf.gz"
 	params:
 		normal = "{sample}.normal"
 	resources:
 		mem_mb=12000
 	shell:
 		"""
-		octopus -R {input.fa} -I {input.tumor_bam} {input.normal_bam} -N {params.normal} -t {input.region} --threads 4 -o {output.out}
+		octopus -R {input.fa} -I {input.tumor_bam} {input.normal_bam} \
+		-N {params.normal} -t {input.region} --threads 4 -o {output.out}
 		"""
 
 rule re_filter:
 	input:
-		fa = "/storage/douyanmeiLab/yanmei/reference/Homo_sapiens_assembly38.fasta",
-		vcf = "output/{sample}.vcf.gz",
-		somatic_forest = "/storage/douyanmeiLab/lulu/mutpipe/octopus/octopus/resources/forests/octopus_forests_somatic.v0.7.4.forest",
-		germline_forest = "/storage/douyanmeiLab/lulu/mutpipe/octopus/octopus/resources/forests/octopus_forests_germline.v0.7.4.forest",
-		tumor_bam = "bam_links_tumor/{sample}.tumor.bam",
-                normal_bam = "bam_links_normal/{sample}.normal.bam",
+		fa = "resources/Homo_sapiens_assembly38.fasta",
+		vcf = "path/to/output/output/{sample}.vcf.gz",
+		somatic_forest = "resources/somatic.v0.7.4.forest",
+		germline_forest = "resources/germline.v0.7.4.forest",
+		tumor_bam = "path/to/output/{sample}.tumor.bam",
+		normal_bam = "path/to/output/{sample}.normal.bam"
 	output:
-		out = "filtered_vcf/{sample}.vcf.gz"
+		out = "path/to/output/filter/{sample}.vcf.gz"
 	params:
-                normal = "{sample}.normal"
+		normal = "{sample}.normal"
 	shell:
 		"""
 		octopus -R {input.fa} -I {input.tumor_bam} {input.normal_bam} -N {params.normal}\
