@@ -14,7 +14,7 @@ Then you could activate the environment "mutpipe_strelka" through this command:
 To run this pipeline, the below resources must exit under the "resources" folder:
 - Reference genome (hg38): Homo_sapiens_assembly38.fasta.gz
 - FASTA index file: Homo_sapiens_assembly38.fasta.fai
-- WES interval list: S31285117_Padded.list.gz
+- WES interval list: S31285117_Padded.list.gz  
 Note: The interval list is based on our WES kit is Sureselect Human All Exon V7. The list and other version kit's list can download form https://earray.chem.agilent.com/suredesign/
 
 The required resource could be downloaded through running:
