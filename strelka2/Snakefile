@@ -14,7 +14,7 @@ rule StrelkaSomaticWorkflow:
 		normal_bam="path/to/input/{sample}.normal.bam",
 		tumor_bam="path/to/input/{sample}.tumor.bam",
 		fa="resources/Homo_sapiens_assembly38.fasta",
-		bed="resources/Padded_addchrM.sorted.bed.gz"
+		bed="resources/region.bed.gz"
 	params:
 		output_dir="demo/strelka_somatic/{sample}_strelka" #change as you you want
 	output:
