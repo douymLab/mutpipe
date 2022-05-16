@@ -1,0 +1,4 @@
+[2022-05-16T03:11:42.466477Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+SNV_concat_vcf] [wrapperSignal] wrapperStart
+[2022-05-16T03:11:42.475422Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+SNV_concat_vcf] [wrapperSignal] taskStart
+[2022-05-16T03:11:42.482357Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+SNV_concat_vcf] [wrapperSignal] taskExitCode 0
+[2022-05-16T03:11:42.492007Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+SNV_concat_vcf] [wrapperSignal] taskElapsedSec 0

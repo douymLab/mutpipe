@@ -1,0 +1,4 @@
+[2022-05-16T03:09:30.852199Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+callGenomeSegment_chromId_022_chrX_0007] [wrapperSignal] wrapperStart
+[2022-05-16T03:09:30.856208Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+callGenomeSegment_chromId_022_chrX_0007] [wrapperSignal] taskStart
+[2022-05-16T03:09:31.685864Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+callGenomeSegment_chromId_022_chrX_0007] [wrapperSignal] taskExitCode 0
+[2022-05-16T03:09:31.688363Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+callGenomeSegment_chromId_022_chrX_0007] [wrapperSignal] taskElapsedSec 0

@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 65 of /storage/douyanmeiLab/TCGA_wu/snakemake_pipelines/MT2/Snakefile:
-Missing input files for rule collect_artifact:
-bam_links_tumor/349.tumor.bam
