@@ -1,5 +1,5 @@
 # Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/MSIprofiler/MSIprofier.png)
+![avatar](https://github.com/douymLab/mutpipe/blob/main/MSIprofiler/MSIprofiler.png)
 ## Dependency:  
 
 we strongly suggest installing dependencies via conda:
