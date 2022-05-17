@@ -43,7 +43,7 @@ Then download the fasta sequences for the chromosomes (hg38) and generate the re
     > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
 
 ## Select the confidence MSIprofiler result
-To select the confidence MSIprofiler result, we use the following stargegy:
+To select the confidence MSIprofiler result, we use the following strategies:
 1. Kolmogorov-Smirnov P value < 0.01  
 2. The length of the MS repeat in the normal/control sample only 2 haplotype(eg. a site with length 7,7,7,6 is a MSIsite, while a site with 7,6,5,7 might be filtered)  
 You can filter the MSI result use this command:
