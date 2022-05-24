@@ -4,6 +4,9 @@ import os
 import glob
 import numpy as np
 import pandas as pd
+import sys
+
+os.chdir(sys.argv[1])
 
 df_all=pd.DataFrame(columns=['sample','type','count','mean','std','min','25%','50%','75%','max'])
 i=1
