@@ -33,7 +33,7 @@ The required resource could be downloaded through running:
     > snakemake -np
 3. actual run
     > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate gatk4  
+    > \$ conda activate mutpipe_octopus  
     > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "  
     > OR \$ sbatch pipe.sbatch.sh
 
