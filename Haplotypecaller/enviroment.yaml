@@ -1,4 +1,4 @@
-name: HC
+name: mutpipe_Haplotypecaller
 channels:
   - bioconda
   - r

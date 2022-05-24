@@ -1,4 +1,4 @@
-name: strelka
+name: mutpipe_strelka
 channels:
   - bioconda
   - r
