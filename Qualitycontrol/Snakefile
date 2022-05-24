@@ -1,0 +1,125 @@
+##GATK: v4.2.2.0
+#import socket
+#shell.prefix("module load gcc; module load jdk/11.0.10; source ~/.bashrc; source /storage/douyanmeiLab/yanmei/tools/miniconda3/etc/profile.d/conda.sh; conda activate base; module load samtools/1.13;")
+#https://gatk.broadinstitute.org/hc/en-us/articles/360035889791--How-to-Call-somatic-mutations-using-GATK4-Mutect2-Deprecated-
+#https://gatk.broadinstitute.org/hc/en-us/articles/360035531132
+#sample_IDs, =glob_wildcards("/storage/douyanmeiLab/TCGA_wu/WES_rawdata/tumor/{id}T_tumor_1.fq.gz")
+sample_IDs, =glob_wildcards("bam_links_tumor/{id}.tumor.bam")
+type_IDs=["tumor","normal"]
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		expand("coverage_metrics/{sample}.{type}.metrics.txt",sample=sample_IDs, type=type_IDs),
+		expand("depth/{sample}.tumor.depth",sample=sample_IDs),
+		expand("depth/{sample}.normal.depth",sample=sample_IDs),
+		expand("bam_stats/{sample}.normal.stats",sample=sample_IDs, type=type_IDs),
+		expand("bam_stats/{sample}.normal.flagstats",sample=sample_IDs, type=type_IDs),
+		expand("table/{sample}_tumor_calculatecontamination.table",sample=sample_IDs, type=type_IDs),
+		"allsamples_statistics.list"
+
+rule depth_tumor:
+	input:
+		tumor_bam="bam_links_tumor/{sample}.tumor.bam",
+		bed="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Regions.bed"
+	output:
+		"depth/{sample}.tumor.depth"
+	shell:
+		"samtools depth -b {input.bed} {input.tumor_bam} > {output}"
+rule depth_normal:
+	input:
+		normal_bam="bam_links_normal/{sample}.normal.bam",
+		bed="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Regions.bed"
+	output:
+		"depth/{sample}.normal.depth"
+	shell:
+		"samtools depth -b {input.bed} {input.normal_bam} > {output}"
+rule samtools_stats_tumor:
+	input:
+		bam="bam_links_tumor/{sample}.tumor.bam",
+		bed="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Regions.bed",
+		fa="/storage/douyanmeiLab/yanmei/reference/Homo_sapiens_assembly38.fasta"
+	output:
+		"bam_stats/{sample}.tumor.stats"
+	shell:
+		"samtools stats -t {input.bed} -r {input.fa} {input.bam} > {output}"
+rule samtools_stats_normal:
+	input:
+		bam="bam_links_normal/{sample}.normal.bam",
+		bed="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Regions.bed",
+		fa="/storage/douyanmeiLab/yanmei/reference/Homo_sapiens_assembly38.fasta"
+	output:
+		"bam_stats/{sample}.normal.stats"
+	shell:
+		"samtools stats -t {input.bed} -r {input.fa} {input.bam} > {output}"
+rule samtools_flagstats_tumor:
+	input:
+		bam="bam_links_tumor/{sample}.tumor.bam"
+	output:
+		"bam_stats/{sample}.tumor.flagstats"
+	shell:
+		"samtools flagstats -@ 1 -O tsv {input} > {output}"
+rule samtools_flagstats_normal:
+	input:
+		bam="bam_links_normal/{sample}.normal.bam"
+	output:
+		"bam_stats/{sample}.normal.flagstats"
+	shell:
+		"samtools flagstats -@ 1 -O tsv {input} > {output}"
+rule summarizedepth_customizedscript:
+	input:
+		expand("depth/{sample}.{type}.depth",sample=sample_IDs,type=type_IDs)
+	output:
+		"allsamples_statistics.list"
+	resources:
+		mem_mb=50000
+	shell:
+		"python depth_statistics.py"
+
+rule GetPileupSummaries_tumor:
+	input:
+		tumor_bam="bam_links_tumor/{sample}.tumor.bam",
+		tumor_index="bam_links_tumor/{sample}.tumor.bam.bai",
+		common_vcf="/storage/douyanmeiLab/yanmei/resources/small_exac_common_3.hg38.vcf.gz"
+	output:
+		"table/{sample}_tumor_getpileupsummaries.table"
+	shell:
+		"gatk GetPileupSummaries -I {input.tumor_bam} -V {input.common_vcf} -L {input.common_vcf} -O {output}"
+
+rule GetPileupSummaries_normal:
+	input:
+		normal_bam="bam_links_normal/{sample}.normal.bam",
+		normal_index="bam_links_normal/{sample}.normal.bam.bai",
+		common_vcf="/storage/douyanmeiLab/yanmei/resources/small_exac_common_3.hg38.vcf.gz"
+	output:
+		"table/{sample}_normal_getpileupsummaries.table"
+	shell:
+		"gatk GetPileupSummaries -I {input.normal_bam} -V {input.common_vcf} -L {input.common_vcf} -O {output}"
+
+rule CalculateContamination:
+	input:
+		tumor_table="table/{sample}_tumor_getpileupsummaries.table",
+		normal_table="table/{sample}_normal_getpileupsummaries.table"
+	output:
+		table1="table/{sample}_tumor_calculatecontamination.table",
+		table2="table/{sample}_tumor_segments.table"
+	shell:
+		"gatk CalculateContamination -I {input.tumor_table} -matched {input.normal_table} -O {output.table1} -tumor-segmentation {output.table2}"
+
+rule generate_interval_file:
+	input:
+		interval="/storage/douyanmeiLab/TCGA_wu/resources/Agilent_SureSelect_V7/S31285117_Padded_addchrM.list",
+		bam="bam_links_{type}/{sample}.{type}.bam"
+	output:
+		"coverage_metrics/{sample}.{type}.interval"
+	shell:
+		"cat <(samtools view -H {input.bam}) <(cat {input.interval}|sed '\''s/:/\\t/g'\''|sed '\''s/-/\\t/g'\''|awk '\''{{OFS=\"\\t\";print $1,$2,$3,\"-\",$1\":\"$2\"-\"$3}}'\'') > {output}"
+
+rule coverage:
+	input:
+		interval="coverage_metrics/{sample}.{type}.interval",
+		bam="bam_links_{type}/{sample}.{type}.bam",
+		fa="/storage/douyanmeiLab/yanmei/reference/Homo_sapiens_assembly38.fasta"
+	output:
+		"coverage_metrics/{sample}.{type}.metrics.txt"
+	shell:
+		"java -jar /storage/douyanmeiLab/yanmei/tools/picard.jar CollectWgsMetrics -I {input.bam} -O {output} -R {input.fa} --INTERVALS {input.interval}"

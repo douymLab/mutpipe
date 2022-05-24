@@ -1,38 +1,35 @@
 #xTEA v0.1 for short and linked reads on hg38
 import socket
-sample_IDs, =glob_wildcards("bam_links_tumor/{sample}.tumor.bam")
+sample_IDs, =glob_wildcards("path/to/input/{sample}.tumor.bam")
 
 rule all:
     input:
-        "sample_id.txt",
-        "case_ctrl_bam_list.txt",
-        "submit_calling_jobs_for_samples.sh",
-        expand("working/{sample}/L1/{sample}.tumor_LINE1.vcf",sample=sample_IDs)
+        expand("/path/to/output/working/{sample}/L1/{sample}.tumor_LINE1.vcf",sample=sample_IDs)
 
 rule generate_list:
     input:
-        BQSRpath="/storage/douyanmeiLab/TCGA_wu/22_4_6/LZ/BQSRbam"
+        "path/to/input/bamfile"
     output:
         id="sample_id.txt",
         list="case_ctrl_bam_list.txt"
     shell:
-        "ls {input.BQSRpath}/tumor/*.bam|grep -o \"LZ-[0-9]*\" >> {output.id}; "
-        "paste <(ls {input.BQSRpath}/tumor/*.bam|grep -o \"LZ-[0-9]*\") "
-        "<(ls {input.BQSRpath}/tumor/*.bam) "
-        "<(ls {input.BQSRpath}/normal/*.bam) >> {output.list}"
+        "ls {input}/*.tumor.bam|sed 's/.tumor.bam//g'|sed 's/.*\///' >> {output.id}; "
+        "paste <(ls {input}/*.tumor.bam|sed 's/.tumor.bam//g') "
+        "<(ls {input}/*.tumor.bam) "
+        "<(ls {input}/*.normal.bam) >> {output.list}"
 
 rule generate_xTea:
     input:
         id="sample_id.txt",
         list="case_ctrl_bam_list.txt",
-        rep_lib="/storage/douyanmeiLab/lujinhong/tools/xTea/rep_lib_annotation/",
-        ref="/storage/douyanmeiLab/reference/Homo_sapiens_assembly38.fasta",
-        gff3="/storage/douyanmeiLab/lujinhong/resource/gencode.v33.annotation.gff3",
-        xtea="/storage/douyanmeiLab/lujinhong/tools/xTea/xtea/",
+        rep_lib="resources/rep_lib_annotation/",
+        ref="resources/Homo_sapiens_assembly38.fasta",
+        gff3="resource/gencode.v33.annotation.gff3",
+        xtea="path/to/xTea/xtea/",
     output:
-        "submit_calling_jobs_for_samples.sh"
+        "path/to/output/working/{sample}/L1/run_xTEA_pipeline.sh"
     params:
-        working="/storage/douyanmeiLab/TCGA_wu/22_4_6/LZ/xtea/working/"
+        working="path/to/output/working/"
     shell:
         "xtea --case_control --tumor -i {input.id} -b {input.list} -p {params.working} -x null"
         "-o submit_jobs.sh -l {input.rep_lib} -r {input.ref} -g {input.gff3} --xtea {input.xtea} "
@@ -42,11 +39,8 @@ rule run_xTEA:
     input:
         rules.generate_xTea.output
     output:
-        "working/{sample}/L1/{sample}.tumor_LINE1.vcf"
-    params:
-        workspace="/storage/douyanmeiLab/TCGA_wu/22_4_6/LZ/xtea/working/"
+        "path/to/output/working/{sample}/L1/{sample}.tumor_LINE1.vcf"
     resources:
         mem_mb=25000
     shell:
-        "touch {input};"
-        "sh run_xTEA.sh {wildcards.sample} {params.workspace}"
+        "sh {input}"
