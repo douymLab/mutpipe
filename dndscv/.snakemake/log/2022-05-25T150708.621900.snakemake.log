@@ -1,0 +1,18 @@
+Building DAG of jobs...
+Job stats:
+job               count    min threads    max threads
+--------------  -------  -------------  -------------
+all                   1              1              1
+generate_input        1              1              1
+total                 2              1              1
+
+
+[Wed May 25 15:07:08 2022]
+rule generate_input:
+    input: demo/input/test.SNV.out, demo/input/test.INDEL.out
+    output: demo/test_drivergene
+    jobid: 1
+    resources: tmpdir=/tmp
+
+WorkflowError:
+Error when formatting 'cat {input}|while read line; do echo "{wildcards.sample} $line" >> {output};done' for rule generate_input. 'Wildcards' object has no attribute 'sample'

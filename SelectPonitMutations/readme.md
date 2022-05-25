@@ -1,6 +1,7 @@
 # Quick Start 
 ![avatar](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutation/mutpipe_SelectPointMutation.png)
 ## Strategy
+### We use the following strategy to select the mutation point from mutpipe's mutect2, strelka2 and octopus variants caller:
 1. Before combine the callers, we filter the variants by the following criteria:
   - the variant is PASS
   - the variant's population allele frequency(popAF) < 0.0001 

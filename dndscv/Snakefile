@@ -1,0 +1,37 @@
+sample_IDs, =glob_wildcards("demo/input/{sample}.SNV.out")
+
+
+rule all:
+	input:
+		"demo/drivergene.csv"
+
+rule generate_input_persample:
+	input:
+		SNV="demo/input/{sample}.SNV.out",
+		Indel="demo/input/{sample}.INDEL.out"
+	output:
+		SNV=temp("demo/{sample}.SNV.input"),
+		Indel=temp("demo/{sample}.INDEL.input")
+	shell:
+		"cat {input.SNV}|while read line; do echo \"{wildcards.sample} $line\"; done|"
+		"sed 's/ /\t/g'|cut -f 1,2,3,5,6 >> {output.SNV};"
+		"cat {input.Indel}|while read line; do echo \"{wildcards.sample} $line\"; done|"
+		"sed 's/ /\t/g'|cut -f 1,2,3,5,6 >> {output.Indel};"
+
+rule merge_input:
+	input:
+		expand("demo/{sample}.{type}.input", sample=sample_IDs, type=type)
+	output:
+		"demo/drivergene.input"
+	shell:
+		"cat {input} >> {output}"
+
+rule dndscv:
+	input:
+		"demo/drivergene.input"
+	output:
+		"demo/drivergene.csv"
+	params:
+		"resources/RefCDS_human_GRCh38.p12_dNdScv.0.1.0.rda"
+	shell:
+		"Rscript drivergene.R {input} {params} {output}"

@@ -1,0 +1,2 @@
+SyntaxError in line 21 of /home/dell/mutpipe/dndscv/Snakefile:
+Expected name or colon after rule or checkpoint keyword. (Snakefile, line 21)
