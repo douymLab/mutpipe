@@ -1,0 +1,14 @@
+ANNOVAR Version:
+	$Date: 2020-06-07 23:56:37 -0400 (Sun,  7 Jun 2020) $
+ANNOVAR Information:
+	For questions, comments, documentation, bug reports and program update, please visit http://www.openbioinformatics.org/annovar/
+ANNOVAR Command:
+	/storage/douyanmeiLab/lujinhong/tools/annovar/annotate_variation.pl -out demo/result/test/test.Indel -build hg38 demo/result/test/test.tumor.INDEL.out /storage/publicdata/ANNOVAR/humandb
+ANNOVAR Started:
+	Tue May 24 22:17:55 2022
+NOTICE: The --geneanno operation is set to ON by default
+NOTICE: Output files are written to demo/result/test/test.Indel.variant_function, demo/result/test/test.Indel.exonic_variant_function
+NOTICE: Reading gene annotation from /storage/publicdata/ANNOVAR/humandb/hg38_refGene.txt ... Done with 82500 transcripts (including 20366 without coding sequence annotation) for 28265 unique genes
+NOTICE: Processing next batch with 9 unique variants in 9 input lines
+NOTICE: Reading FASTA sequences from /storage/publicdata/ANNOVAR/humandb/hg38_refGeneMrna.fa ... Done with 7 sequences
+WARNING: A total of 591 sequences will be ignored due to lack of correct ORF annotation
