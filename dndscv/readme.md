@@ -38,8 +38,7 @@ The input file is the output file from mutpipe's SelectPointMutation
 test inputfiles we provide under the "demo" folder
 
 ### output:
-
-#### outputdir/drivergene.csv
+outputdir/drivergene.csv
 |   |gene_name|qglobal_cv|
 |:---:|:---------:|:----------:|
 |17498|TP53|1.52027279654021E-11|
