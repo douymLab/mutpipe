@@ -24,7 +24,7 @@ we strongly suggest installing dependencies via conda:
 
 Then you could activate the environment "mutpipe_SelectPointMutation" through this command:
  
-  > $ conda activate mutpipe_SelectPointMutation
+  > $ conda activate mutpipe_SelectPointMutation 
 
 ### install ANNOVAR
 ANNOVAR not includ in conda package, please install ANNOVAR manually.   
