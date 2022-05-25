@@ -1,7 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 8 of /home/dell/mutpipe/dndscv/Snakefile:
-Missing input files for rule generate_input:
-    output: demo/test_test_drivergene
-    wildcards: sample=test
-    affected files:
-        demo/input/test.[SNV,INDEL].out

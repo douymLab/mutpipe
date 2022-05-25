@@ -23,7 +23,7 @@ To run this pipeline, the below resources must exit under the "resources" folder
     + af-only-gnomad.hg38.vcf.gz
     + af-only-gnomad.hg38.vcf.gz.tbi
 - WES interval list: S31285117_Padded.list  
-Note: The interval list is based on our WES kit is Sureselect Human All Exon V7. The list and other version kit's list can download form https://earray.chem.agilent.com/suredesign/
+Note: The interval list is based on our WES kit is Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
 
 The required resource could be downloaded through running:
 
