@@ -1,5 +1,5 @@
 # Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutation/mutpipe_SelectPointMutation.png)
+![avatar](https://github.com/douymLab/mutpipe/blob/main/SelectPonitMutations/mutpipe_SelectPointMutation.png)
 ## Strategy
 ### We use the following strategy to select the mutation point from mutpipe's mutect2, strelka2 and octopus variants caller:
 1. Before combine the callers, we filter the variants by the following criteria:
@@ -9,11 +9,11 @@
 2. We combine multiple callers by a voting approch.  
 
 - For SNVs, we manually examined 588 sites by using IGV.  
-  ![avatar](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutation/SNV.png)  
+  ![avatar](https://github.com/douymLab/mutpipe/blob/main/SelectPonitMutations/SNV.png)  
   Variants called by >=2 software has a ~86% precision. Based on the precision, we choose the SNVs voted by >=2 software as the consensus SNVs.
     
 - For Indels, we manually examined 85 sites by using IGV.  
-  ![avatar](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutation/Indel.png)  
+  ![avatar](https://github.com/douymLab/mutpipe/blob/main/SelectPonitMutations/Indel.png)  
   Variants called by >=2 software has a ~89% precision. Based on the precision, we choose the SNVs voted by >=2 software as the consensus Indels.
 
 ## Dependency:  
