@@ -12,7 +12,7 @@ Then you could activate the environment "mutpipe_dndscv" through this command:
 
 ## Resource:
 To run this pipeline, the below resources must exit under the "resources" folder:
-- RefCDS objects to run dndscv: RefCDS_human_GRCh38.p12_dNdScv.0.1.0.rda
+- RefCDS objects to run dndscv: RefCDS_human_GRCh38.p12_dNdScv.0.1.0.rda  
 Note: We chose this RefCDS because our reference genome is hg38. You could change it as you need and download it from https://github.com/im3sanger/dndscv_data
 
 The required resource could be downloaded through running:
