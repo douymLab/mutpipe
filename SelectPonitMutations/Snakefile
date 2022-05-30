@@ -61,7 +61,7 @@ rule convert_SNV:
         octopus="demo/temp/{sample}/{sample}.octopus.PASS.SNVs.vcf",
         strelka="demo/temp/{sample}/{sample}.strelka.filter.SNVs.vcf",
         Mutect2="demo/temp/{sample}/{sample}.mt2.filter.SNVs.vcf",
-        convert="/storage/douyanmeiLab/lujinhong/tools/annovar/convert2annovar.pl"
+        convert="path/to/annovar/convert2annovar.pl"
     output:
         octopus="demo/temp/{sample}/{sample}.octopus.SNV.avinput",
         strelka="demo/temp/{sample}/{sample}.strelka.SNV.avinput",
@@ -76,7 +76,7 @@ rule convert_Indel:
         octopus="demo/temp/{sample}/{sample}.octopus.PASS.Indels.vcf",
         Mutect2="demo/temp/{sample}/{sample}.mt2.filter.Indels.vcf",
         strelka="demo/temp/{sample}/{sample}.strelka.filter.Indels.vcf",
-        convert="/storage/douyanmeiLab/lujinhong/tools/annovar/convert2annovar.pl"
+        convert="path/to/annovar/convert2annovar.pl"
     output:
         octopus="demo/temp/{sample}/{sample}.octopus.Indel.avinput",
         strelka="demo/temp/{sample}/{sample}.strelka.Indel.avinput",
@@ -90,8 +90,8 @@ rule annovar_SNV:
     input:
         octopus_input="demo/temp/{sample}/{sample}.octopus.SNV.avinput",
         strelka_input="demo/temp/{sample}/{sample}.strelka.SNV.avinput",
-        annovar="/storage/douyanmeiLab/lujinhong/tools/annovar/table_annovar.pl",
-        humandb="/storage/publicdata/ANNOVAR/humandb"
+        annovar="path/to/table_annovar.pl",
+        humandb="path/to/humandb"
     output:
         "demo/temp/{sample}/{sample}.snv.octopus.hg38_multianno.txt",
         "demo/temp/{sample}/{sample}.snv.strelka.hg38_multianno.txt"
@@ -110,8 +110,8 @@ rule annovar_Indel:
     input:
         octopus_input="demo/temp/{sample}/{sample}.octopus.Indel.avinput",
         strelka_input="demo/temp/{sample}/{sample}.strelka.Indel.avinput",
-        annovar="/storage/douyanmeiLab/lujinhong/tools/annovar/table_annovar.pl",
-        humandb="/storage/publicdata/ANNOVAR/humandb"
+        annovar="path/to/annovar/table_annovar.pl",
+        humandb="path/to/humandb"
     output:
         "demo/temp/{sample}/{sample}.indel.octopus.hg38_multianno.txt",
         "demo/temp/{sample}/{sample}.indel.strelka.hg38_multianno.txt"
@@ -157,8 +157,8 @@ rule merge_INDEL:
 rule anno_SNV:
     input:
         input="demo/result/{sample}/{sample}.tumor.SNV.out",
-        anno="/storage/douyanmeiLab/lujinhong/tools/annovar/annotate_variation.pl",
-        humandb="/storage/publicdata/ANNOVAR/humandb/"
+        anno="path/to/annovar/annotate_variation.pl",
+        humandb="path/to/humandb/"
     output:
         "demo/result/{sample}/{sample}.SNV.exonic_variant_function",
         "demo/result/{sample}/{sample}.SNV.variant_function",
@@ -171,8 +171,8 @@ rule anno_SNV:
 rule anno_Indel:
     input:
         input="demo/result/{sample}/{sample}.tumor.INDEL.out",
-        anno="/storage/douyanmeiLab/lujinhong/tools/annovar/annotate_variation.pl",
-        humandb="/storage/publicdata/ANNOVAR/humandb/"
+        anno="path/to/annovar/annotate_variation.pl",
+        humandb="path/to/humandb/"
     output:
         "demo/result/{sample}/{sample}.Indel.exonic_variant_function",
         "demo/result/{sample}/{sample}.Indel.variant_function",
