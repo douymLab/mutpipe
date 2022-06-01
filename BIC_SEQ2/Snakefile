@@ -2,15 +2,14 @@
 import socket
 #shell.prefix("module load gcc; module load jdk/11.0.10; source ~/.bashrc; source /storage/douyanmeiLab/lulu/tools/miniconda3/etc/profile.d/conda.sh; conda activate mutpipe; module load samtools/1.13;module load R/4.1.2")
 sample_IDs, =glob_wildcards("path/to/BQSRTumorBamFolder/{sample}.tumor.bam")
-#chr_list = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"]
-chr_list = ["1"]
+chr_list = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"]
 
 #sample_IDs = "YC-002"
 # a pseudo-rule that collects the target files
 rule all:
 	input:
-		expand("path/to/mappability/hg38/150mer/genmap.log"),
-		expand("path/to/mappability/hg38/150mer/hg38.150mer.m2.chr{chr_index}.txt",chr_index=chr_list),
+		expand("resources/genmap.log"),
+		expand("resources/hg38.150mer.m2.chr{chr_index}.txt",chr_index=chr_list),
 		expand("seq/tumor/{sample}/chr.seq", sample=sample_IDs),
 		expand("seq/tumor/{sample}/seq.log", sample=sample_IDs),
 		expand("seq/normal/{sample}/seq.log", sample=sample_IDs),
@@ -24,20 +23,20 @@ rule all:
 rule genmap:
 	input:
 	output:
-		"path/to/mappability/hg38/150mer/genmap.log"
+		"resources/genmap.log"
 	params:
-		map_dir="path/to/mappability/hg38/150mer/",
-		index_path="path/to/hg38_index/"
+		map_dir="resources/",
+		index_path="resources"
 	shell:
 		"""
 		genmap map -K 150 -E 2 -I {params.index_path} -O {params.map_dir} -t -w -bg > {output}
 		"""
 rule mappable_region:
 	input:
-		log="path/to/mappability/hg38/150mer/genmap.log",
-		bedgraph="path/to/mappability/hg38/150mer/grch38-no-alt.genmap.bedgraph"
+		log="resources/genmap.log",
+		bedgraph="resources/grch38-no-alt.genmap.bedgraph"
 	output:
-		out="path/to/mappability/hg38/150mer/hg38.150mer.m2.chr{chr_index}.txt"
+		out="resources/hg38.150mer.m2.chr{chr_index}.txt"
 	params:
 		chr="chr{chr_index}"
 	shell:
@@ -62,7 +61,7 @@ rule tumor_chr_seq:
 		out_dir="seq/tumor/{sample}/"
 	shell:
 		"""
-		python /path/to/tools/split_chr_seq.py -seq {input.chr_seq} -outdir {params.out_dir} > {output.out}
+		python tools/split_chr_seq.py -seq {input.chr_seq} -outdir {params.out_dir} > {output.out}
 		"""
 rule normal_seq:
 	input:
@@ -82,7 +81,7 @@ rule normal_chr_seq:
 		out_dir="seq/normal/{sample}/"
 	shell:
 		"""
-		python /path/to/tools/split_chr_seq.py -seq {input.chr_seq} -outdir {params.out_dir} > {output.out}
+		python tools/split_chr_seq.py -seq {input.chr_seq} -outdir {params.out_dir} > {output.out}
 		"""
 rule gen_tumor_norm_config:
 	input:
@@ -90,13 +89,13 @@ rule gen_tumor_norm_config:
 	output:
 		config="norm_config/tumor/{sample}.tumor.config",
 	params:
-		ref="path/to/directory_of_unpacked_sequences_for_each_chromosome",
-		kmer="path/to/mappability/hg38/150mer/hg38.150mer.m2.chr",
+		ref="resources/",
+		kmer="resources/hg38.150mer.m2.chr",
 		seq="seq/tumor/{sample}/",
 		bin="bin/tumor/{sample}/",
 	shell:
 		"""
-		python /path/to/tools/gen_norm_config.py -ref {params.ref} -kmer {params.kmer} -seq {params.seq} -bin {params.bin} -config {output.config}
+		python tools/gen_norm_config.py -ref {params.ref} -kmer {params.kmer} -seq {params.seq} -bin {params.bin} -config {output.config}
 		"""
 rule gen_normal_norm_config:
 	input:
@@ -104,13 +103,13 @@ rule gen_normal_norm_config:
 	output:
 		config="norm_config/normal/{sample}.normal.config",
 	params:
-		ref="path/to/directory_of_unpacked_sequences_for_each_chromosome",
-		kmer="path/to/mappability/hg38/150mer/hg38.150mer.m2.chr",
+		ref="resources/",
+		kmer="resources/hg38.150mer.m2.chr",
 		seq="seq/normal/{sample}/",
 		bin="bin/normal/{sample}/",
 	shell:
 		"""
-		python /path/to/tools/gen_norm_config.py -ref {params.ref} -kmer {params.kmer} -seq {params.seq} -bin {params.bin} -config {output.config}
+		python tools/gen_norm_config.py -ref {params.ref} -kmer {params.kmer} -seq {params.seq} -bin {params.bin} -config {output.config}
 		"""
 rule gen_seg_config:
 	input:
@@ -123,7 +122,7 @@ rule gen_seg_config:
 		normal_bin="bin/normal/{sample}/",
 	shell:
 		"""
-		python /path/to/tools/gen_seg_config.py -tumor_bin {params.tumor_bin} -normal_bin {params.normal_bin} -config {output.config}
+		python tools/gen_seg_config.py -tumor_bin {params.tumor_bin} -normal_bin {params.normal_bin} -config {output.config}
 		"""
 rule norm_tumor:
 	input: 
@@ -132,7 +131,7 @@ rule norm_tumor:
 		out="output/tumor/{sample}.output",
 	shell:
 		"""
-		perl path/to/NBICseq-norm_v0.2.4/NBICseq-norm.pl {input.conf} {output.out}
+		perl tools/NBICseq-norm_v0.2.4/NBICseq-norm.pl {input.conf} {output.out}
 		"""
 rule norm_normal:
 	input: 
@@ -141,7 +140,7 @@ rule norm_normal:
 		out="output/normal/{sample}.output",
 	shell:
 		"""
-		perl path/to/NBICseq-norm_v0.2.4/NBICseq-norm.pl {input.conf} {output.out}
+		perl tools/NBICseq-norm_v0.2.4/NBICseq-norm.pl {input.conf} {output.out}
 		"""
 rule seg_p_value:
 	input:
@@ -155,39 +154,5 @@ rule seg_p_value:
 		title="{sample}_pvalue_CNV_profile"
 	shell:
 		"""
-		perl path/to/NBICseq-seg_v0.7.2/NBICseq-seg.pl --control {input.conf} {output.out} --fig {output.png} --title {params.title} --bootstrap
+		perl tools/NBICseq-seg_v0.7.2/NBICseq-seg.pl --control {input.conf} {output.out} --fig {output.png} --title {params.title} --bootstrap
 		"""
-#rule rerun_seg:
-#	input:
-#		tumor_out="tumor_output",
-#		normal_out="normal_output",
-#		conf="seg_config"
-#	output:
-#		out="rerun_CNVs",
-#		fig="rerun_cnv_profile.png",
-#	params:
-#		title="rerun_cnv_profile"
-#	shell:
-#		"""
-#		perl path/to/NBICseq-seg_v0.7.2/NBICseq-seg.pl --control {input.conf} {output.out} --fig {output.fig} --title {params.title}
-#		"""
-#rule join:
-#	input:
-#		cnvs="CNVs",
-#		hg37_len="/storage/douyanmeiLab/lulu/mutpipe/freec/DO52556/depth/hg37_len.txt"
-#	output:
-#		cnvs_all_chr="cnvs_all_chr"
-#	shell:
-#		"""
-#		grep -v "start" {input.cnvs} > CNVs_no_head
-#		join -1 1 -2 2 CNVs_no_head {input.hg37_len}|awk '{{printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n",$1,$2+$13,$3+$13,$4,$5,$6,$7,$8,$9,$10}}' > {output.cnvs_all_chr}
-#		"""
-#rule xy:
-#	input:
-#		cnvs_all_chr="cnvs_all_chr"
-#	output:
-#		xy="cnvs_all_chr_xy"
-#	shell:
-#		"""
-#		awk '/^chr/{{print}}' {input.cnvs_all_chr}|sed 's/^chrX/23/g'|sed 's/^chrY/24/g'|sed 's/^chr//g' > {output.xy}
-#		"""
