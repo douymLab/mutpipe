@@ -1,13 +1,13 @@
 # Quick Start 
 ![avatar](https://github.com/douymLab/mutpipe/blob/main/BIC_SEQ2/dag.png)
 ## Dependency:  
-python 3.6.15
-snakemake 5.3.0
-samtools 1.8
-R 4.1.2
-genmap 1.2.0
-NBICseq-norm 0.2.4
-NBICseq-seg 0.7.2
+- python 3.6.15
+- snakemake 5.3.0
+- samtools 1.8
+- R 4.1.2
+- genmap 1.2.0
+- NBICseq-norm 0.2.4
+- NBICseq-seg 0.7.2
 
 we strongly suggest installing dependencies(expect BIC-seq2) via conda:
 
@@ -19,10 +19,10 @@ Then you could activate the environment "mutpipe_bicseq2" through this command:
 
 BIC-seq2 is not included in conda environment, please install BIC-seq2 manually:
 
-wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-norm_v0.2.4.tar.gz
-tar -zxvf NBICseq-norm_v0.2.4.tar.gz
-wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-seg_v0.7.2.tar.gz
-tar -zxvf NBICseq-seg_v0.7.2.tar.gz
+  > $ wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-norm_v0.2.4.tar.gz
+  > $ tar -zxvf NBICseq-norm_v0.2.4.tar.gz
+  > $ wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-seg_v0.7.2.tar.gz
+  > $ tar -zxvf NBICseq-seg_v0.7.2.tar.gz
 
 ## Resource:
 To run this pipeline, the below resources must exit under the "resources" folder:
