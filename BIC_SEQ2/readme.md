@@ -19,7 +19,7 @@ Then you could activate the environment "mutpipe_bicseq2" through this command:
 
 BIC-seq2 is not included in conda environment, please install BIC-seq2 manually:
 
-  > $ cd tools
+  > $ cd tools   
   > $ wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-norm_v0.2.4.tar.gz   
   > $ tar -zxvf NBICseq-norm_v0.2.4.tar.gz   
   > $ wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-seg_v0.7.2.tar.gz   
@@ -28,7 +28,7 @@ BIC-seq2 is not included in conda environment, please install BIC-seq2 manually:
 ## Resource:
 To run this pipeline, the below resources must exit under the "resources" folder:
 - FASTA sequence of each chromosome of reference genome (hg38): chr*.fa
-- Mappability file (hg38(150bp with 2 mismatches): hg38.150mer.m2.chr
+- Index for hg38: grch38-no-alt.tar.gz
 
 The required resource could be downloaded through running:
 
