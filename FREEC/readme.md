@@ -56,7 +56,7 @@ The required resource could be downloaded through running:
 ## Input
 path/to/BQSRTumorBamFolder/{sample}.tumor.bam
 ## Output
-result/{sample}.tumor.bam_CNVs
-result/{sample}.tumor.bam_info.txt
-result/{sample}.tumor.bam_ratio.txt
-result/{sample}_median_ratio.txt
+result/{sample}.tumor.bam_CNVs   
+result/{sample}.tumor.bam_info.txt   
+result/{sample}.tumor.bam_ratio.txt   
+result/{sample}_median_ratio.txt   
