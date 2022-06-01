@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 73 of /storage/douyanmeiLab/lulu/TCGA_wu/doulab/mutpipe/FREEC/Snakefile:
+Missing input files for rule cal_median_ratio:
+result/test.tumor.bam_info.txt
