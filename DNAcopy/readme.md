@@ -17,9 +17,9 @@ Then you could activate the environment "mutpipe_dnacopy" through this command:
 
 DNAcopy is not included in conda environment, please install DNAcopy manually:
 
-  > $ if (!require("BiocManager", quietly = TRUE))   
-  > $ 	install.packages("BiocManager")   
-  > $ BiocManager::install("DNAcopy")   
+  > \> if (!require("BiocManager", quietly = TRUE))   
+  > \> &nbsp;&nbsp;&nbsp;&nbsp;install.packages("BiocManager")   
+  > \> BiocManager::install("DNAcopy")   
 
 ## Run on slurm
 
