@@ -34,5 +34,5 @@ DNAcopy is not included in conda environment, please install DNAcopy manually:
 ## Input
 path/to/BQSRTumorBamFolder/{sample}.tumor.bam
 ## Output
-results/{sample}.CNVs
-results/{sample}.mapd
+results/{sample}.CNVs   
+results/{sample}.mapd   
