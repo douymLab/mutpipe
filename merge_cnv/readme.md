@@ -46,12 +46,12 @@ The required resource could be downloaded through running:
     > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
 
 ## Input
-path/to/BIC_SEQ2/results/{sample}_pvalue.CNVs
-path/to/DNAcopy/result/{sample}.CNVs
-path/to/freec/result/{sample}.tumor.bam_CNVs
-path/to/freec/result/{sample}_median_ratio.txt
+path/to/BIC_SEQ2/results/{sample}_pvalue.CNVs   
+path/to/DNAcopy/result/{sample}.CNVs   
+path/to/freec/result/{sample}.tumor.bam_CNVs   
+path/to/freec/result/{sample}_median_ratio.txt   
 ## Output
-result/{sample}.seg_vote_by_g2.bed
-result/{sample}.seg_vote_by_3.bed
-anno/{sample}.g2.variant_function
-anno/{sample}.e3.variant_function
+result/{sample}.seg_vote_by_g2.bed   
+result/{sample}.seg_vote_by_3.bed   
+anno/{sample}.g2.variant_function   
+anno/{sample}.e3.variant_function   
