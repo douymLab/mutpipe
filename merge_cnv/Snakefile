@@ -1,11 +1,14 @@
 ##GATK: v4.2.2.0
 import socket
+shell.prefix("module load gcc; module load jdk/11.0.10; source ~/.bashrc; source /storage/douyanmeiLab/lulu/tools/miniconda3/etc/profile.d/conda.sh; conda activate mutpipe; module load samtools/1.13;")
 sample_IDs, =glob_wildcards("path/to/BIC_SEQ2/results/{sample}_pvalue.CNVs")
 #sample_IDs="DO52556"
 # a pseudo-rule that collects the target files
 rule all:
 	input:
 		expand("result/{sample}.seg_vote_by_g2.bed",sample=sample_IDs),
+		expand("result/{sample}.g2.point.bed",sample=sample_IDs),
+		expand("result/{sample}.g2.point.bed.log2.png",sample=sample_IDs),
 		expand("avinput/{sample}.seg_vote_by_g2.avinput",sample=sample_IDs),
 		expand("anno/{sample}.g2.variant_function",sample=sample_IDs),
 
@@ -28,7 +31,7 @@ rule merge_cnv:
 		script_dir="tools"
 	shell:
 		"""
-		sh path/to/merge_cnv/run_merge_cnv.sh {params.sample} {input.bicseq2} {input.dnacopy} {input.freec_cnv} {input.freec_median_ratio} {input.chrlen} {input.centromeric} {input.telomere} {params.expand_len} {params.output_dir} {params.script_dir}
+		sh tools/run_merge_cnv.sh {params.sample} {input.bicseq2} {input.dnacopy} {input.freec_cnv} {input.freec_median_ratio} {input.chrlen} {input.centromeric} {input.telomere} {params.expand_len} {params.output_dir} {params.script_dir}
 		"""
 rule convert_to_avinput:
 	input:
@@ -57,4 +60,35 @@ rule annotate:
 		"""
 		perl path/to/annovar/annotate_variation.pl -out {params.g2_prefix} -build hg38 {input.g2_avinput} {params.humandb}
 		perl path/to/annovar/annotate_variation.pl -out {params.e3_prefix} -build hg38 {input.e3_avinput} {params.humandb}
+		"""
+rule makeGraph_input:
+	input:
+		g2="result/{sample}.seg_vote_by_g2.bed",
+		e3="result/{sample}.seg_vote_by_3.bed",
+		depth="path/to/DNAcopy/depth/{sample}.depth.regions.logratio.mainchr.bed",
+		chrlen="resources/hg38_len_offset.sorted.txt",
+	output:
+		g2="result/{sample}.g2.point.bed",
+		e3="result/{sample}.3.point.bed",
+	params:
+		sample="{sample}",
+		result_prefix="result",
+		tmp="tmp"
+	shell:
+		"""
+		sh tools/makeGraph.sh {params.sample} {input.depth} {input.chrlen} {params.result_prefix} {params.tmp}
+		"""
+rule makeGraph:
+	input:
+		chrlen="resources/hg38_len_offset.sorted.txt",
+		g2="result/{sample}.g2.point.bed",
+		e3="result/{sample}.3.point.bed",
+	output:
+		g2="result/{sample}.g2.point.bed.log2.png",
+		e3="result/{sample}.3.point.bed.log2.png",
+	params:
+		sample="{sample}"
+	shell:
+		"""
+		cat tools/makeGraph.R| R --slave --arg {input.chrlen} {input.g2} {input.e3} {params.sample}
 		"""

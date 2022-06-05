@@ -132,7 +132,7 @@ for key in seg_dict2.keys():
 
 
 out_f = open(out, 'w')
-header = "chrom\tstart\tend\tbic\tdc\tfreec\tbic_mean\tdc_mean\tfreec_mean\tmean\tfunction\tstar\tbic_fun\tdc_fun\tfreec_fun\tgain_num\tloss_num\n"
+header = "chrom\tstart\tend\tbic\tdc\tfreec\tbic_mean\tdc_mean\tfreec_mean\tmean\tfunction\tstar\tbic_fun\tdc_fun\tfreec_fun\tgain_num\tloss_num\tfun\n"
 out_f.write(header)
 merge_dict = defaultdict(list)
 for key in seg_dict0.keys():

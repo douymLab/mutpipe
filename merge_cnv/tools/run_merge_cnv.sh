@@ -102,7 +102,7 @@ function generate_results {
 	grep -v 'start' $TMP/$SAMPLE.dnacopy.txt |awk '{printf "%s\t%s\t%s\t%s\n", $2,$3,$4,$6}'> $TMP/$SAMPLE.dnacopy.formated.txt
 	bedtools intersect -b $TMP/$SAMPLE.seg.txt -a $TMP/$SAMPLE.dnacopy.formated.txt -wb | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$5,$6,$7,$1,$2,$3,$4}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg.dnacopy.txt
 	# log2 ratio
-	bedtools intersect -b $TMP/$SAMPLE.seg.txt -a $TMP/$SAMPLE.bicseq2.nochr.txt -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$13,$14,$15,$1,$2,$3,$9,$11}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg.bicseq2.txt
+	#bedtools intersect -b $TMP/$SAMPLE.seg.txt -a $TMP/$SAMPLE.bicseq2.nochr.txt -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$13,$14,$15,$1,$2,$3,$9,$11}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg.bicseq2.txt
 	# log2 tumor us expected ratio
 	bedtools intersect -b $TMP/$SAMPLE.seg.txt -a $TMP/$SAMPLE.bicseq2.nochr.txt -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$13,$14,$15,$1,$2,$3,$10,$11}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg.bicseq2.txt
 	
@@ -126,7 +126,7 @@ function generate_results {
 	
 	
 	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_3.sorted.txt -a $TMP/$SAMPLE.dnacopy.formated.txt -wb | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$5,$6,$7,$1,$2,$3,$4}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_dnacopy_3.bed
-	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_3.sorted.txt -a $TMP/$SAMPLE.bicseq2.nochr.txt -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$13,$14,$15,$1,$2,$3,$9}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_bicseq2_3.bed
+	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_3.sorted.txt -a $TMP/$SAMPLE.bicseq2.nochr.txt -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$13,$14,$15,$1,$2,$3,$10}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_bicseq2_3.bed
 	#bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_3.sorted.txt -a $TMP/$SAMPLE.freec.1.bed -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$7,$8,$9,$1,$2,$3,$4,$5,$6}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_freec_3.bed
 	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_3.sorted.txt -a $TMP/$SAMPLE.freec.1.bed -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$8,$9,$10,$1,$2,$3,$4,$5,$6,$7}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_freec_3.bed
 	
@@ -142,7 +142,7 @@ function generate_results {
 	cat $TMP/$SAMPLE.merged_seg_vote_by_g2_gain.txt $TMP/$SAMPLE.merged_seg_vote_by_g2_loss.txt |sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g" > $TMP/$SAMPLE.merged_seg_vote_by_g2.sorted.txt
 	#python merge_seg.py -chrlen ../v2/hg37.main.genome -seg seg_vote_by_g2.txt -out merged_seg_vote_by_g2.txt
 	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_g2.sorted.txt -a $TMP/$SAMPLE.dnacopy.formated.txt -wb | awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$5,$6,$7,$1,$2,$3,$4}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_dnacopy_g2.bed
-	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_g2.sorted.txt -a $TMP/$SAMPLE.bicseq2.nochr.txt -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$13,$14,$15,$1,$2,$3,$9}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_bicseq2_g2.bed
+	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_g2.sorted.txt -a $TMP/$SAMPLE.bicseq2.nochr.txt -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$13,$14,$15,$1,$2,$3,$10}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_bicseq2_g2.bed
 	#bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_g2.sorted.txt -a $TMP/$SAMPLE.freec.1.bed -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$7,$8,$9,$1,$2,$3,$4,$5,$6}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_freec_g2.bed
 	bedtools intersect -b $TMP/$SAMPLE.merged_seg_vote_by_g2.sorted.txt -a $TMP/$SAMPLE.freec.1.bed -wb|awk '{printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$8,$9,$10,$1,$2,$3,$4,$5,$6,$7}'|sed 's/X/23/g' |sed 's/Y/24/g'| sort -k1,1n -k2,2n |sed "s/^23/X/g"|sed "s/^24/Y/g"> $TMP/$SAMPLE.seg_freec_g2.bed
 	#python $SCRIPT_DIR/merge_logratio_v2.py -bicseq2 $TMP/$SAMPLE.seg_bicseq2_g2.bed -dnacopy $TMP/$SAMPLE.seg_dnacopy_g2.bed -freec $TMP/$SAMPLE.seg_freec_g2.bed -out $TMP/$SAMPLE.seg_vote_g2.bed -seg $TMP/$SAMPLE.merged_seg_vote_by_g2.sorted.txt

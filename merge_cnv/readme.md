@@ -50,8 +50,11 @@ path/to/BIC_SEQ2/results/{sample}_pvalue.CNVs
 path/to/DNAcopy/result/{sample}.CNVs   
 path/to/freec/result/{sample}.tumor.bam_CNVs   
 path/to/freec/result/{sample}_median_ratio.txt   
+path/to/DNAcopy/depth/{sample}.depth.regions.logratio.mainchr.bed   
 ## Output
 result/{sample}.seg_vote_by_g2.bed   
 result/{sample}.seg_vote_by_3.bed   
+result/{sample}.g2.point.bed.log2.png   
+result/{sample}.3.point.bed.log2.png   
 anno/{sample}.g2.variant_function   
 anno/{sample}.e3.variant_function   
