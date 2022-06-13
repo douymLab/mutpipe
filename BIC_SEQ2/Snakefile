@@ -129,6 +129,7 @@ rule norm_tumor:
 		conf="norm_config/tumor/{sample}.tumor.config",
 	output:
 		out="output/tumor/{sample}.output",
+		bin="bin/tumor/{sample}/chr16.norm.bin"
 	shell:
 		"""
 		perl tools/NBICseq-norm_v0.2.4/NBICseq-norm.pl {input.conf} {output.out}
@@ -138,6 +139,7 @@ rule norm_normal:
 		conf="norm_config/normal/{sample}.normal.config",
 	output:
 		out="output/normal/{sample}.output",
+		bin="bin/normal/{sample}/chr16.norm.bin"
 	shell:
 		"""
 		perl tools/NBICseq-norm_v0.2.4/NBICseq-norm.pl {input.conf} {output.out}
