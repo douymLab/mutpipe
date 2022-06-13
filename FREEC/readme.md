@@ -28,7 +28,7 @@ Some R package is not included in conda environment, please install R package ma
 FREEC also needs to be installed manually:
 
   > $ cd tools   
-  > $ wget https://github.com/BoevaLab/FREEC/archive/refs/tags/v11.6   
+  > $ wget https://github.com/BoevaLab/FREEC/releases   
   > $ tar -zxvf FREEC-11.6.tar.gz   
   > $ cd FREEC-11.6/src   
   > $ make   
@@ -47,7 +47,7 @@ The required resource could be downloaded through running:
 
 1. Change all directory names in the "Snakefile".
 2. dry run test
-    > snakemake -np
+    > \$ snakemake -np
 3. actual run
     > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
     > \$ conda activate mutpipe_freec  
