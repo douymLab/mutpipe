@@ -72,8 +72,9 @@ rule cal_median_ratio:
 	output:
 		median_ratio="result/{sample}_median_ratio.txt"
 	params:
-		sample="{sample}"
+		sample="{sample}",
+		script_dir="tools"
 	shell:
 		"""
-		sh tools/freec_cal_median_ratio.sh {params.sample} {input.bam_info} {input.bam_CNVs} {input.bam_ratio} {output.median_ratio}
+		sh tools/freec_cal_median_ratio.sh {params.sample} {input.bam_info} {input.bam_CNVs} {input.bam_ratio} {output.median_ratio} {params.script_dir}
 		"""
