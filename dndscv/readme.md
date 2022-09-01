@@ -15,7 +15,7 @@ we strongly suggest installing dependencies via mamba:
 
 ```{bash}
 conda install -n base -c conda-forge mamba
-mamba create -n mutpipe_dndscv –file workflow/envs/environment.yaml
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_dndscv
 ```
 
 Then you could activate the environment "mutpipe_dndscv" through this command:
