@@ -1,17 +1,23 @@
-sample_IDs, =glob_wildcards("path/to/input/{sample}.SNV.out")
+include: "rules/common.smk"
+include: "rules/download.smk"
 
+inputPath = config['path']['input']
+outPath = config['path']['out']
+
+sample_IDs, =glob_wildcards(os.path.join(inputPath,'{sample}.SNV.out'))
+type = ["SNV","INDEL"]
 
 rule all:
 	input:
-		"path/to/output/drivergene.csv"
+		os.path.join(outPath,'drivergene.csv')
 
 rule generate_input_persample:
 	input:
-		SNV="path/to/input/{sample}.SNV.out",
-		Indel="path/to/input/{sample}.INDEL.out"
+		SNV=os.path.join(inputPath,'{sample}.SNV.out'),
+		Indel=os.path.join(inputPath,'{sample}.INDEL.out')
 	output:
-		SNV=temp("path/to/output/{sample}.SNV.input"),
-		Indel=temp("path/to/output/{sample}.INDEL.input")
+		SNV=temp(os.path.join(outPath,'{sample}.SNV.input')), 
+		Indel=temp(os.path.join(outPath,'{sample}.INDEL.input')) 
 	shell:
 		"cat {input.SNV}|while read line; do echo \"{wildcards.sample} $line\"; done|"
 		"sed 's/ /\t/g'|cut -f 1,2,3,5,6 >> {output.SNV};"
@@ -20,18 +26,17 @@ rule generate_input_persample:
 
 rule merge_input:
 	input:
-		expand("path/to/output/{sample}.{type}.input", sample=sample_IDs, type=type)
+		expand(os.path.join(outPath,"{sample}.{type}.input"), sample=sample_IDs, type=type)
 	output:
-		"path/to/output/drivergene.input"
+		os.path.join(outPath,'drivergene.input')
 	shell:
 		"cat {input} >> {output}"
 
 rule dndscv:
 	input:
-		"path/to/output/drivergene.input"
+		file = os.path.join(outPath,'drivergene.input'),
+		refdb = refdb_path
 	output:
-		"path/to/output/drivergene.csv"
-	params:
-		"resources/RefCDS_human_GRCh38.p12_dNdScv.0.1.0.rda"
+		os.path.join(outPath,'drivergene.csv')
 	shell:
-		"Rscript drivergene.R {input} {params} {output}"
+		"Rscript workflow/scripts/drivergene.R {input.file} {input.refdb} {output}"
