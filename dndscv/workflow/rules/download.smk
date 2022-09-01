@@ -1,10 +1,11 @@
-rule download:
-    input: {refdb_path}
-
-rule file:
+rule download_refdb:
     output: {refdb_path}
-    shell: 
-        "mkdir -p {refdb_dir};"
-        "cd {refdb_dir};"
-        "wget -N https://raw.githubusercontent.com/im3sanger/dndscv_data/master/data/RefCDS_human_GRCh38_GencodeV18_recommended.rda"
+    params: {refdb_file}
+    log: "log/RefCDS_object_ready.log"
+    script: 
+        '../scripts/download_refdb.R'
         
+rule install_dndscv:
+	log: "log/dndscv_package_ready.log"
+	script:
+		'../scripts/package_install.R'

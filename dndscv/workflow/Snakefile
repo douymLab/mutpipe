@@ -35,8 +35,10 @@ rule merge_input:
 rule dndscv:
 	input:
 		file = os.path.join(outPath,'drivergene.input'),
-		refdb = refdb_path
+		refdb = refdb_path,
+		check_refdb = "log/RefCDS_object_ready.log",
+		check_dndscv = "log/dndscv_package_ready.log"
 	output:
 		os.path.join(outPath,'drivergene.csv')
-	shell:
-		"Rscript workflow/scripts/drivergene.R {input.file} {input.refdb} {output}"
+	script:
+		'scripts/drivergene.R'
