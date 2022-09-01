@@ -8,7 +8,7 @@ Download workflow
 
 ```{bash}
 git clone https://github.com/xiayh17/mutpipe
-cd dndscv
+cd mutpipe/dndscv
 ```
 
 we strongly suggest installing dependencies via mamba:
