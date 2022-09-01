@@ -1,8 +1,6 @@
 channels:
   - bioconda
-  - conda-forge
 dependencies:
   - python=3.9
   - r-base
-  - conda-forge::r-pak
   - snakemake
