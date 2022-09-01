@@ -1,0 +1,5 @@
+path:
+  refdb_file: 'RefCDS_human_GRCh38_GencodeV18_recommended.rda'
+  refdb_dir: 'resources/'
+  input: 'demo/input/'
+  out: 'demo/output/'
