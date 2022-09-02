@@ -18,10 +18,10 @@ conda install -n base -c conda-forge mamba
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_dndscv
 ```
 
-Then you could activate the environment "mutpipe_dndscv" through this command:
+Then you could activate the environment "snakemake" through this command:
 
 ```{bash}
-conda activate mutpipe_dndscv
+conda activate snakemake
 ```
 
 ## Step2: configure workflow
@@ -57,7 +57,7 @@ snakemake -np
 2.  actual run
 
 ```{bash}
-snakemake --cores 1
+snakemake --cores 1 --use-conda
 ```
 
 ## Run on slurm
