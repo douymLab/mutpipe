@@ -3,5 +3,12 @@ channels:
   - conda-forge
 dependencies:
   - r-base
-  - conda-forge::r-pak
-  - snakemake
+  - r-devtools
+  - r-seqinr
+  - r-mass
+  - bioconductor-genomicranges
+  - bioconductor-biostrings
+  - bioconductor-iranges
+  - bioconductor-rsamtools
+  - r-poilog
+  - r-dplyr

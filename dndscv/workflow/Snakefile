@@ -40,5 +40,7 @@ rule dndscv:
 		check_dndscv = "log/dndscv_package_ready.log"
 	output:
 		os.path.join(outPath,'drivergene.csv')
+	conda: 
+		"mutpipe_dndscv"
 	script:
 		'scripts/drivergene.R'

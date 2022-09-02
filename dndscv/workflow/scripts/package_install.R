@@ -1,6 +1,10 @@
+log <- file(snakemake@log[[1]], open="wt")
+sink(log)
 ## set up packages
 options(repos = c(CRAN = "http://cran.rstudio.com"))
-if (!requireNamespace("pak", quietly = TRUE))
-  install.packages("pak")
+if (!requireNamespace("pacman", quietly = TRUE))
+  install.packages("pacman")
 if (!requireNamespace("dndscv", quietly = TRUE))
-  pak::pkg_install("im3sanger/dndscv",ask = FALSE)
+  pacman::p_load_gh("im3sanger/dndscv",ask = FALSE)
+if (requireNamespace("dndscv", quietly = TRUE))
+  print("ok")
