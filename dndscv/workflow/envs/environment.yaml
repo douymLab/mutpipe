@@ -13,3 +13,9 @@ dependencies:
   - bioconductor-rsamtools
   - r-poilog
   - r-dplyr
+  - r-ade4
+  - bioconductor-genomeinfodb
+  - bioconductor-s4vectors
+  - r-nlme
+  - r-segmented
+  - r-plyr
