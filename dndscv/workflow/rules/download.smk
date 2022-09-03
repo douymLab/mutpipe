@@ -1,15 +1,21 @@
 rule download_refdb:
-	output: {refdb_path}
+	output: 
+		refdb = {refdb_path},
+		success = os.path.join(outPath,'refcds_downloaded.success')
 	params: {refdb_file}
 	conda:
 		"mutpipe_dndscv",
-	log: "log/RefCDS_object_ready.log",
+	log: 
+		os.path.join(outPath,"RefCDS_object_ready.log"),
 	script:
 		'../scripts/download_refdb.R'
 
 rule install_dndscv:
+	output: 
+		success = os.path.join(outPath,'dnds_installed.success')
 	conda:
 		"mutpipe_dndscv",
-	log: "log/dndscv_package_ready.log",
+	log: 
+		os.path.join(outPath,"dndscv_package_install.log"),
 	script:
 		'../scripts/package_install.R'
