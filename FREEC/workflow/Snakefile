@@ -87,8 +87,8 @@ rule cal_median_ratio:
 		bam_CNVs=os.path.join(outPath,"result/{sample}.tumor.mainchr.bam_CNVs.p.value.txt"),
 		bam_ratio=os.path.join(outPath,"result/{sample}.tumor.mainchr.bam_ratio.txt"),
 	output:
-		median_ratio=os.path.join(outPath,"result/{sample}_median_ratio.txt")
-		tmp = temp(os.path.join(outPath,"tmp_cal_median_ratio"))
+		median_ratio=os.path.join(outPath,"result/{sample}_median_ratio.txt"),
+		tmp = temp(os.path.join(outPath,"tmp_cal_median_ratio/{sample}/"))
 	params:
 		sample="{sample}",
 		script_dir="workflow/scripts"
