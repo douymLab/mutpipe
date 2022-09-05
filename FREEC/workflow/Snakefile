@@ -17,7 +17,7 @@ rule config:
 		fai=index_path,
 		tumor=os.path.join(tumor_path,'{sample}.tumor.bam'),
 		normal=os.path.join(normal_path,'{sample}.normal.bam'),
-		check = os.path.join(outPath,"index.downloaded.log")
+		check = ancient(os.path.join(outPath,"index.downloaded.log"))
 	output:
 		config=os.path.join(outPath,"config/{sample}.config")
 	params:
@@ -48,7 +48,7 @@ rule assessSignificance:
 	input:
 		cnv=os.path.join(outPath,"result/{sample}.tumor.bam_CNVs"),
 		ratio=os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt"),
-		check = os.path.join(outPath,"scripts.downloaded.log")
+		check = ancient(os.path.join(outPath,"scripts.downloaded.log"))
 	output:
 		os.path.join(outPath,"result/{sample}.tumor.bam_CNVs.p.value.txt")
 	conda: "mutpipe_freec",
@@ -60,7 +60,7 @@ rule assessSignificance:
 rule makeGraph:
 	input:
 		ratio=os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt"),
-		check = os.path.join(outPath,"scripts.downloaded.log")
+		check = ancient(os.path.join(outPath,"scripts.downloaded.log"))
 	output:
 		png=os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt.png")
 	conda: "mutpipe_freec"
