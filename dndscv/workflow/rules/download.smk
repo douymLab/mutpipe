@@ -1,3 +1,8 @@
+# Define rules to be run locally when using a compute cluster
+localrules:
+    download_refdb,
+    install_dndscv
+
 rule download_refdb:
 	output: 
 		refdb = {refdb_path},

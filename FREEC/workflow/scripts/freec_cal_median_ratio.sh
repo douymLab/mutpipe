@@ -6,7 +6,7 @@ BAM_RATIO=$4
 OUT=$5
 #script dir
 SCRIPT_DIR=$6
-TMP=tmp
+TMP=$7
 
 
 if [ ! -d $TMP  ];then

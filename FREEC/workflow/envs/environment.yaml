@@ -1,0 +1,12 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - control-freec
+  - r-stringr
+  - r-dplyr
+  - bioconductor-rtracklayer
+  - bedtools
+  - r-base
+  - python
+  - gsutil

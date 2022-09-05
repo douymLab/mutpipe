@@ -19,3 +19,4 @@ dependencies:
   - r-nlme
   - r-segmented
   - r-plyr
+  - samtools
