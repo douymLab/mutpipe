@@ -1,0 +1,4 @@
+path:
+  output: "demo/output"
+  bam_tumor: "demo/bam/tumor"
+  bam_normal: "demo/bam/normal"

@@ -1,0 +1,101 @@
+##GATK: v4.2.2.0
+include: "rules/common.smk"
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+#sample_IDs = "YZ_017"
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		expand(os.path.join(outPath,"depth/{sample}.tumor.depth.regions.bed.gz"),sample=sample_IDs),
+		expand(os.path.join(outPath,"depth/{sample}.normal.depth.regions.bed.gz"),sample=sample_IDs),
+		expand(os.path.join(outPath,"depth/{sample}.tumor.depth.log"),sample=sample_IDs),
+		expand(os.path.join(outPath,"depth/{sample}.normal.depth.log"),sample=sample_IDs),
+		expand(os.path.join(outPath,"depth/{sample}.regions.depth"),sample=sample_IDs),
+		expand(os.path.join(outPath,"depth/{sample}.depth.regions.logratio.bed"),sample=sample_IDs),
+		expand(os.path.join(outPath,"result/{sample}.CNVs"),sample=sample_IDs),
+
+rule mosdepth_tumor:
+	input:
+		bam=os.path.join(tumor_path,"{sample}.tumor.bam")
+	output:
+		region_bed_gz=os.path.join(outPath,"depth/{sample}.tumor.depth.regions.bed.gz")
+	params:
+		depth=os.path.join(outPath,"depth/{sample}.tumor.depth")
+	conda: "mutpipe_dnacopy",
+	shell:
+		"""
+		mosdepth --fast-mode --by 50000 {params.depth} {input.bam}
+		"""
+rule mosdepth_normal:
+	input:
+		bam=os.path.join(normal_path,"{sample}.normal.bam")
+	output:
+		region_bed_gz=os.path.join(outPath,"depth/{sample}.normal.depth.regions.bed.gz"),
+	params:
+		depth=os.path.join(outPath,"depth/{sample}.normal.depth"),
+	conda: "mutpipe_dnacopy",
+	shell:
+		"""
+		mosdepth --fast-mode --by 50000 {params.depth} {input.bam}
+		"""
+rule gunzip:
+	input:
+		tumor_depth=os.path.join(outPath,"depth/{sample}.tumor.depth.regions.bed.gz"),
+		normal_depth=os.path.join(outPath,"depth/{sample}.normal.depth.regions.bed.gz")
+	output:
+		tumor_depth=os.path.join(outPath,"depth/{sample}.tumor.depth.regions.bed"),
+		normal_depth=os.path.join(outPath,"depth/{sample}.normal.depth.regions.bed"),
+		tumor_depth_log=os.path.join(outPath,"depth/{sample}.tumor.depth.log"),
+		normal_depth_log=os.path.join(outPath,"depth/{sample}.normal.depth.log"),
+	conda: "mutpipe_dnacopy",
+	shell:
+		"""
+		gzip -kd {input.tumor_depth} > {output.tumor_depth_log}
+		gzip -kd {input.normal_depth}> {output.normal_depth_log}
+		"""
+rule paste:
+	input:
+		tumor_depth_log=os.path.join(outPath,"depth/{sample}.tumor.depth.log"),
+		normal_depth_log=os.path.join(outPath,"depth/{sample}.normal.depth.log"),
+		tumor_depth=os.path.join(outPath,"depth/{sample}.tumor.depth.regions.bed"),
+		normal_depth=os.path.join(outPath,"depth/{sample}.normal.depth.regions.bed")
+	output:
+		depth=os.path.join(outPath,"depth/{sample}.regions.depth")
+	conda: "mutpipe_dnacopy",
+	shell:
+		"""
+		paste -d '\\t' {input.tumor_depth} {input.normal_depth} > {output.depth}
+		"""
+rule log_ratio:
+	input:
+		depth=os.path.join(outPath,"depth/{sample}.regions.depth")
+	output:
+		log_ratio=os.path.join(outPath,"depth/{sample}.depth.regions.logratio.bed")
+	conda: "mutpipe_dnacopy",
+	shell:
+		"""
+		awk '{{printf "%s\\t%s\\t%s\\t%f\\n",$1,$2,$3,log($4/($8+0.00001))/log(2)}}' {input.depth} >{output.log_ratio}
+		"""
+rule filter_chr:
+	input:
+		bed=os.path.join(outPath,"depth/{sample}.depth.regions.logratio.bed")
+	output:
+		bed=os.path.join(outPath,"depth/{sample}.depth.regions.logratio.mainchr.bed")
+	conda: "mutpipe_dnacopy",
+	shell:
+		"""
+		awk -F "\\t" '{{if(length($1)<=5 && $1!="chrM") print}}' {input.bed} > {output.bed} 
+		"""
+rule DNAcopy:
+	input:
+		log_ratio=os.path.join(outPath,"depth/{sample}.depth.regions.logratio.mainchr.bed")
+	output:
+		cnv=os.path.join(outPath,"result/{sample}.CNVs"),
+		mapd=os.path.join(outPath,"result/{sample}.mapd")
+	params:
+		sample="{sample}",
+		dir=os.path.join(outPath,"result/")
+	conda: "mutpipe_dnacopy",
+	shell:
+		"""
+		cat workflow/scripts/DNAcopy.R |R --slave --args {params.sample} {input.log_ratio} {params.dir}
+		"""
