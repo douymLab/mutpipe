@@ -1,0 +1,14 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - bicseq2-seg
+  - bicseq2-norm
+  - gzip
+  - wget
+  - genmap
+  - samtools=1.9
+  - python=3.8
+  - r-mgcv
+  - numpy
+  - r-base=4.0*

@@ -1,7 +1,7 @@
 ##GATK: v4.2.2.0
 import socket
-#shell.prefix("module load gcc; module load jdk/11.0.10; source ~/.bashrc; source /storage/douyanmeiLab/lulu/tools/miniconda3/etc/profile.d/conda.sh; conda activate mutpipe; module load samtools/1.13;module load R/4.1.2")
-sample_IDs, =glob_wildcards("path/to/BQSRTumorBamFolder/{sample}.tumor.bam")
+shell.prefix("module load gcc; module load jdk/11.0.10; source ~/.bashrc; source /storage/douyanmeiLab/wangchunyi/miniconda3/etc/profile.d/conda.sh; conda activate mutpipe_bicseq2; module load samtools/1.13; module load R/4.1.2")
+sample_IDs, =glob_wildcards("/storage/douyanmeiLab/TCGA_wu/demo/{sample}.tumor.bam")
 chr_list = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","Y"]
 
 #sample_IDs = "YC-002"
@@ -20,32 +20,35 @@ rule all:
 		expand("output/normal/{sample}.output", sample=sample_IDs),
 		expand("results/{sample}_pvalue.CNVs", sample=sample_IDs),
 		
+#require big memory
 rule genmap:
 	input:
 	output:
-		"resources/genmap.log"
+		#log="resources/genmap.log",
+		bedgraph="resources/genmap.bedgraph"
 	params:
-		map_dir="resources/",
-		index_path="resources"
+		map_dir="resources/genmap",
+		index_path="resources/grch38-no-alt"
 	shell:
 		"""
-		genmap map -K 150 -E 2 -I {params.index_path} -O {params.map_dir} -t -w -bg > {output}
+		genmap map -K 150 -E 2 -I {params.index_path} -O {params.map_dir} -t -w -bg
 		"""
 rule mappable_region:
 	input:
-		log="resources/genmap.log",
-		bedgraph="resources/grch38-no-alt.genmap.bedgraph"
+		#log="resources/genmap.log",
+		bedgraph="resources/genmap.bedgraph"
 	output:
 		out="resources/hg38.150mer.m2.chr{chr_index}.txt"
 	params:
 		chr="chr{chr_index}"
+		#bedgraph="resources/genmap/grch38-no-alt.genmap.bedgraph"
 	shell:
 		"""
 		awk '{{if ($1=="{params.chr}") print}}' {input.bedgraph}|awk '{{if($4==1) printf "%s\\t%s\\n",$2,$3}}'> {output.out}
 		"""
 rule tumor_seq:
 	input:
-		bam="path/to/BQSRTumorBamFolder/{sample}.tumor.bam"	
+		bam="/storage/douyanmeiLab/TCGA_wu/demo/{sample}.tumor.bam"	
 	output:
 		chr_seq="seq/tumor/{sample}/chr.seq"
 	shell:
@@ -65,7 +68,7 @@ rule tumor_chr_seq:
 		"""
 rule normal_seq:
 	input:
-		bam="path/to/BQSRTumorBamFolder/{sample}.normal.bam"	
+		bam="/storage/douyanmeiLab/TCGA_wu/demo/{sample}.normal.bam"	
 	output:
 		chr_seq="seq/normal/{sample}/chr.seq"
 	shell:
@@ -89,7 +92,7 @@ rule gen_tumor_norm_config:
 	output:
 		config="norm_config/tumor/{sample}.tumor.config",
 	params:
-		ref="resources/",
+		ref="resources/ref/",
 		kmer="resources/hg38.150mer.m2.chr",
 		seq="seq/tumor/{sample}/",
 		bin="bin/tumor/{sample}/",
@@ -103,7 +106,7 @@ rule gen_normal_norm_config:
 	output:
 		config="norm_config/normal/{sample}.normal.config",
 	params:
-		ref="resources/",
+		ref="resources/ref/",
 		kmer="resources/hg38.150mer.m2.chr",
 		seq="seq/normal/{sample}/",
 		bin="bin/normal/{sample}/",

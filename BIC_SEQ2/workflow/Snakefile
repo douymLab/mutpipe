@@ -1,0 +1,149 @@
+from tempfile import tempdir
+
+
+include: "rules/common.smk"
+include: "rules/download.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,'{sample}.tumor.bam'))
+types =    ["tumor", "normal"]
+
+rule all:
+	input:
+		expand(os.path.join(outPath,"{sample}_pvalue.CNVs"), sample=sample_IDs),
+		expand(os.path.join(outPath,"{sample}_pvalue.CNVs"), sample=sample_IDs)
+
+
+
+# genmap rule
+rule genmap:
+	input:
+		index_path = rules.decom_map_index.output,
+	output:
+		os.path.join(outPath,"genmap/grch38-no-alt.genmap.bedgraph")
+	log:
+		os.path.join(outPath,"genmap/genmap.log"),
+	params:
+		map_dir = directory(os.path.join(outPath,"genmap"))
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		genmap map -K 150 -E 2 -I {input.index_path} -O {params.map_dir} -t -w -bg > {log}
+		"""
+
+rule mappable_region:
+	input:
+		bedgraph=ancient(os.path.join(outPath,"genmap/grch38-no-alt.genmap.bedgraph"))
+	output:
+		out=os.path.join(outPath,"chr/hg38.150mer.m2.chr{chr_list}.txt"),
+	params:
+		chr= "chr{chr_list}"
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		awk '{{if ($1=="{params.chr}") print}}' {input.bedgraph}|awk '{{if($4==1) printf "%s\\t%s\\n",$2,$3}}'> {output.out}
+		"""
+
+# seq rule
+rule tumor_seq:
+	input:
+		bam=os.path.join(tumor_path,'{sample}.tumor.bam'),
+	output:
+		chr_seq=os.path.join(outPath,"seq/tumor/{sample}/chr.seq"),
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		samtools view {input.bam} |awk '{{print $3,$4}}'> {output.chr_seq}
+		"""
+
+rule normal_seq:
+	input:
+		bam=os.path.join(normal_path,'{sample}.normal.bam'),
+	output:
+		chr_seq=os.path.join(outPath,"seq/normal/{sample}/chr.seq"),
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		samtools view {input.bam} |awk '{{print $3,$4}}'> {output.chr_seq}
+		"""
+
+rule _chr_seq:
+	input:
+		chr_seq=os.path.join(outPath, "seq/{type}/{sample}/chr.seq")
+	output:
+		out=os.path.join(outPath, "seq/{type}/{sample}/seq.log")
+	params:
+		out_dir=os.path.join(outPath, "seq/{type}/{sample}/"),
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		python workflow/scripts/split_chr_seq.py -seq {input.chr_seq} -outdir {params.out_dir} > {output.out}
+		"""
+
+rule gen_norm_config:
+	input:
+		seq=os.path.join(outPath, "seq/{type}/{sample}/seq.log"),
+		check=os.path.join(fasta_dir,"{type}/{sample}/check_chr_files.log")
+	output:
+		config=os.path.join(outPath,"norm_config/{type}/{sample}.{type}.config"),
+	params:
+		ref=fasta_dir,
+		kmer=os.path.join(outPath,"chr/hg38.150mer.m2.chr"),
+		seq=os.path.join(outPath,"seq/{type}/{sample}/"),
+		bin=os.path.join(outPath,"bin/{type}/{sample}/"),
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		python workflow/scripts/gen_norm_config.py -ref {params.ref} -kmer {params.kmer} -seq {params.seq} -bin {params.bin} -config {output.config}
+		"""
+
+rule gen_seg_config:
+	input:
+		normal_config=os.path.join(outPath,"norm_config/normal/{sample}.normal.config"),
+		tumor_config=os.path.join(outPath,"norm_config/tumor/{sample}.tumor.config"),
+	output:
+		config=os.path.join(outPath,"seg_config/{sample}.seg.config")
+	params:
+		tumor_bin=os.path.join(outPath,"bin/tumor/{sample}/"),
+		normal_bin=os.path.join(outPath,"bin/normal/{sample}/"),
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		python workflow/scripts/gen_seg_config.py -tumor_bin {params.tumor_bin} -normal_bin {params.normal_bin} -config {output.config}
+		"""
+
+rule norm_:
+	input: 
+		conf=os.path.join(outPath,"norm_config/{type}/{sample}.{type}.config"),
+	output:
+		out=os.path.join(outPath,"{type}/{sample}.output"),
+		bin=os.path.join(outPath,"bin/{type}/{sample}/chr16.norm.bin"),
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		NBICseq-norm.pl {input.conf} {output.out} --tmp {resources.tmpdir}
+		"""
+
+rule seg_p_value:
+	input:
+		tumor_out=os.path.join(outPath,"tumor/{sample}.output"),
+		normal_out=os.path.join(outPath,"normal/{sample}.output"),
+		conf=os.path.join(outPath,"seg_config/{sample}.seg.config")
+	output:
+		out=os.path.join(outPath,"{sample}_pvalue.CNVs"),
+		png=os.path.join(outPath,"{sample}.pvalue.cnv.profile.png")
+	params:
+		title=os.path.join(outPath,"{sample}_pvalue_CNV_profile"),
+	conda: "mutpipe_bicseq",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		NBICseq-seg.pl --control {input.conf} {output.out} --fig {output.png} --title {params.title} --bootstrap --tmp {resources.tmpdir}
+		"""

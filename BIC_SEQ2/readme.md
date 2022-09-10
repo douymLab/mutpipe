@@ -12,6 +12,7 @@
 we strongly suggest installing dependencies(expect BIC-seq2) via conda:
 
   > $ conda create -n mutpipe_bicseq2 --file environment.yaml
+  mamba env create --file workflow/envs/aria2.yaml -n aria2
 
 Then you could activate the environment "mutpipe_bicseq2" through this command:
  
