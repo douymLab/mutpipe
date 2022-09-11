@@ -1,9 +1,9 @@
 path:
-  output: "demo/output"
-  res_dir: "demo/resources"
-  bam_tumor: "demo/bam/tumor"
-  bam_normal: "demo/bam/normal"
+  output: "path/to/output"
+  res_dir: "path/to/resources"
+  bam_tumor: "path/to/bam/tumor"
+  bam_normal: "path/to/bam/normal"
 
 aria2c_threads: 16
 
-TEMPDIR: "tmp"
+TEMPDIR: "path/to/tmp"

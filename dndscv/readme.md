@@ -15,6 +15,8 @@ we strongly suggest installing dependencies via mamba:
 
 ```{bash}
 conda install -n base -c conda-forge mamba
+conda activate base
+mamba create -c conda-forge -c bioconda -n snakemake snakemake
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_dndscv
 ```
 
@@ -75,8 +77,8 @@ sh workflow/run.slurm.sh
 ```{yaml}
 path:
   refdb_file: 'RefCDS_human_GRCh38_GencodeV18_recommended.rda'
-  refdb_dir: 'demo/resources/'
-  input: 'demo/input/'
+  refdb_dir: '../demo/dndscv_input/'
+  input: '../demo/dndscv_input/'
   out: 'demo/output/'
 ```
 

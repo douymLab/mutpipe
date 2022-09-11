@@ -14,6 +14,8 @@ we strongly suggest installing dependencies via mamba:
 
 ```{bash}
 conda install -n base -c conda-forge mamba
+conda activate base
+mamba create -c conda-forge -c bioconda -n snakemake snakemake
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_dndscv
 ```
 
@@ -86,8 +88,8 @@ path:
   output: "demo/output"
   index_dir: "demo/resources"
   index_file: "Homo_sapiens_assembly38.fasta.fai"
-  bam_tumor: demo/bam/tumor
-  bam_normal: demo/bam/normal
+  bam_tumor: "../demo/bam/tumor"
+  bam_normal: "../demo/bam/normal"
 
 controlfreec_params: 
   coefficientOfVariation: 0.062

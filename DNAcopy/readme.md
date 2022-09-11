@@ -14,6 +14,8 @@ we strongly suggest installing dependencies via mamba:
 
 ```{bash}
 conda install -n base -c conda-forge mamba
+conda activate base
+mamba create -c conda-forge -c bioconda -n snakemake snakemake
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_dnacopy
 ```
 
@@ -68,8 +70,8 @@ sh workflow/run.slurm.sh
 ```{yaml}
 path:
   output: "demo/output"
-  bam_tumor: "demo/bam/tumor"
-  bam_normal: "demo/bam/normal"
+  bam_tumor: "../demo/bam/tumor"
+  bam_normal: "../demo/bam/normal"
 ```
 
 ## Input
