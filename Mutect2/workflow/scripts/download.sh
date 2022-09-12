@@ -3,7 +3,7 @@
 cd resources;
 
 ## Downloading reference genome (hg38) via GATK
-wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.fasta.gz
+wget https://media.githubusercontent.com/media/broadinstitute/gatk/master/src/test/resources/large/Homo_sapiens_assembly38.fasta.gz
 gzip -d Homo_sapiens_assembly38.fasta.gz
 
 ## Creating the FASTA sequence dictionary file

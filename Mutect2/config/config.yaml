@@ -1,0 +1,8 @@
+path:
+  resources: "resources"
+  output: "demo/output"
+  bam_tumor: "../demo/mutect2_bam"
+  bam_normal: "../demo/mutect2_bam"
+
+fa: "Homo_sapiens_assembly38.fasta"
+interval_list: "S31285117_Padded.list"

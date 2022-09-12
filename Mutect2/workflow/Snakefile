@@ -1,0 +1,120 @@
+##GATK: v4.2.2.0
+
+#https://gatk.broadinstitute.org/hc/en-us/articles/360035889791--How-to-Call-somatic-mutations-using-GATK4-Mutect2-Deprecated-
+#https://gatk.broadinstitute.org/hc/en-us/articles/360035531132
+
+include: "rules/common.smk"
+include: "rules/download.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+
+rule all:
+	input:
+		expand(os.path.join(outPath,"{sample}.somatic.mt2.SNVs.vcf.gz"),sample=sample_IDs),
+		expand(os.path.join(outPath,"{sample}.somatic.mt2.INDELs.vcf.gz"),sample=sample_IDs),
+
+rule MT2:
+	input:
+		tumor_bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+		normal_bam=os.path.join(normal_path,"{sample}.normal.bam"),
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		fa_idx = os.path.join(res_dir,"Homo_sapiens_assembly38.fasta.fai"),
+		fa_dict = os.path.join(res_dir,"Homo_sapiens_assembly38.dict"),
+		interval=os.path.join(res_dir,"S31285117_Padded.list"),
+		germline_resource=os.path.join(res_dir,"af-only-gnomad.hg38.vcf.gz"),
+		PON=os.path.join(res_dir,"1000g_pon.hg38.vcf.gz")
+	output:
+		vcf=temp(os.path.join(outPath,"{sample}.somatic.m2.vcf.gz")),
+		f1r2=temp(os.path.join(outPath,"{sample}.f1r2.tar.gz")),
+		bamout=temp(os.path.join(outPath,"{sample}.tumor_vs_normal.bam")),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk Mutect2 -R {input.fa} -I {input.tumor_bam} -I {input.normal_bam} \
+		-normal {wildcards.sample}.normal -tumor {wildcards.sample}.tumor \
+		--germline-resource {input.germline_resource} --pon {input.PON} \
+		-L {input.interval} --interval-padding 100 \
+		--af-of-alleles-not-in-resource 0.0001 \
+		--disable-read-filter MateOnSameContigOrNoMappedMateReadFilter \
+		-O {output.vcf} --f1r2-tar-gz {output.f1r2} -bamout {output.bamout}"
+
+rule LearnReadOrientationModel:
+	input:
+		os.path.join(outPath,"{sample}.f1r2.tar.gz")
+	output:
+		temp(os.path.join(outPath,"{sample}.read-orientation-model.tar.gz")),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk LearnReadOrientationModel -I {input} -O {output}"
+
+rule GetPileupSummaries_tumor:
+	input:
+		tumor_bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+		common_vcf=os.path.join(res_dir,"small_exac_common_3.hg38.vcf.gz")
+	output:
+		temp(os.path.join(outPath,"{sample}_tumor_getpileupsummaries.table")),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk GetPileupSummaries -I {input.tumor_bam} -V {input.common_vcf} \
+		-L {input.common_vcf} -O {output}"
+
+rule GetPileupSummaries_normal:
+	input:
+		normal_bam=os.path.join(normal_path,"{sample}.normal.bam"),
+		common_vcf=os.path.join(res_dir,"small_exac_common_3.hg38.vcf.gz")
+	output:
+		temp(os.path.join(outPath,"{sample}_normal_getpileupsummaries.table")),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk GetPileupSummaries -I {input.normal_bam} -V {input.common_vcf} \
+		-L {input.common_vcf} -O {output}"
+
+rule CalculateContamination:
+	input:
+		tumor_table=os.path.join(outPath,"{sample}_tumor_getpileupsummaries.table"),
+		normal_table=os.path.join(outPath,"{sample}_normal_getpileupsummaries.table")
+	output:
+		table1=temp(os.path.join(outPath,"{sample}_tumor_calculatecontamination.table")),
+		table2=temp(os.path.join(outPath,"{sample}_tumor_segments.table")),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk CalculateContamination -I {input.tumor_table} \
+		-matched {input.normal_table} -O {output.table1} \
+		-tumor-segmentation {output.table2}"
+
+rule FilterMutectCalls:
+	input:
+		vcf=os.path.join(outPath,"{sample}.somatic.m2.vcf.gz"),
+		contamination_table=os.path.join(outPath,"{sample}_tumor_calculatecontamination.table"),
+		segmentation_table=os.path.join(outPath,"{sample}_tumor_segments.table"),
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		read_orientation_model=os.path.join(outPath,"{sample}.read-orientation-model.tar.gz")
+	output:
+		temp(os.path.join(outPath,"{sample}.somatic.mt2.oncefiltered.vcf.gz")),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk FilterMutectCalls -R {input.fa} -V {input.vcf} \
+		--tumor-segmentation {input.segmentation_table} \
+		--contamination-table {input.contamination_table} \
+		--ob-priors {input.read_orientation_model} -O {output}"
+
+rule selectSNV:
+	input:
+		vcf=os.path.join(outPath,"{sample}.somatic.mt2.oncefiltered.vcf.gz"),
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta")
+	output:
+		os.path.join(outPath,"{sample}.somatic.mt2.SNVs.vcf.gz"),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk SelectVariants -R {input.fa} -V {input.vcf} \
+		--select-type-to-include SNP -O {output}"
+
+rule selectINDEL:
+	input:
+		vcf=os.path.join(outPath,"{sample}.somatic.mt2.oncefiltered.vcf.gz"),
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta")
+	output:
+		os.path.join(outPath,"{sample}.somatic.mt2.INDELs.vcf.gz"),
+	conda: "mutpipe_mutect2",
+	shell:
+		"gatk SelectVariants -R {input.fa} -V {input.vcf} \
+		--select-type-to-include INDEL -O {output}"
