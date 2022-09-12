@@ -16,6 +16,7 @@ we strongly suggest installing dependencies via mamba:
 conda install -n base -c conda-forge mamba
 conda activate base
 mamba create -c conda-forge -c bioconda -n snakemake snakemake
+mamba env create --file workflow/envs/aria2.yaml -n aria2
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_bicseq
 ```
 
