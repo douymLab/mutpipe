@@ -37,12 +37,23 @@ rule mappable_region:
 	output:
 		out=os.path.join(outPath,"chr/hg38.150mer.m2.chr{chr_list}.txt"),
 	params:
-		chr= "chr{chr_list}"
+		chr= "chr{chr_list}",
+	log: os.path.join(fasta_dir,"{chr_list}.mappable_region.log"),
 	conda: "mutpipe_bicseq",
 	resources:tmpdir=TEMPDIR,
 	shell:
 		"""
 		awk '{{if ($1=="{params.chr}") print}}' {input.bedgraph}|awk '{{if($4==1) printf "%s\\t%s\\n",$2,$3}}'> {output.out}
+		"""
+
+hg38_150mer_files = expand(os.path.join(outPath,"chr/hg38.150mer.m2.chr{chr_list}.txt"),chr_list=chr_list)
+rule check_hg38_150mer:
+	input: expand(os.path.join(fasta_dir,"{chr_list}.mappable_region.log"),chr_list=chr_list),
+	output: os.path.join(fasta_dir,"{type}/{sample}/check_hg38_150mer_files.log"),
+	conda: "mutpipe_bicseq",
+	shell:
+		"""
+		for i in hg38_150mer_files; do test -f "$i" && echo "$i exists."; done; >> {output}
 		"""
 
 # seq rule
@@ -87,7 +98,8 @@ rule _chr_seq:
 rule gen_norm_config:
 	input:
 		seq=os.path.join(outPath, "seq/{type}/{sample}/seq.log"),
-		check=os.path.join(fasta_dir,"{type}/{sample}/check_chr_files.log")
+		check=os.path.join(fasta_dir,"{type}/{sample}/check_chr_files.log"),
+		check2=os.path.join(fasta_dir,"{type}/{sample}/check_hg38_150mer_files.log"),
 	output:
 		config=os.path.join(outPath,"norm_config/{type}/{sample}.{type}.config"),
 	params:

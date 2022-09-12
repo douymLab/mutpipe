@@ -46,7 +46,7 @@ rule download_map_index:
 		map_gz = os.path.join(res_dir,"grch38-no-alt.tar.gz"),
 	conda: "aria2",
 	shell:
-		"aria2c -c -s {aria2c_threads} -x {aria2c_threads} -k 1M -j 2 --file-allocation=none -d {res_dir} -o {output.map_gz} http://ftp.imp.fu-berlin.de/pub/cpockrandt/genmap/indices/grch38-no-alt.tar.gz"
+		"aria2c -c -s {aria2c_threads} -x {aria2c_threads} -k 1M -j 2 --file-allocation=none -o {output.map_gz} http://ftp.imp.fu-berlin.de/pub/cpockrandt/genmap/indices/grch38-no-alt.tar.gz"
 
 rule decom_map_index:
 	input:
