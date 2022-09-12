@@ -16,7 +16,7 @@ we strongly suggest installing dependencies via mamba:
 conda install -n base -c conda-forge mamba
 conda activate base
 mamba create -c conda-forge -c bioconda -n snakemake snakemake
-mamba env create --file workflow/envs/environment.yaml -n mutpipe_dndscv
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_freec
 ```
 
 Then you could activate the environment "snakemake" through this command:
