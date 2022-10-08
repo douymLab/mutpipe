@@ -1,6 +1,6 @@
-# Quick Start
-
 ![dndscv](https://github.com/douymLab/mutpipe/blob/main/dndscv/dndscv.png)
+
+# Quick Start
 
 ## Step1: deploy workflow
 
