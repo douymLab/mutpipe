@@ -1,9 +1,7 @@
 conda activate snakemake
-## network part
-snakemake --cores 1 download_refdb
-snakemake --cores 1 install_dndscv
 ## submit to cluster
 snakemake -j 666\
+    --use-conda\
     --cluster-config workflow/scripts/slurm.json\
     --cluster "sbatch -p {cluster.partition}\
                       -q {cluster.qos}\

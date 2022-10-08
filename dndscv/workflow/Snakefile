@@ -1,5 +1,4 @@
 include: "rules/common.smk"
-include: "rules/download.smk"
 
 sample_IDs, =glob_wildcards(os.path.join(inputPath,'{sample}.SNV.out'))
 type = ["SNV","INDEL"]
@@ -33,8 +32,6 @@ rule dndscv:
 	input:
 		file = os.path.join(outPath,'drivergene.input'),
 		refdb = refdb_path,
-		check_refdb = ancient(os.path.join(outPath,'refcds_downloaded.success')),
-		check_dndscv = ancient(os.path.join(outPath,'dnds_installed.success'))
 	output:
 		os.path.join(outPath,'drivergene.csv')
 	conda: 

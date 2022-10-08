@@ -1,8 +1,8 @@
 {
     "__default__" :
     {
-        "partition" : "intel-e5,amd-ep2",
-        "qos" : "large",
+        "partition" : "amd-ep2",
+        "qos" : "normal",
         "cpus-per-task" : "1",
         "mem"    : 20000,
         "time" : "12:00:00",
