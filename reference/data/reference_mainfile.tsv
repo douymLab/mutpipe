@@ -88,7 +88,7 @@ Mills_and_1000G_gold_standard.indels.hg38.vcf.gz	Haplotypecaller	gsutil	gs://gen
 Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi	Haplotypecaller	gsutil	gs://genomics-public-data/resources/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi
 RefCDS_human_GRCh38_GencodeV18_recommended.rda	dndscv	wget	https://raw.githubusercontent.com/im3sanger/dndscv_data/master/data/RefCDS_human_GRCh38_GencodeV18_recommended.rda
 rep_lib_annotation.tar.gz	xtea	wget	https://media.githubusercontent.com/media/parklab/xTea/master/rep_lib_annotation.tar.gz
-S31285117_Padded.bed.gz	Qualitycontrol	-	-
+S31285117_Regions.bed	Qualitycontrol	-	-
 S31285117_Padded.list.gz	Mutect2	-	-
 S31285117_Padded.list.gz	Haplotypecaller	-	-
 S31285117_Padded.list.gz	strelka2	-	-
