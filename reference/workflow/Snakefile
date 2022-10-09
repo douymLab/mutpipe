@@ -1,0 +1,18 @@
+configfile: "config/config.yaml"
+download_threads = config['threads']
+download_log = config['download_log']
+reference_path = config['reference_path']
+
+rule download_ref:
+	conda:
+		"mutpipe_reference",
+	params:
+		reference_path,
+	resources:
+		download_threads=download_threads,
+	log:
+		os.path.join(download_log,"reference_files_download.log"),
+	threads:
+		download_threads,
+	script:
+		'scripts/download_files.sh'
