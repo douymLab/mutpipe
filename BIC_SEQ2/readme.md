@@ -68,11 +68,11 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
 
 -   nbicseq_seg
 
-    Directory for [NBICseq-seg_v0.7.2](#NBICseqsegv072)
+    Directory for [NBICseq-seg_v0.7.2](#nbicseq-seg_v072)
 
 -   nbicseq_norm
 
-    Directory for [NBICseq-norm_v0.2.4](#NBICseqnormv024).
+    Directory for [NBICseq-norm_v0.2.4](#nbicseq-norm_v024).
 
 -   TEMPDIR
 
