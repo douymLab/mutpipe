@@ -26,24 +26,29 @@ Modify config file
 
 To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
--   threads
+-   `threads`
 
     Threads for data download
 
--   reference_path
+-   `reference_path`
 
     Directory path for files downloaded
 
--   download_log
+-   `download_log`
 
     Directory path for the log file of download
     
 ## Step3: run workflow
 
-1.  dry run test
+Given that snakemake is installed, run
 
 ```{bash}
 conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
 snakemake -np
 ```
 
@@ -161,10 +166,12 @@ Files record in `data/reference_mainfile.tsv`
 | Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi            | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi                        |
 | RefCDS_human_GRCh38_GencodeV18_recommended.rda                  | dndscv          | wget   | https://raw.githubusercontent.com/im3sanger/dndscv_data/master/data/RefCDS_human_GRCh38_GencodeV18_recommended.rda            |
 | rep_lib_annotation.tar.gz                                       | xtea            | wget   | https://media.githubusercontent.com/media/parklab/xTea/master/rep_lib_annotation.tar.gz                                       |
-| S31285117_Regions.bed                                         | Qualitycontrol  | -      | -                                                                                                                             |
+| S31285117_Regions.bed                                           | Qualitycontrol  | -      | -                                                                                                                             |
 | S31285117_Padded.list.gz                                        | Mutect2         | -      | -                                                                                                                             |
 | S31285117_Padded.list.gz                                        | Haplotypecaller | -      | -                                                                                                                             |
 | S31285117_Padded.list.gz                                        | strelka2        | -      | -                                                                                                                             |
+| region.bed.gz                                                   | strelka2        | -      | -                                                                                                                             |
+| region.bed.gz.tbi                                               | strelka2        | -      | -                                                                                                                             |
 | small_exac_common_3.hg38.vcf.gz                                 | Mutect2         | gsutil | gs://gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz                                                         |
 | small_exac_common_3.hg38.vcf.gz                                 | Qualitycontrol  | gsutil | gs://gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz                                                         |
 | small_exac_common_3.hg38.vcf.gz.tbi                             | Mutect2         | gsutil | gs://gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz.tbi                                                     |

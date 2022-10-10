@@ -92,6 +92,8 @@ S31285117_Regions.bed	Qualitycontrol	-	-
 S31285117_Padded.list.gz	Mutect2	-	-
 S31285117_Padded.list.gz	Haplotypecaller	-	-
 S31285117_Padded.list.gz	strelka2	-	-
+region.bed.gz	strelka2	-	-
+region.bed.gz.tbi	strelka2	-	-
 small_exac_common_3.hg38.vcf.gz	Mutect2	gsutil	gs://gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz
 small_exac_common_3.hg38.vcf.gz	Qualitycontrol	gsutil	gs://gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz
 small_exac_common_3.hg38.vcf.gz.tbi	Mutect2	gsutil	gs://gatk-best-practices/somatic-hg38/small_exac_common_3.hg38.vcf.gz.tbi
