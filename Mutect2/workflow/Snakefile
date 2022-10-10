@@ -4,25 +4,25 @@
 #https://gatk.broadinstitute.org/hc/en-us/articles/360035531132
 
 include: "rules/common.smk"
-include: "rules/download.smk"
+include: "rules/unzip.smk"
 
 sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
 
 rule all:
 	input:
 		expand(os.path.join(outPath,"{sample}.somatic.mt2.SNVs.vcf.gz"),sample=sample_IDs),
-		expand(os.path.join(outPath,"{sample}.somatic.mt2.INDELs.vcf.gz"),sample=sample_IDs),
+		expand(os.path.join(outPath,"{sample}.somatic.mt2.INDELs.vcf.gz"),sample=sample_IDs)
 
 rule MT2:
 	input:
 		tumor_bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
 		normal_bam=os.path.join(normal_path,"{sample}.normal.bam"),
-		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
-		fa_idx = os.path.join(res_dir,"Homo_sapiens_assembly38.fasta.fai"),
-		fa_dict = os.path.join(res_dir,"Homo_sapiens_assembly38.dict"),
-		interval=os.path.join(res_dir,"S31285117_Padded.list"),
-		germline_resource=os.path.join(res_dir,"af-only-gnomad.hg38.vcf.gz"),
-		PON=os.path.join(res_dir,"1000g_pon.hg38.vcf.gz")
+		fa=os.path.join(res_dir,fa),
+		fa_idx = os.path.join(gz_ref_dir,fai),
+		fa_dict = os.path.join(gz_ref_dir,dict),
+		interval=os.path.join(res_dir,interval_list),
+		germline_resource=os.path.join(gz_ref_dir,germline),
+		PON=os.path.join(gz_ref_dir,pon)
 	output:
 		vcf=temp(os.path.join(outPath,"{sample}.somatic.m2.vcf.gz")),
 		f1r2=temp(os.path.join(outPath,"{sample}.f1r2.tar.gz")),
@@ -49,7 +49,7 @@ rule LearnReadOrientationModel:
 rule GetPileupSummaries_tumor:
 	input:
 		tumor_bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
-		common_vcf=os.path.join(res_dir,"small_exac_common_3.hg38.vcf.gz")
+		common_vcf=os.path.join(gz_ref_dir,common_vcf)
 	output:
 		temp(os.path.join(outPath,"{sample}_tumor_getpileupsummaries.table")),
 	conda: "mutpipe_mutect2",
@@ -60,7 +60,7 @@ rule GetPileupSummaries_tumor:
 rule GetPileupSummaries_normal:
 	input:
 		normal_bam=os.path.join(normal_path,"{sample}.normal.bam"),
-		common_vcf=os.path.join(res_dir,"small_exac_common_3.hg38.vcf.gz")
+		common_vcf=os.path.join(gz_ref_dir,common_vcf)
 	output:
 		temp(os.path.join(outPath,"{sample}_normal_getpileupsummaries.table")),
 	conda: "mutpipe_mutect2",
@@ -86,7 +86,7 @@ rule FilterMutectCalls:
 		vcf=os.path.join(outPath,"{sample}.somatic.m2.vcf.gz"),
 		contamination_table=os.path.join(outPath,"{sample}_tumor_calculatecontamination.table"),
 		segmentation_table=os.path.join(outPath,"{sample}_tumor_segments.table"),
-		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		fa=os.path.join(res_dir,fa),
 		read_orientation_model=os.path.join(outPath,"{sample}.read-orientation-model.tar.gz")
 	output:
 		temp(os.path.join(outPath,"{sample}.somatic.mt2.oncefiltered.vcf.gz")),
@@ -100,7 +100,7 @@ rule FilterMutectCalls:
 rule selectSNV:
 	input:
 		vcf=os.path.join(outPath,"{sample}.somatic.mt2.oncefiltered.vcf.gz"),
-		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta")
+		fa=os.path.join(res_dir,fa)
 	output:
 		os.path.join(outPath,"{sample}.somatic.mt2.SNVs.vcf.gz"),
 	conda: "mutpipe_mutect2",
@@ -111,7 +111,7 @@ rule selectSNV:
 rule selectINDEL:
 	input:
 		vcf=os.path.join(outPath,"{sample}.somatic.mt2.oncefiltered.vcf.gz"),
-		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta")
+		fa=os.path.join(res_dir,fa)
 	output:
 		os.path.join(outPath,"{sample}.somatic.mt2.INDELs.vcf.gz"),
 	conda: "mutpipe_mutect2",
