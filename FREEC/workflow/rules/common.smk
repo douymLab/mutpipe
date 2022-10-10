@@ -1,6 +1,9 @@
 configfile: "config/config.yaml"
 import os
 import socket
+from tempfile import tempdir
+
+TEMPDIR = config['TEMPDIR']
 
 index_dir = config['path']['index_dir']
 index_file = config['path']['index_file']

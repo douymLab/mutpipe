@@ -1,9 +1,9 @@
 {
     "__default__" :
     {
-        "partition" : "intel-e5,amd-ep2",
-        "qos" : "large",
-        "cpus-per-task" : "1",
+        "partition" : "amd-ep2-short",
+        "qos" : "normal",
+        "cpus-per-task" : "16",
         "mem"    : 20000,
         "time" : "12:00:00",
         "output"    : "log/mutpipe_freec.job.out",

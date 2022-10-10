@@ -1,10 +1,12 @@
 path:
-  output: "path/to/output"
-  index_dir: "path/to/resources"
+  output: "demo/output"
+  index_dir: "../reference/data"
   index_file: "Homo_sapiens_assembly38.fasta.fai"
-  bam_tumor: "path/to/bam/tumor"
-  bam_normal: "path/to/bam/normal"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
 
 controlfreec_params: 
   coefficientOfVariation: 0.062
-  threads: 1
+  threads: 16
+
+TEMPDIR: "tmp"

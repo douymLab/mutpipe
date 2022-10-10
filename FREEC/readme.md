@@ -1,63 +1,68 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/FREEC/dag.png)
+![FREEC](https://github.com/douymLab/mutpipe/blob/main/FREEC/dag.png)
 
-## Step1: install mamba and deploy workflow
+# Quick Start
 
-Download workflow
+## Step1: deploy workflow
+
+Given that mutpipe is cloned, run
 
 ```{bash}
-git clone https://github.com/xiayh17/mutpipe
-cd mutpipe/dndscv
+cd mutpipe/FREEC
 ```
 
 we strongly suggest installing dependencies via mamba:
 
+Given that Mamba is installed, run
+
 ```{bash}
-conda install -n base -c conda-forge mamba
-conda activate base
-mamba create -c conda-forge -c bioconda -n snakemake snakemake
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_freec
-```
-
-Then you could activate the environment "snakemake" through this command:
-
-```{bash}
-conda activate snakemake
 ```
 
 ## Step2: configure workflow
 
 To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
--   output
+-   `output`
     
-    Directory name for output files
+    Directory path for output files
     
--  index_file
+-  `index_file`
 
-    Fasta index file of reference genome (hg38): Homo_sapiens_assembly38.fasta.fai
+    File name for Fasta index file of reference genome (hg38): Homo_sapiens_assembly38.fasta.fai
     
--  index_dir
-
-    Directory name to save index_file
+    Download by [reference workflow](reference/readme.md)
     
--   bam_tumor
+-  `index_dir`
 
-     Directory for tumor bam files
+    Directory path to save `index_file`
+    
+-   `bam_tumor`
+
+    Directory path for tumor bam files
      
--   bam_normal
+-   `bam_normal`
 
-    Directory for normal bam files
+    Directory path for normal bam files
     
--   threads
+-   `threads`
 
-    threads for control-freec
+    Threads for control-freec
     
--   coefficientOfVariation
+-   `coefficientOfVariation`
 
-    coefficientOfVariation for control-freec
+    CoefficientOfVariation for control-freec
+    
+-   `TEMPDIR`
+
+    Temporary directory for temporary files.
 
 ## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
 
 1.  dry run test
 
@@ -86,14 +91,16 @@ sh workflow/run.slurm.sh
 ```{yaml}
 path:
   output: "demo/output"
-  index_dir: "demo/resources"
+  index_dir: "../reference/data"
   index_file: "Homo_sapiens_assembly38.fasta.fai"
-  bam_tumor: "../demo/bam/tumor"
-  bam_normal: "../demo/bam/normal"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
 
 controlfreec_params: 
   coefficientOfVariation: 0.062
   threads: 16
+
+TEMPDIR: "tmp"
 ```
 
 ## Input
