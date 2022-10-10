@@ -1,0 +1,17 @@
+path:
+  ref_dir: reference
+  gz_ref_dir: ../reference/data
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+  output: demo/output
+
+gz_ref:
+  fa: Homo_sapiens_assembly38.fasta.gz
+
+ref:
+  fa: Homo_sapiens_assembly38.fasta
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  bed: "S31285117_Regions.bed"
+  common_vcf: small_exac_common_3.hg38.vcf.gz
+  common_vcfi: small_exac_common_3.hg38.vcf.gz.tbi
