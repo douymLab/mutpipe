@@ -1,0 +1,53 @@
+include: "rules/commons.smk"
+include: "rules/unzip.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+
+rule all:
+	input:
+		expand(os.path.join(outPath,"filter/{sample}.vcf.gz"), sample=sample_IDs),
+
+rule octopus:
+	input:
+		fa = os.path.join(ref_dir,fa),
+		fa_dict = os.path.join(ref_dir,dict),
+		fa_idx = os.path.join(ref_dir,fai),
+		tumor_bam = os.path.join(tumor_path,"{sample}.tumor.bam"),
+        normal_bam = os.path.join(normal_path,"{sample}.normal.bam"),
+		region = os.path.join(ref_dir,interval_list)
+	output:
+		out = os.path.join(outPath,"{sample}.vcf.gz")
+	params:
+		normal = "{sample}.normal"
+	resources:
+		mem_mb=12000,
+	conda: "mutpipe_octopus",
+	threads: threads
+	shell:
+		"""
+		octopus -R {input.fa} -I {input.tumor_bam} {input.normal_bam} \
+		-N {params.normal} -t {input.region} --threads {threads} -o {output.out}
+		"""
+
+rule re_filter:
+	input:
+		fa = os.path.join(ref_dir,fa),
+		vcf = os.path.join(outPath,"{sample}.vcf.gz"),
+		somatic_forest = os.path.join(ref_dir,somatic),
+		germline_forest = os.path.join(ref_dir,germline),
+		tumor_bam = os.path.join(tumor_path,"{sample}.tumor.bam"),
+		normal_bam = os.path.join(normal_path,"{sample}.normal.bam")
+	output:
+		out = os.path.join(outPath,"filter/{sample}.vcf.gz")
+	params:
+		normal = "{sample}.normal",
+	conda: "mutpipe_octopus",
+	threads: threads
+	shell:
+		"""
+		octopus -R {input.fa} -I {input.tumor_bam} {input.normal_bam} -N {params.normal}\
+    			--filter-vcf {input.vcf} \
+    			--forest {input.germline_forest} \
+    			--somatic-forest {input.somatic_forest}\
+    			-o {output.out} --threads {threads}
+		"""
