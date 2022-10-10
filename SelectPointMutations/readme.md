@@ -79,15 +79,15 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
     
     -  `mutect2`
     
-        Directory path to vcf from [Mutect2](Mutect2/readme.md)
+        Directory path to vcf from [Mutect2 workflow](/Mutect2)
 
     -  `octopus`
     
-        Directory path to vcf from [octopus](octopus/readme.md)
+        Directory path to vcf from [octopus workflow](/octopus)
 
     -  `strelka2`
     
-        Directory path to {sample}_strelka from [strelka2](strelka2/readme.md)
+        Directory path to {sample}_strelka from [strelka2 workflow](/strelka2)
 
 ## Step3: run workflow
 

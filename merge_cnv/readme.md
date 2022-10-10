@@ -82,7 +82,7 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
 
     -  `hg38_len_offset` hg38_len_offset.sorted.txt
 
-    Required reference files prepared in [reference workflow](reference)
+    Required reference files prepared in [reference workflow](/reference)
 
     Reference files need to decompress will be extracted automatically in workflow.
 

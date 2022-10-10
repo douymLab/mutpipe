@@ -41,7 +41,7 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
     You could change it as you need, referencing here:
     <https://github.com/im3sanger/dndscv_data/tree/master/data>
     
-    Required reference file prepared in [reference workflow](reference)
+    Required reference file prepared in [reference workflow](/reference)
 
 -   `ref_dir`
 
@@ -97,7 +97,9 @@ path:
 
 ### input:
 
-The input file is the output file from mutpipe's SelectPointMutation test inputfiles we provide under the "demo_data/dndscv_input" folder
+The input file is the output file from mutpipe's [SelectPointMutation workflow](/SelectPointMutations).
+
+We provide under the "demo_data/dndscv_input" folder.
 
 ### output:
 

@@ -68,7 +68,7 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
     -   FASTA sequence of each chromosome of reference genome (hg38): chr\*.fa.gz
     -   Index for hg38: grch38-no-alt.tar.gz
     
-    Required reference files prepared in [reference workflow](reference/readme.md)
+    Required reference files prepared in [reference workflow](/reference)
     Reference files need to decompress will automatic do it in workflow.
 
 -   `nbicseq_seg`
