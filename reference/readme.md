@@ -1,6 +1,10 @@
 Prepare reference data used in mutpipe
 
-This is a help workflow to download reference data
+This is a help workflow to download all reference data for all workflows.
+
+Detail info recorded in `data/reference_mainfile.tsv`.
+
+For files that Tool and Link absenting should be already in `data` folder.
 
 # Quick Start
 
@@ -75,6 +79,7 @@ reference_path: data
 
 Files record in `data/reference_mainfile.tsv`
 
+| File Name                                                       | Workflow        | Tool   | Link                                                                                                                          |
 | 1000G_omni2.5.hg38.vcf.gz                                       | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz                                                   |
 | --------------------------------------------------------------- | --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | 1000G_omni2.5.hg38.vcf.gz.tbi                                   | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz.tbi                                               |

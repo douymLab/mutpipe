@@ -22,56 +22,56 @@ The usage of every workflow is described as follows:
 
 ### reference
 
-[reference](reference)
+[reference](reference) is a help workflow to download all reference data for all workflows.
 
 ### Qualitycontrol
 
-[Qualitycontrol](Qualitycontrol/readme.md)
+[Qualitycontrol](Qualitycontrol)
 
 ### Mutect2
 
-[Mutect2](Mutect2/readme.md)
+[Mutect2](Mutect2)
 
 ### Haplotypecaller
 
-[Haplotypecaller](Haplotypecaller/readme.md)
+[Haplotypecaller](Haplotypecaller)
 
 ### strelka2
 
-[strelka2](strelka2/readme.md)
+[strelka2](strelka2)
 
 ### octopus
 
-[octopus](octopus/readme.md)
+[octopus](octopus)
 
 ### xtea
 
-[xtea](xtea/readme.md)
+[xtea](xtea)
 
 ### MSIprofiler
 
-[MSIprofiler](MSIprofiler/readme.md)
+[MSIprofiler](MSIprofiler)
 
 ### BIC_SEQ2
 
-[BIC_SEQ2](BIC_SEQ2/readme.md)
+[BIC_SEQ2](BIC_SEQ2)
 
 ### FREEC
 
-[FREEC](FREEC/readme.md)
+[FREEC](FREEC)
 
 ### DNAcopy
 
-[DNAcopy](DNAcopy/readme.md)
+[DNAcopy](DNAcopy)
 
 ### merge_cnv
 
-[merge_cnv](merge_cnv/readme.md)
+[merge_cnv](merge_cnv)
 
 ### SelectPointMutations
 
-[SelectPointMutations](SelectPointMutations/readme.md)
+[SelectPointMutations](SelectPointMutations)
 
 ### dndscv
 
-[dndscv](dndscv/readme.md)
+[dndscv](dndscv)
