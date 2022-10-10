@@ -75,3 +75,17 @@ The usage of every workflow is described as follows:
 ### dndscv
 
 [dndscv](dndscv)
+
+## Code Replicability
+
+Only for Linux
+
+All workflows tested under:
+
+-   `CentOS Linux 8 (Core)`
+
+-   `Linux_x86_64`
+
+-   `Anaconda 4.12.0`
+
+-   `Snakemake 6.15.5`
