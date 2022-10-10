@@ -1,0 +1,19 @@
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.7
+  - xtea
+  - bwa=0.7.17
+  - samtools=1.9
+  - minimap2
+  - wtdbg
+  - pysam
+  - sortedcontainers
+  - numpy
+  - scikit-learn=0.21.3
+  - pandas
+  - pip
+  - pip:
+    - deep-forest
