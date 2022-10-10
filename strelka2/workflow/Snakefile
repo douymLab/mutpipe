@@ -1,0 +1,39 @@
+include: "rules/common.smk"
+include: "rules/unzip.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+
+#localrules:all
+
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		expand(os.path.join(outPath,"strelka_somatic/{sample}_strelka/results/variants/somatic.snvs.vcf.gz"),sample=sample_IDs),
+		expand(os.path.join(outPath,"strelka_somatic/{sample}_strelka/results/variants/somatic.indels.vcf.gz"),sample=sample_IDs)
+
+rule StrelkaSomaticWorkflow:
+	input:
+		normal_bam=os.path.join(normal_path,"{sample}.normal.bam"),
+		tumor_bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		bed=os.path.join(gz_ref_dir,"region.bed.gz")
+	params:
+		output_dir=os.path.join(outPath,"strelka_somatic/{sample}_strelka") #change as you you want
+	output:
+		os.path.join(outPath,"strelka_somatic/{sample}_strelka/runWorkflow.py"),
+	conda: 'mutpipe_strelka'
+	shell:
+		"configureStrelkaSomaticWorkflow.py --normalBam {input.normal_bam} \
+		--tumorBam {input.tumor_bam} --referenceFasta {input.fa} --exome \
+		--callRegions {input.bed} --runDir {params.output_dir}"
+
+command = expand(os.path.join(outPath,"strelka_somatic/{sample}_strelka/runWorkflow.py"),sample=sample_IDs)
+rule somatic_calling:
+	input:
+		os.path.join(outPath,"strelka_somatic/{sample}_strelka/runWorkflow.py")
+	output:
+		snvs=os.path.join(outPath,"strelka_somatic/{sample}_strelka/results/variants/somatic.snvs.vcf.gz"),
+		indels=os.path.join(outPath,"strelka_somatic/{sample}_strelka/results/variants/somatic.indels.vcf.gz")
+	conda: 'mutpipe_strelka'
+	shell:
+		"{command} -m local -j 2"
