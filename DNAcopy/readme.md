@@ -1,47 +1,46 @@
+![DNAcopy](https://github.com/douymLab/mutpipe/blob/main/DNAcopy/dag.png)
+
 # Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/DNAcopy/dag.png)
 
-## Step1: install mamba and deploy workflow
+## Step1: deploy workflow
 
-Download workflow
+Given that mutpipe is cloned, run
 
 ```{bash}
-git clone https://github.com/xiayh17/mutpipe
-cd mutpipe/dndscv
+cd mutpipe/DNAcopy
 ```
 
 we strongly suggest installing dependencies via mamba:
 
+Given that Mamba is installed, run
+
 ```{bash}
-conda install -n base -c conda-forge mamba
-conda activate base
-mamba create -c conda-forge -c bioconda -n snakemake snakemake
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_dnacopy
-```
-
-Then you could activate the environment "snakemake" through this command:
-
-```{bash}
-conda activate snakemake
 ```
 
 ## Step2: configure workflow
 
 To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
--   output
+-   `output`
     
-    Directory name for output files
+    Directory path for output files
     
--   bam_tumor
+-   `bam_tumor`
 
-     Directory for tumor bam files
+    Directory path for tumor bam files
      
--   bam_normal
+-   `bam_normal`
 
-    Directory for normal bam files
+    Directory path for normal bam files
 
 ## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
 
 1.  dry run test
 
@@ -70,12 +69,13 @@ sh workflow/run.slurm.sh
 ```{yaml}
 path:
   output: "demo/output"
-  bam_tumor: "../demo/bam/tumor"
-  bam_normal: "../demo/bam/normal"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
 ```
 
 ## Input
-path/to/BQSRTumorBamFolder/{sample}.tumor.bam
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
 ## Output
 results/{sample}.CNVs   
 results/{sample}.mapd   

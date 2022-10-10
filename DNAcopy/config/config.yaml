@@ -1,4 +1,4 @@
 path:
-  output: "path/to/output"
-  bam_tumor: "path/to/bam/tumor"
-  bam_normal: "path/to/bam/normal"
+  output: "demo/output"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"

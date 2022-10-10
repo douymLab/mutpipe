@@ -5,13 +5,8 @@ sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
 # a pseudo-rule that collects the target files
 rule all:
 	input:
-		expand(os.path.join(outPath,"depth/{sample}.tumor.depth.regions.bed.gz"),sample=sample_IDs),
-		expand(os.path.join(outPath,"depth/{sample}.normal.depth.regions.bed.gz"),sample=sample_IDs),
-		expand(os.path.join(outPath,"depth/{sample}.tumor.depth.log"),sample=sample_IDs),
-		expand(os.path.join(outPath,"depth/{sample}.normal.depth.log"),sample=sample_IDs),
-		expand(os.path.join(outPath,"depth/{sample}.regions.depth"),sample=sample_IDs),
-		expand(os.path.join(outPath,"depth/{sample}.depth.regions.logratio.bed"),sample=sample_IDs),
 		expand(os.path.join(outPath,"result/{sample}.CNVs"),sample=sample_IDs),
+		expand(os.path.join(outPath,"result/{sample}.mapd"),sample=sample_IDs)
 
 rule mosdepth_tumor:
 	input:
