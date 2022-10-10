@@ -58,7 +58,7 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
 
   -  `xtea`
   
-     Directory path for [MSIprofiler](#1-install-xtea)
+     Directory path for [xTea](#1-install-xtea)
 
 -   `gz_ref`
 
