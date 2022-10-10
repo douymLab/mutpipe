@@ -1,13 +1,12 @@
 {
-	"__default__" :
-	{
-		"account" : "my account",
-		"time" : "12:15:00",
-		"n" : 1,
-		"partition" : "nromal"
-	},
-	"compute1" :
-	{
-		"time" : "12:20:00"
-	}
+    "__default__" :
+    {
+        "partition" : "amd-ep2-short",
+        "qos" : "normal",
+        "cpus-per-task" : "1",
+        "mem"    : 20000,
+        "time" : "12:00:00",
+        "output"    : "log/mutpipe_xtea.job.out",
+        "error"     : "log/mutpipe_xtea.job.err"
+    }
 }

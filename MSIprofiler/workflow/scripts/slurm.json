@@ -3,7 +3,7 @@
     {
         "partition" : "amd-ep2-short",
         "qos" : "normal",
-        "cpus-per-task" : "1",
+        "cpus-per-task" : "4",
         "mem"    : 20000,
         "time" : "12:00:00",
         "output"    : "log/mutpipe_msiprofiler.job.out",
