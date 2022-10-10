@@ -10,7 +10,7 @@ Given that mutpipe is cloned, run
 cd mutpipe/FREEC
 ```
 
-we strongly suggest installing dependencies via mamba:
+We strongly suggest installing dependencies via mamba:
 
 Given that Mamba is installed, run
 
@@ -30,11 +30,13 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
 
     File name for Fasta index file of reference genome (hg38): Homo_sapiens_assembly38.fasta.fai
     
-    Download by [reference workflow](reference/readme.md)
-    
 -  `index_dir`
 
     Directory path to save `index_file`
+
+    Required reference files prepared in [reference workflow](reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
     
 -   `bam_tumor`
 

@@ -10,7 +10,7 @@ Given that mutpipe is cloned, run
 cd mutpipe/dndscv
 ```
 
-we strongly suggest installing dependencies via mamba:
+We strongly suggest installing dependencies via mamba:
 
 Given that Mamba is installed, run
 
@@ -21,6 +21,8 @@ mamba env create --file workflow/envs/environment.yaml -n mutpipe_dndscv
 ## Step2: configure workflow
 
 ### 1. Install package
+
+For `dndscv` in conda dont work. Please install they manually.
 
 ```{bash}
 conda activate mutpipe_dndscv
@@ -39,7 +41,7 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
     You could change it as you need, referencing here:
     <https://github.com/im3sanger/dndscv_data/tree/master/data>
     
-    Download by [reference workflow](reference/readme.md)
+    Required reference file prepared in [reference workflow](reference)
 
 -   `ref_dir`
 
@@ -95,7 +97,7 @@ path:
 
 ### input:
 
-The input file is the output file from mutpipe's SelectPointMutation test inputfiles we provide under the "demo_data" folder
+The input file is the output file from mutpipe's SelectPointMutation test inputfiles we provide under the "demo_data/dndscv_input" folder
 
 ### output:
 

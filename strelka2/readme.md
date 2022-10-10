@@ -10,7 +10,7 @@ Given that mutpipe is cloned, run
 cd mutpipe/strelka2
 ```
 
-we strongly suggest installing dependencies via mamba:
+We strongly suggest installing dependencies via mamba:
 
 Given that Mamba is installed, run
 
@@ -62,7 +62,7 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
 
     Note: The interval list is based on our WES kit Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
 
-    Required reference files prepared in [reference workflow](reference/readme.md)
+    Required reference files prepared in [reference workflow](reference)
 
     Reference files need to decompress will be extracted automatically in workflow.
 

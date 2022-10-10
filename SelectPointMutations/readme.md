@@ -31,7 +31,7 @@ Given that mutpipe is cloned, run
 cd mutpipe/SelectPonitMutations
 ```
 
-we strongly suggest installing dependencies via mamba:
+We strongly suggest installing dependencies via mamba:
 
 Given that Mamba is installed, run
 

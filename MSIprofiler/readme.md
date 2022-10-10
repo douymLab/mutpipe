@@ -10,7 +10,7 @@ Given that mutpipe is cloned, run
 cd mutpipe/MSIprofiler
 ```
 
-we strongly suggest installing dependencies via mamba:
+We strongly suggest installing dependencies via mamba:
 
 Given that Mamba is installed, run
 
@@ -56,9 +56,9 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
   
      Directory path for compress reference files or do not need to decompress
 
-     Required reference files prepared in [reference workflow](reference/readme.md)
+     Required reference files prepared in [reference workflow](reference)
 
-     Reference files need to decompress will automatic do it in workflow.
+     Reference files need to decompress will be extracted automatically in workflow.
 
   -  `msiprofiler`
   

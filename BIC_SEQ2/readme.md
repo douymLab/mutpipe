@@ -10,7 +10,7 @@ Given that mutpipe is cloned, run
 cd mutpipe/BIC_SEQ2
 ```
 
-we strongly suggest installing dependencies via mamba:
+We strongly suggest installing dependencies via mamba:
 
 Given that Mamba is installed, run
 
@@ -21,6 +21,8 @@ mamba env create --file workflow/envs/environment.yaml -n mutpipe_bicseq
 ## Step2: configure workflow
 
 ### 1. Download and unzip dependencies
+
+For `NBICseq-seg` and `NBICseq-norm` in conda dont work. Please install they manually.
 
 #### NBICseq-seg_v0.7.2
 

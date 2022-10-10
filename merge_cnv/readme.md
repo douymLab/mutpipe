@@ -10,7 +10,7 @@ Given that mutpipe is cloned, run
 cd mutpipe/merge_cnv
 ```
 
-we strongly suggest installing dependencies via mamba:
+We strongly suggest installing dependencies via mamba:
 
 Given that Mamba is installed, run
 
@@ -82,8 +82,9 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
 
     -  `hg38_len_offset` hg38_len_offset.sorted.txt
 
-    Required reference files prepared in [reference workflow](reference/readme.md)
-    Reference files need to decompress will automatic do it in workflow.
+    Required reference files prepared in [reference workflow](reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
 
 -  `pre_res`
 
