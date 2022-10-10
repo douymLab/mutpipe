@@ -1,0 +1,9 @@
+path:
+  ANNOVAR: annovar
+  humandb: annovar/humandb
+  output: demo/output
+
+vcf_links:
+  mutect2: ../Mutect2/demo/output
+  octopus: ../octopus/demo/output
+  strelka2: ../strelka2/demo/output/strelka_somatic
