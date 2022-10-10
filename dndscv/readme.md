@@ -32,30 +32,38 @@ conda deactivate
 
 To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
--   refdb_file
+-   `ref_file`
 
     RefCDS object to run dndscv. Default of eference genome hg38.
 
-    You could change it as you need, referencing here : <https://github.com/im3sanger/dndscv_data/tree/master/data>
+    You could change it as you need, referencing here:
+    <https://github.com/im3sanger/dndscv_data/tree/master/data>
+    
+    Download by [reference workflow](reference/readme.md)
 
--   refdb_dir
+-   `ref_dir`
 
-    Directory name to save refdb_file
+    Directory path to save refdb_file
 
--   input
+-   `input`
 
-    Directory for input files
+    Directory path for input files
 
--   out
+-   `output`
 
-    Directory name for output files
+    Directory path for output files
 
 ## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
 
 1.  dry run test
 
 ```{bash}
-conda activate snakemake
 snakemake -np
 ```
 
@@ -91,10 +99,8 @@ The input file is the output file from mutpipe's SelectPointMutation test inputf
 
 ### output:
 
-outputdir/drivergene.csv \|
+outputdir/drivergene.csv
 
-\|gene_name\|qglobal_cv\|
-
-\|:---:\|:---------:\|:----------:\|
-
-\|17498\|TP53\|1.52027279654021E-11\|
+|   |gene_name|qglobal_cv|
+|:---:|:---------:|:----------:|
+|17498|TP53|1.52027279654021E-11|
