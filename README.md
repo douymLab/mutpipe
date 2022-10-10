@@ -22,7 +22,7 @@ The usage of every workflow is described as follows:
 
 ### reference
 
-[reference](reference/readme.md)
+[reference](#reference)
 
 ### Qualitycontrol
 
