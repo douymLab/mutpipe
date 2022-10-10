@@ -60,6 +60,7 @@ snakemake -np
 
 ```{bash}
 snakemake --cores 1 --use-conda
+```
 
 ## Demo
 
