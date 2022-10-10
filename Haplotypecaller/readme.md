@@ -1,48 +1,153 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/Haplotypecaller/Haplotypecaller.png)
-## Dependency:  
+![Haplotypecaller](https://github.com/douymLab/mutpipe/blob/main/Haplotypecaller/Haplotypecaller.png)
 
-we strongly suggest installing dependencies via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_Haplotypecaller --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "Haplotypecaller" through this command:
- 
-  > $ conda activate Haplotypecaller
+Given that mutpipe is cloned, run
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- Reference genome (hg38): Homo_sapiens_assembly38.fasta.gz
-- FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
-- FASTA index file: Homo_sapiens_assembly38.fasta.fai
-- VQSR resources:   
-    + hapmap_3.3.hg38.vcf.gz
-    + hapmap_3.3.hg38.vcf.gz.tbi
-    + 1000G_omni2.5.hg38.vcf.gz
-    + 1000G_omni2.5.hg38.vcf.gz.tbi
-    + Homo_sapiens_assembly38.dbsnp138.vcf   
-    + Homo_sapiens_assembly38.dbsnp138.vcf.idx         
-    + 1000G_phase1.snps.high_confidence.hg38.vcf.gz
-    + 1000G_phase1.snps.high_confidence.hg38.vcf.gz.tbi
-    + Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
-    + Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi
-    + Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz
-    + Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz.tbi
-- WES interval list: S31285117_Padded.list  
-Note: The interval list is based on our WES kit is Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
+```{bash}
+cd mutpipe/Haplotypecaller
+```
 
-The required resource could be downloaded through running:
+we strongly suggest installing dependencies via mamba:
 
-> $bash download.sh
+Given that Mamba is installed, run
 
- Or you also can soft-link the file into the "resources" folder.
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_qualitycontrol
+```
+
+## Step2: configure workflow
+
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
+
+-   `output`
+    
+    Directory path for output files
+    
+-   `bam_tumor`
+
+    Directory path for tumor bam files
+     
+-   `bam_normal`
+
+    Directory path for normal bam files
+
+-   `ref_dir`
+
+    Directory path for unziped reference files
+
+-   `gz_ref_dir`
+
+    Directory path for reference files that zipped or do not need to be unzipped
+
+-   `gz_ref`
+
+    Reference file name need to unzip including
+
+    fa: "Homo_sapiens_assembly38.fasta.gz"
+    interval_list: "S31285117_Padded.list.gz"
+
+    Download by [reference workflow](reference/readme.md)
+
+-   `ref`
+
+    + `fa` Reference genome (hg38): Homo_sapiens_assembly38.fasta
+    + `fai` FASTA index file: Homo_sapiens_assembly38.fasta.fai
+    + `dict` FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
+    + `snp` Homo_sapiens_assembly38.dbsnp138.vcf
+    + `snpi` Homo_sapiens_assembly38.dbsnp138.vcf.idx
+    + `poly` Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz
+    + `polyi` Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz.tbi
+    + `hapmap` hapmap_3.3.hg38.vcf.gz
+    + `hapmapi` hapmap_3.3.hg38.vcf.gz.tbi
+    + `omn` 1000G_omni2.5.hg38.vcf.gz
+    + `omni` 1000G_omni2.5.hg38.vcf.gz.tbi
+    + `highsnp` 1000G_phase1.snps.high_confidence.hg38.vcf.gz
+    + `highsnpi` 1000G_phase1.snps.high_confidence.hg38.vcf.gz.tbi
+    + `mills` Mills_and_1000G_gold_standard.indels.hg38.vcf.gz
+    + `millsi` Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi
+    + `interval_list` WES interval list: S31285117_Padded.list
+
+    Note: The interval list is based on our WES kit Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
+
+    Required reference files prepared in [reference workflow](reference/readme.md)
+    Reference files need to decompress will automatic do it in workflow.
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_Haplotypecaller   
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
+
+## Demo
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  gz_ref_dir: '../reference/data'
+  ref_dir: reference
+  output: "demo/output"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+
+gz_ref:
+  fa: "Homo_sapiens_assembly38.fasta.gz"
+  interval_list: "S31285117_Padded.list.gz"
+
+ref:
+  fa: "Homo_sapiens_assembly38.fasta"
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  interval_list: "S31285117_Padded.list"
+  snp: "Homo_sapiens_assembly38.dbsnp138.vcf"
+  snpi: "Homo_sapiens_assembly38.dbsnp138.vcf.idx"
+  poly: "Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz"
+  polyi: "Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz.tbi"
+  hapmap: "hapmap_3.3.hg38.vcf.gz"
+  hapmapi: "hapmap_3.3.hg38.vcf.gz.tbi"
+  omn: "1000G_omni2.5.hg38.vcf.gz"
+  omni: "1000G_omni2.5.hg38.vcf.gz.tbi"
+  highsnp: "1000G_phase1.snps.high_confidence.hg38.vcf.gz"
+  highsnpi: "1000G_phase1.snps.high_confidence.hg38.vcf.gz.tbi"
+  mills: "Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"
+  millsi: "Mills_and_1000G_gold_standard.indels.hg38.vcf.gz.tbi"
+
+max-gaussians: 2
+```
+
+## Input
+
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
+
+## Output
+
+normal_cohort.snps.VQSR.vcf.gz
+tumor_cohort.snps.VQSR.vcf.gz
+normal_cohort.indels.VQSR.vcf.gz
+tumor_cohort.indels.VQSR.vcf.gz
