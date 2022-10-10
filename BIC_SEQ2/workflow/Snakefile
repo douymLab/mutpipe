@@ -2,33 +2,32 @@ from tempfile import tempdir
 
 
 include: "rules/common.smk"
-include: "rules/download.smk"
+include: "rules/unzip.smk"
 
 sample_IDs, =glob_wildcards(os.path.join(tumor_path,'{sample}.tumor.bam'))
-types =    ["tumor", "normal"]
+types = ["tumor", "normal"]
 
 rule all:
 	input:
 		expand(os.path.join(outPath,"{sample}_pvalue.CNVs"), sample=sample_IDs),
 		expand(os.path.join(outPath,"{sample}_pvalue.CNVs"), sample=sample_IDs)
 
-
-
 # genmap rule
 rule genmap:
 	input:
-		index_path = rules.decom_map_index.output,
+		index_dir = rules.decom_map_index.output,
+		check=os.path.join(res_dir,"grch38-no-alt_decomed.log")
 	output:
-		os.path.join(outPath,"genmap/grch38-no-alt.genmap.bedgraph")
+		bedgreph = os.path.join(outPath,"genmap/grch38-no-alt.genmap.bedgraph"),
 	log:
 		os.path.join(outPath,"genmap/genmap.log"),
 	params:
-		map_dir = directory(os.path.join(outPath,"genmap"))
+		map_dir = directory(os.path.join(outPath,"genmap")),
 	conda: "mutpipe_bicseq",
 	resources:tmpdir=TEMPDIR,
 	shell:
 		"""
-		genmap map -K 150 -E 2 -I {input.index_path} -O {params.map_dir} -t -w -bg > {log}
+		genmap map -K 150 -E 2 -I {input.index_dir} -O {params.map_dir} -t -w -bg > {log}
 		"""
 
 rule mappable_region:
@@ -38,7 +37,6 @@ rule mappable_region:
 		out=os.path.join(outPath,"chr/hg38.150mer.m2.chr{chr_list}.txt"),
 	params:
 		chr= "chr{chr_list}",
-	log: os.path.join(fasta_dir,"{chr_list}.mappable_region.log"),
 	conda: "mutpipe_bicseq",
 	resources:tmpdir=TEMPDIR,
 	shell:
@@ -46,10 +44,10 @@ rule mappable_region:
 		awk '{{if ($1=="{params.chr}") print}}' {input.bedgraph}|awk '{{if($4==1) printf "%s\\t%s\\n",$2,$3}}'> {output.out}
 		"""
 
-hg38_150mer_files = expand(os.path.join(outPath,"chr/hg38.150mer.m2.chr{chr_list}.txt"),chr_list=chr_list)
+hg38150merm2chrs = expand(os.path.join(outPath,"chr/hg38.150mer.m2.chr{chr_list}.txt"), chr_list=chr_list)
 rule check_hg38_150mer:
-	input: expand(os.path.join(fasta_dir,"{chr_list}.mappable_region.log"),chr_list=chr_list),
-	output: os.path.join(fasta_dir,"{type}/{sample}/check_hg38_150mer_files.log"),
+	input: hg38150merm2chrs,
+	output: os.path.join(res_dir,"check_hg38_150mer_files.log"),
 	conda: "mutpipe_bicseq",
 	shell:
 		"""
@@ -83,30 +81,32 @@ rule normal_seq:
 
 rule _chr_seq:
 	input:
-		chr_seq=os.path.join(outPath, "seq/{type}/{sample}/chr.seq")
+		chr_seq=os.path.join(outPath, "seq/{types}/{sample}/chr.seq")
 	output:
-		out=os.path.join(outPath, "seq/{type}/{sample}/seq.log")
+		out_dir=directory(os.path.abspath(outPath + "/" + "seqs/{types}/{sample}")),
 	params:
-		out_dir=os.path.join(outPath, "seq/{type}/{sample}/"),
+		os.path.abspath(outPath + "/" + "seqs/{types}/{sample}") + "/",
+	log: os.path.join(outPath, "seqs/{types}/{sample}/chr.seq.log"),
 	conda: "mutpipe_bicseq",
 	resources:tmpdir=TEMPDIR,
 	shell:
 		"""
-		python workflow/scripts/split_chr_seq.py -seq {input.chr_seq} -outdir {params.out_dir} > {output.out}
+		python workflow/scripts/split_chr_seq.py -seq {input.chr_seq} -outdir {params} >{log}
 		"""
 
 rule gen_norm_config:
 	input:
-		seq=os.path.join(outPath, "seq/{type}/{sample}/seq.log"),
-		check=os.path.join(fasta_dir,"{type}/{sample}/check_chr_files.log"),
-		check2=os.path.join(fasta_dir,"{type}/{sample}/check_hg38_150mer_files.log"),
+		seq=rules._chr_seq.output.out_dir,
+		check=os.path.join(res_dir,"{types}/{sample}/check_chr_files.log"),
+		check2=os.path.join(res_dir,"check_hg38_150mer_files.log"),
+		check3=os.path.join(outPath, "seqs/{types}/{sample}/chr.seq.log"),
 	output:
-		config=os.path.join(outPath,"norm_config/{type}/{sample}.{type}.config"),
+		config=os.path.join(outPath,"norm_config/{types}/{sample}.{types}.config"),
 	params:
-		ref=fasta_dir,
+		ref=os.path.abspath(res_dir)+"/",
 		kmer=os.path.join(outPath,"chr/hg38.150mer.m2.chr"),
-		seq=os.path.join(outPath,"seq/{type}/{sample}/"),
-		bin=os.path.join(outPath,"bin/{type}/{sample}/"),
+		seq=os.path.join(outPath,"seqs/{types}/{sample}/"),
+		bin=os.path.join(outPath,"bin/{types}/{sample}/"),
 	conda: "mutpipe_bicseq",
 	resources:tmpdir=TEMPDIR,
 	shell:
@@ -132,22 +132,25 @@ rule gen_seg_config:
 
 rule norm_:
 	input: 
-		conf=os.path.join(outPath,"norm_config/{type}/{sample}.{type}.config"),
+		conf=os.path.join(outPath,"norm_config/{types}/{sample}.{types}.config"),
+		seqs=rules._chr_seq.output.out_dir,
 	output:
-		out=os.path.join(outPath,"{type}/{sample}.output"),
-		bin=os.path.join(outPath,"bin/{type}/{sample}/chr16.norm.bin"),
+		out=os.path.join(outPath,"{types}/{sample}.output"),
+		bin=os.path.join(outPath,"bin/{types}/{sample}/chr1.norm.bin"),
 	conda: "mutpipe_bicseq",
 	resources:tmpdir=TEMPDIR,
 	shell:
 		"""
-		NBICseq-norm.pl {input.conf} {output.out} --tmp {resources.tmpdir}
+		perl {nbicseq_norm}/NBICseq-norm.pl {input.conf} {output.out} --tmp {resources.tmpdir}
 		"""
 
 rule seg_p_value:
 	input:
 		tumor_out=os.path.join(outPath,"tumor/{sample}.output"),
 		normal_out=os.path.join(outPath,"normal/{sample}.output"),
-		conf=os.path.join(outPath,"seg_config/{sample}.seg.config")
+		conf=os.path.join(outPath,"seg_config/{sample}.seg.config"),
+		bin_t=os.path.join(outPath,"bin/tumor/{sample}/chr1.norm.bin"),
+		bin_n=os.path.join(outPath,"bin/normal/{sample}/chr1.norm.bin"),
 	output:
 		out=os.path.join(outPath,"{sample}_pvalue.CNVs"),
 		png=os.path.join(outPath,"{sample}.pvalue.cnv.profile.png")
@@ -157,5 +160,5 @@ rule seg_p_value:
 	resources:tmpdir=TEMPDIR,
 	shell:
 		"""
-		NBICseq-seg.pl --control {input.conf} {output.out} --fig {output.png} --title {params.title} --bootstrap --tmp {resources.tmpdir}
+		perl {nbicseq_seg}/NBICseq-seg.pl --control {input.conf} {output.out} --fig {output.png} --title {params.title} --bootstrap --tmp {resources.tmpdir}>>run_seg_p_value.log 2>&1
 		"""

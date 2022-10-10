@@ -1,18 +1,18 @@
-# Quick Start
-
 ![BIC_SEQ2](https://github.com/douymLab/mutpipe/blob/main/BIC_SEQ2/dag.png)
+
+# Quick Start
 
 ## Step1: deploy workflow
 
 Given that mutpipe is cloned, run
 
 ```{bash}
-cd mutpipe/dndscv
+cd mutpipe/BIC_SEQ2
 ```
 
 we strongly suggest installing dependencies via mamba:
 
-Given that Mamba and snakemake is installed, run
+Given that Mamba is installed, run
 
 ```{bash}
 mamba env create --file workflow/envs/environment.yaml -n mutpipe_bicseq
@@ -40,50 +40,58 @@ tar -zxvf NBICseq-norm_v0.2.4.tar.gz
 
 To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
--   output
+-   `output`
 
     Directory path for output files
 
--   bam_tumor
+-   `bam_tumor`
 
     Directory path for tumor bam files
 
--   bam_normal
+-   `bam_normal`
 
     Directory path for normal bam files
 
--   res_dir
+-   `res_dir`
 
-    Directory path for decompress resources including:
+    Directory path for decompress reference files including:
 
     -   FASTA sequence of each chromosome of reference genome (hg38): chr\*.fa
     -   Index directory for hg38: grch38-no-alt
 
--   ref_gz_dir
+-   `ref_gz_dir`
 
-    Directory path for compress resources including:
+    Directory path for compress reference files including:
 
     -   FASTA sequence of each chromosome of reference genome (hg38): chr\*.fa.gz
     -   Index for hg38: grch38-no-alt.tar.gz
+    
+    Required reference files prepared in [reference workflow](reference/readme.md)
+    Reference files need to decompress will automatic do it in workflow.
 
--   nbicseq_seg
+-   `nbicseq_seg`
 
     Directory for [NBICseq-seg_v0.7.2](#nbicseq-seg_v072)
 
--   nbicseq_norm
+-   `nbicseq_norm`
 
     Directory for [NBICseq-norm_v0.2.4](#nbicseq-norm_v024).
 
--   TEMPDIR
+-   `TEMPDIR`
 
     Temporary directory for temporary files. A large space required in this workflow.
 
 ## Step3: run workflow
 
-1.  dry run test
+Given that snakemake is installed, run
 
 ```{bash}
 conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
 snakemake -np
 ```
 
@@ -110,8 +118,8 @@ path:
   output: demo/output
   res_dir: reference
   ref_gz_dir: ../reference/data
-  bam_tumor: "/storage/douyanmeiLab/TCGA_wu/demo/"
-  bam_normal: "/storage/douyanmeiLab/TCGA_wu/demo/"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
   nbicseq_seg: NBICseq-seg_v0.7.2
   nbicseq_norm: NBICseq-norm_v0.2.4
 
@@ -120,4 +128,9 @@ TEMPDIR: tmp
 
 ## Input
 
-path/to/{sample}.tumor.bam \## Output results/{sample}\_pvalue.CNVs
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
+
+## Output
+
+results/{sample}\_pvalue.CNVs

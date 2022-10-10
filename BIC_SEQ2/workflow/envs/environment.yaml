@@ -12,3 +12,4 @@ dependencies:
   - r-mgcv
   - numpy
   - r-base=4.0*
+  - pigz
