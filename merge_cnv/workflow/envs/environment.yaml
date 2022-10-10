@@ -1,0 +1,10 @@
+channels:
+  - defaults
+  - conda-forge
+  - bioconda
+dependencies:
+  - perl=5.32.1
+  - python=3.8.12
+  - bedtools
+  - r-base=4.1
+  - numpy

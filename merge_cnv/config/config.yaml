@@ -1,0 +1,23 @@
+path:
+  gz_ref_dir: '../reference/data'
+  ref_dir: reference
+  ANNOVAR: annovar
+  humandb: annovar/humandb
+  output: demo/output
+
+gz_ref:
+  fa: "Homo_sapiens_assembly38.fasta.gz"
+
+ref:
+  fa: Homo_sapiens_assembly38.fasta
+  fai: Homo_sapiens_assembly38.fasta.fai
+  dict: Homo_sapiens_assembly38.dict
+  centromeric: centromeric.txt
+  telomere: telomere.txt
+  hg38_len: hg38_len.txt
+  hg38_len_offset: hg38_len_offset.sorted.txt
+
+pre_res:
+  bic_seq2_res: ../BIC_SEQ2/demo/output
+  dnacopy_res: ../DNAcopy/demo/output
+  freec_res: ../FREEC/demo/output
