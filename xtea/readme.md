@@ -34,53 +34,52 @@ git clone https://github.com/parklab/xTea.git
 
 To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
--  `path`
+-   `path`
 
-  -  `output`
-  
-     Directory path for output files
+    -   `output`
 
-  -  `bam_tumor`
+        Directory path for output files
 
-     Directory path for tumor bam files
-   
-  -  `bam_normal`
+    -   `bam_tumor`
 
-     Directory path for normal bam files
-  
-  -  `ref_dir`
-  
-     Directory path for decompress reference files
-  
-  -  `gz_ref_dir`
-  
-     Directory path for compress reference files or do not need to decompress
+        Directory path for tumor bam files
 
-  -  `xtea`
-  
-     Directory path for [xTea](#1-install-xtea)
+    -   `bam_normal`
+
+        Directory path for normal bam files
+
+    -   `ref_dir`
+
+        Directory path for decompress reference files
+
+    -   `gz_ref_dir`
+
+        Directory path for compress reference files or do not need to decompress
+
+    -   `xtea`
+
+        Directory path for [xTea](#1-install-xtea)
 
 -   `gz_ref`
 
     reference file need to decompress
 
-    - `fa`: Homo_sapiens_assembly38.fasta.gz
-    - `gff`: gencode.v33.annotation.gff3.gz
-    - `rep_lib`: rep_lib_annotation.tar.gz
+    -   `fa`: Homo_sapiens_assembly38.fasta.gz
+    -   `gff`: gencode.v33.annotation.gff3.gz
+    -   `rep_lib`: rep_lib_annotation.tar.gz
 
 -   ref
 
     reference files
 
-    + `fa` Reference genome (hg38): Homo_sapiens_assembly38.fasta
-    + `fai` FASTA index file: Homo_sapiens_assembly38.fasta.fai
-    + `dict` FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
-    + `gff` Comprehensive gene annotation: gencode.v33.annotation.gff3
-    + `rep_lib_dir` pre-processed repeat library used by xTea: rep_lib_annotation   
-  (more informations: https://github.com/parklab/xTea )
+    -   `fa` Reference genome (hg38): Homo_sapiens_assembly38.fasta
+    -   `fai` FASTA index file: Homo_sapiens_assembly38.fasta.fai
+    -   `dict` FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
+    -   `gff` Comprehensive gene annotation: gencode.v33.annotation.gff3
+    -   `rep_lib_dir` pre-processed repeat library used by xTea: rep_lib_annotation\
+        (more informations: <https://github.com/parklab/xTea> )
 
-    Note: The interval list is based on our WES kit Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
-
+    \
     Required reference files prepared in [reference workflow](/reference)
 
     Reference files need to decompress will be extracted automatically in workflow.
@@ -141,7 +140,8 @@ ref:
 
 ## input:
 
-path/to/{sample}.tumor.bam
+path/to/{sample}.tumor.bam 
+
 path/to/{sample}.normal.bam
 
 ## output:
