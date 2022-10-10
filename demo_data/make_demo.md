@@ -1,3 +1,5 @@
+Demo bam is a downsample BAM file from real data.
+
 ## downsample BAM file
 
 ## real BAM file
