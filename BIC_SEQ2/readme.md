@@ -69,7 +69,8 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
     -   Index for hg38: grch38-no-alt.tar.gz
     
     Required reference files prepared in [reference workflow](/reference)
-    Reference files need to decompress will automatic do it in workflow.
+
+    Reference files need to decompress will be extracted automatically in workflow.
 
 -   `nbicseq_seg`
 

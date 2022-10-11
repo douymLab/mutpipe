@@ -46,10 +46,9 @@ To configure this workflow, modify `config/config.yaml` according to your needs,
 
     Reference file name need to unzip including
 
-    fa: "Homo_sapiens_assembly38.fasta.gz"
-    interval_list: "S31285117_Padded.list.gz"
-
-    Download by [reference workflow](reference/readme.md)
+    `fa`: "Homo_sapiens_assembly38.fasta.gz"
+    
+    `interval_list`: "S31285117_Padded.list.gz"
 
 -   `ref`
 

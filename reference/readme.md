@@ -60,6 +60,7 @@ snakemake -np
 
 ```{bash}
 snakemake --cores 1 --use-conda
+```
 
 ## Demo
 
@@ -80,8 +81,8 @@ reference_path: data
 Files record in `data/reference_mainfile.tsv`
 
 | File Name                                                       | Workflow        | Tool   | Link                                                                                                                          |
-| 1000G_omni2.5.hg38.vcf.gz                                       | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz                                                   |
 | --------------------------------------------------------------- | --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| 1000G_omni2.5.hg38.vcf.gz                                       | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz                                                   |
 | 1000G_omni2.5.hg38.vcf.gz.tbi                                   | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/1000G_omni2.5.hg38.vcf.gz.tbi                                               |
 | 1000G_phase1.snps.high_confidence.hg38.vcf.gz                   | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz                               |
 | 1000G_phase1.snps.high_confidence.hg38.vcf.gz.tbi               | Haplotypecaller | gsutil | gs://genomics-public-data/resources/broad/hg38/v0/1000G_phase1.snps.high_confidence.hg38.vcf.gz.tbi                           |
