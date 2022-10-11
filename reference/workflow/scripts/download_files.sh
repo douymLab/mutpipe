@@ -10,10 +10,10 @@ downloadFile() {
         if [ $tool != "-" ]; then
             if [ $tool == "wget" ]; then
                 wget -N $url -P $filedir
-                # echo "wget -N $url -P $filedir"
+                echo "wget -N $url -P $filedir"
             elif [ $tool == "gsutil" ]; then
                 gsutil cp -n -R $url $filedir
-                # echo "gsutil cp -n -R $url $filedir"
+                echo "gsutil cp -n -R $url $filedir"
             fi
         fi
     fi
