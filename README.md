@@ -88,4 +88,4 @@ All workflows tested under:
 
 -   `Anaconda 4.12.0`
 
--   `Snakemake 6.15.5`
+-   `Snakemake 7.14.0`
