@@ -1,0 +1,40 @@
+include: "rules/common.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(inputPath,'{sample}.SNV.out'))
+type = ["SNV","INDEL"]
+
+rule all:
+	input:
+		os.path.join(outPath,'drivergene.csv')
+
+rule generate_input_persample:
+	input:
+		SNV=os.path.join(inputPath,'{sample}.SNV.out'),
+		Indel=os.path.join(inputPath,'{sample}.INDEL.out')
+	output:
+		SNV=temp(os.path.join(outPath,'{sample}.SNV.input')), 
+		Indel=temp(os.path.join(outPath,'{sample}.INDEL.input')) 
+	shell:
+		"cat {input.SNV}|while read line; do echo \"{wildcards.sample} $line\"; done|"
+		"sed 's/ /\t/g'|cut -f 1,2,3,5,6 >> {output.SNV};"
+		"cat {input.Indel}|while read line; do echo \"{wildcards.sample} $line\"; done|"
+		"sed 's/ /\t/g'|cut -f 1,2,3,5,6 >> {output.Indel};"
+
+rule merge_input:
+	input:
+		expand(os.path.join(outPath,"{sample}.{type}.input"), sample=sample_IDs, type=type)
+	output:
+		os.path.join(outPath,'drivergene.input')
+	shell:
+		"cat {input} >> {output}"
+
+rule dndscv:
+	input:
+		file = os.path.join(outPath,'drivergene.input'),
+		refdb = refdb_path,
+	output:
+		os.path.join(outPath,'drivergene.csv')
+	conda: 
+		"mutpipe_dndscv"
+	script:
+		'scripts/drivergene.R'

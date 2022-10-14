@@ -1,0 +1,12 @@
+{
+    "__default__" :
+    {
+        "partition" : "amd-ep2-short",
+        "qos" : "normal",
+        "cpus-per-task" : "1",
+        "mem"    : 20000,
+        "time" : "12:00:00",
+        "output"    : "log/mutpipe_mutect2.job.out",
+        "error"     : "log/mutpipe_mutect2.job.err"
+    }
+}

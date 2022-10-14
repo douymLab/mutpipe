@@ -1,0 +1,22 @@
+path:
+  gz_ref_dir: '../reference/data'
+  ref_dir: reference
+  output: "demo/output"
+  bam_tumor: "../demo_data/test/"
+  bam_normal: "../demo_data/test/"
+
+gz_ref:
+  fa: "Homo_sapiens_assembly38.fasta.gz"
+  interval_list: "S31285117_Padded.list.gz"
+
+ref:
+  fa: "Homo_sapiens_assembly38.fasta"
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  interval_list: "S31285117_Padded.list"
+  germline: "af-only-gnomad.hg38.vcf.gz"
+  germlinei: af-only-gnomad.hg38.vcf.gz.tbi
+  pon: "1000g_pon.hg38.vcf.gz"
+  poni: 1000g_pon.hg38.vcf.gz.tbi
+  common_vcf: small_exac_common_3.hg38.vcf.gz
+  common_vcfi: small_exac_common_3.hg38.vcf.gz.tbi

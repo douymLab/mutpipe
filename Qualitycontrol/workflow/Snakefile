@@ -1,0 +1,129 @@
+include: "rules/common.smk"
+include: "rules/unzip.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+type_IDs=["tumor","normal"]
+
+rule all:
+	input:
+		expand(os.path.join(outPath,"depth/{sample}.{types}.depth"),sample=sample_IDs, types=type_IDs),
+		expand(os.path.join(outPath,"bam_stats/{sample}/{sample}.{types}.stats"),sample=sample_IDs, types=type_IDs),
+		expand(os.path.join(outPath,"bam_stats/{sample}/{sample}.{types}.flagstats"),sample=sample_IDs, types=type_IDs),
+		expand(os.path.join(outPath,"table/{sample}_{types}_getpileupsummaries.table"),sample=sample_IDs, types=type_IDs),
+		os.path.join(outPath,"allsamples_statistics.list"),
+		os.path.join(outPath,"allsample_contamination")
+
+rule depth_tumor:
+	input:
+		tumor_bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+		bed=os.path.join(gz_ref_dir,bed),
+	output:
+		os.path.join(outPath,"depth/{sample}.tumor.depth"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"samtools depth -b {input.bed} {input.tumor_bam} > {output}"
+
+rule depth_normal:
+	input:
+		normal_bam=os.path.join(normal_path,"{sample}.normal.bam"),
+		bed=os.path.join(gz_ref_dir,bed),
+	output:
+		os.path.join(outPath,"depth/{sample}.normal.depth")
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"samtools depth -b {input.bed} {input.normal_bam} > {output}"
+
+rule summarizedepth_customizedscript:
+	input:
+		expand(os.path.join(outPath,"depth/{sample}.{type}.depth"),sample=sample_IDs,type=type_IDs)
+	output:
+		os.path.join(outPath,"allsamples_statistics.list")
+	params:
+		os.path.abspath(outPath)
+	resources:
+		mem_mb=50000,
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"python workflow/scripts/depth_statistics.py {params}"
+
+rule samtools_stats_tumor:
+	input:
+		bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+		bed=os.path.join(gz_ref_dir,bed),
+		fa=os.path.join(res_dir,fa),
+	output:
+		os.path.join(outPath,"bam_stats/{sample}/{sample}.tumor.stats"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"samtools stats -t {input.bed} -r {input.fa} {input.bam} > {output}"
+
+rule samtools_stats_normal:
+	input:
+		bam=os.path.join(normal_path,"{sample}.normal.bam"),
+		bed=os.path.join(gz_ref_dir,bed),
+		fa=os.path.join(res_dir,fa),
+	output:
+		os.path.join(outPath,"bam_stats/{sample}/{sample}.normal.stats"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"samtools stats -t {input.bed} -r {input.fa} {input.bam} > {output}"
+
+rule samtools_flagstats_tumor:
+	input:
+		bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+	output:
+		os.path.join(outPath,"bam_stats/{sample}/{sample}.tumor.flagstats"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"samtools flagstats -@ 1 -O tsv {input} > {output}"
+
+rule samtools_flagstats_normal:
+	input:
+		bam=os.path.join(normal_path,"{sample}.normal.bam"),
+	output:
+		os.path.join(outPath,"bam_stats/{sample}/{sample}.normal.flagstats"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"samtools flagstats -@ 1 -O tsv {input} > {output}"
+
+rule GetPileupSummaries_tumor:
+	input:
+		tumor_bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+		tumor_index=os.path.join(tumor_path,"{sample}.tumor.bam.bai"),
+		common_vcf=os.path.join(gz_ref_dir,common_vcf),
+	output:
+		os.path.join(outPath,"table/{sample}_tumor_getpileupsummaries.table"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"gatk GetPileupSummaries -I {input.tumor_bam} -V {input.common_vcf} -L {input.common_vcf} -O {output}"
+
+rule GetPileupSummaries_normal:
+	input:
+		normal_bam=os.path.join(normal_path,"{sample}.normal.bam"),
+		normal_index=os.path.join(normal_path,"{sample}.normal.bam.bai"),
+		common_vcf=os.path.join(gz_ref_dir,common_vcf),
+	output:
+		os.path.join(outPath,"table/{sample}_normal_getpileupsummaries.table"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"gatk GetPileupSummaries -I {input.normal_bam} -V {input.common_vcf} -L {input.common_vcf} -O {output}"
+
+rule CalculateContamination:
+	input:
+		tumor_table=os.path.join(outPath,"table/{sample}_tumor_getpileupsummaries.table"),
+		normal_table=os.path.join(outPath,"table/{sample}_normal_getpileupsummaries.table")
+	output:
+		table1=os.path.join(outPath,"table/{sample}_tumor_calculatecontamination.table"),
+		table2=os.path.join(outPath,"table/{sample}_tumor_segments.table"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"gatk CalculateContamination -I {input.tumor_table} -matched {input.normal_table} -O {output.table1} -tumor-segmentation {output.table2}"
+
+rule summarizeContamination:
+	input:
+		expand(os.path.join(outPath,"table/{sample}_tumor_calculatecontamination.table"),sample=sample_IDs),
+	output:
+		output=os.path.join(outPath,"allsample_contamination"),
+	conda: "mutpipe_qualitycontrol"
+	shell:
+		"cat {input}|awk '!x[$0]++' >> {output.output}"

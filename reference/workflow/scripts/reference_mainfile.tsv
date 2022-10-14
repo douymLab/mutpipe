@@ -1,0 +1,3 @@
+Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz.tbi	Haplotypecaller	gsutil	gs://genomics-public-data/resources/broad/hg38/v0/Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz.tbi
+centromeric.txt	merge_cnv	-	-
+chr1.fa.gz	BIC_SEQ2	wget	http://hgdownload.cse.ucsc.edu/goldenPath/hg38/chromosomes/chr1.fa.gz

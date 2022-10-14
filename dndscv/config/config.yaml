@@ -1,0 +1,5 @@
+path:
+  ref_file: 'RefCDS_human_GRCh38_GencodeV18_recommended.rda'
+  ref_dir: '../reference/data'
+  input: '../demo_data/dndscv_input'
+  output: 'demo/output'

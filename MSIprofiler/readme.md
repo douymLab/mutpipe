@@ -1,61 +1,165 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/MSIprofiler/MSIprofiler.png)
-## Dependency:  
+![MSIprofiler](https://github.com/douymLab/mutpipe/blob/main/MSIprofiler/MSIprofiler.png)
 
-we strongly suggest installing dependencies via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_MSIprofiler --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "mutpipe_MSIprofiler" through this command:
- 
-  > $ conda activate mutpipe_MSIprofiler
+Given that mutpipe is cloned, run
 
-### Install MSIprofiler
-MSIprofier not includ in conda package, please install MSIprofier manually.
+```{bash}
+cd mutpipe/MSIprofiler
+```
+
+We strongly suggest installing dependencies via mamba:
+
+Given that Mamba is installed, run
+
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_msiprofiler
+```
+
+## Step2: configure workflow
+
+### 1. Install MSIprofiler
+
+MSIprofier package in conda dont work, please install MSIprofier manually.
+
 To insall MSIprofier(https://github.com/parklab/MSIprofiler):
-  > $ git clone https://github.com/parklab/MSIprofiler.git && cd MSIprofiler  
 
-Then download the fasta sequences for the chromosomes (hg38) and generate the reference set of MS repeats:   
-1. **first edit the download scripts** 
-    > path/to/MSIprofiler/scripts/download_chromosomes_fa.sh  
+```{bash}
+git clone https://github.com/parklab/MSIprofiler.git
+```
 
-    change the command below
-    > echo "Download fasta files for chrs (hg19)"  
-    > wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/chromosomes/chr${i}.fa.gz
+### 2. Modify config file
 
-    as
-    > echo "Download fasta files for chrs (hg38)"  
-    > wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/chromosomes/chr${i}.fa.gz 
-2. run the command below (workpath is the path to MSIprofiler)
-    > \$ ./scripts/download_chromosomes_fa.sh  
-    > \$ python scripts/get_reference_set_from_fasta.py  
-    > \$ ./scripts/sort_reference_sets.sh  
-3. Make sure to add the current directory to your PYTHONPATH: export PYTHONPATH=$PYTHONPATH:$PWD
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
+
+-  `path`
+
+  -  `output`
+  
+     Directory path for output files
+
+  -  `bam_tumor`
+
+     Directory path for tumor bam files
+   
+  -  `bam_normal`
+
+     Directory path for normal bam files
+  
+  -  `ref_dir`
+  
+     Directory path for decompress reference files
+  
+  -  `gz_ref_dir`
+  
+     Directory path for compress reference files or do not need to decompress
+
+     Required reference files prepared in [reference workflow](/reference)
+
+     Reference files need to decompress will be extracted automatically in workflow.
+
+  -  `msiprofiler`
+  
+     Directory path for [MSIprofiler](#1-install-msiprofiler)
+
+-  `chr_list` a chromosome list. for example `9` or `[1,2,"Y"]`
+
+-  `threads`
+
+  -  `get_ref`
+
+      Threads for MSIprofiler in performing reference sets
+
+  -  `msi`
+
+      Threads for MSIprofiler in performing unphased chromosomes
+
+-  `parameters`
+
+  -  `min_coverage` parameter for MSIprofiler
+
+  -  `nprocs` parameter for MSIprofiler
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_MSIprofiler  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
 
 ## Select the confidence MSIprofiler result
+
 To select the confidence MSIprofiler result, we use the following strategies:
+
 1. Kolmogorov-Smirnov P value < 0.01  
+
 2. The length of the MS repeat in the normal/control sample only 2 haplotype(eg. a site with length 7,7,7,6 is a MSIsite, while a site with 7,6,5,7 might be filtered)  
 You can filter the MSI result use this command:
-> \$ bash filter.sh path/to/input path/to/output  
 
-eg.  
-> \$ bash filter.sh demo/MSI/test.unphased.txt demo/MSI/test.unphased.filtered.txt
+```{bash}
+bash workflow/scripts/filter.sh path/to/sample.unphased.txt path/to/sample.unphased.filtered.txt  
+```
+
+eg.
+
+```{bash}
+bash workflow/scripts/filter.sh demo/output/MSI/YC-104.unphased.txt demo/output/MSI/YC-104.unphased.filtered.txt
+```
 
 ## Demo
-### input:
-test bamfile we provide under the "demo" folder
-### output:
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  msiprofiler: 'MSIprofiler'
+  ref_dir: "reference"
+  gz_ref_dir: '../reference/data'
+  output: "demo/output"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+
+chr_list: 9
+
+threads:
+  get_ref: 10
+  msi: 4
+
+parameters:
+  min_coverage: 8
+  nprocs: 2
+```
+
+## input:
+
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
+
+## output:
+
 > output_dir/MSI/test.unphased.txt 
 
 > chr9	97994572	97994579	TTGTTGTT	3	8	0.4	8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8	8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8	1.0 high    

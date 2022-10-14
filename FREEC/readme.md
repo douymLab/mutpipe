@@ -1,60 +1,113 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/FREEC/dag.png)
-## Dependency:  
-- python 3.6
-- snakemake 5.3.0
-- R 4.1.2
-- dplyr
-- stringr
-- rtracklayer
-- FREEC
+![FREEC](https://github.com/douymLab/mutpipe/blob/main/FREEC/dag.png)
 
-we strongly suggest installing dependencies via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_freec --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "mutpipe_freec" through this command:
- 
-  > $ conda activate mutpipe_freec
+Given that mutpipe is cloned, run
 
-Some R package is not included in conda environment, please install R package manually:
+```{bash}
+cd mutpipe/FREEC
+```
 
-  > \> if (!require("BiocManager", quietly = TRUE))   
-  > \> &nbsp;&nbsp;&nbsp;&nbsp;install.packages("BiocManager")   
-  > \> BiocManager::install("dplyr")   
-  > \> BiocManager::install("stringr")   
-  > \> BiocManager::install("rtracklayer")   
+We strongly suggest installing dependencies via mamba:
 
-FREEC also needs to be installed manually:
+Given that Mamba is installed, run
 
-  > $ cd tools   
-  > $ wget https://github.com/BoevaLab/FREEC/releases   
-  > $ tar -zxvf FREEC-11.6.tar.gz   
-  > $ cd FREEC-11.6/src   
-  > $ make   
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_freec
+```
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- Fasta index file of reference genome (hg38): Homo_sapiens_assembly38.fasta.fai
+## Step2: configure workflow
 
-The required resource could be downloaded through running:
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
-> $bash download.sh
+-   `output`
+    
+    Directory path for output files
+    
+-  `index_file`
 
- Or you also can soft-link the file into the "resources" folder.
+    File name for Fasta index file of reference genome (hg38): Homo_sapiens_assembly38.fasta.fai
+    
+-  `index_dir`
+
+    Directory path to save `index_file`
+
+    Required reference files prepared in [reference workflow](/reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
+    
+-   `bam_tumor`
+
+    Directory path for tumor bam files
+     
+-   `bam_normal`
+
+    Directory path for normal bam files
+    
+-   `threads`
+
+    Threads for control-freec
+    
+-   `coefficientOfVariation`
+
+    CoefficientOfVariation for control-freec
+    
+-   `TEMPDIR`
+
+    Temporary directory for temporary files.
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > \$ snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_freec  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
+
+## Demo
+
+### config.yaml
+
+```{yaml}
+path:
+  output: "demo/output"
+  index_dir: "../reference/data"
+  index_file: "Homo_sapiens_assembly38.fasta.fai"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+
+controlfreec_params: 
+  coefficientOfVariation: 0.062
+  threads: 16
+
+TEMPDIR: "tmp"
+```
 
 ## Input
-path/to/BQSRTumorBamFolder/{sample}.tumor.bam
+path/to/BamFolder/{sample}.tumor.bam
+path/to/BamFolder/{sample}.normal.bam
 ## Output
 result/{sample}.tumor.bam_CNVs   
 result/{sample}.tumor.bam_info.txt   

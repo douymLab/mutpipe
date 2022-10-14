@@ -1,0 +1,19 @@
+path:
+  ref_dir: reference
+  gz_ref_dir: ../reference/data
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+  output: demo/output
+  xtea: xTea
+
+gz_ref:
+  fa: Homo_sapiens_assembly38.fasta.gz
+  gff: gencode.v33.annotation.gff3.gz
+  rep_lib: rep_lib_annotation.tar.gz
+
+ref:
+  fa: Homo_sapiens_assembly38.fasta
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  gff: gencode.v33.annotation.gff3
+  rep_lib_dir: rep_lib_annotation

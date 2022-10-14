@@ -1,0 +1,8 @@
+name: mutpipe_strelka
+channels:
+  - bioconda
+  - defaults
+  - conda-forge
+dependencies:
+  - python=2.7
+  - strelka=2.9.10

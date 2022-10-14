@@ -1,0 +1,17 @@
+path:
+  msiprofiler: 'MSIprofiler'
+  ref_dir: "reference"
+  gz_ref_dir: '../reference/data'
+  output: "demo/output"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+
+chr_list: 9
+
+threads:
+  get_ref: 10
+  msi: 4
+
+parameters:
+  min_coverage: 8
+  nprocs: 2

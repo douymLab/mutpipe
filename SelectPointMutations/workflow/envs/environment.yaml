@@ -1,0 +1,6 @@
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - perl=5.32.1
+  - python=3.8.12

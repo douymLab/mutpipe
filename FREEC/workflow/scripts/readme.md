@@ -1,0 +1,2 @@
+wget https://cdn.jsdelivr.net/gh/BoevaLab/FREEC@master/scripts/makeGraph.R -O workflow/scripts/makeGraph.R
+wget https://cdn.jsdelivr.net/gh/BoevaLab/FREEC@master/scripts/assess_significance.R -O workflow/scripts/assess_significance.R

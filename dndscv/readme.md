@@ -1,47 +1,110 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/dndscv/dndscv.png)
-## Dependency:  
+![dndscv](https://github.com/douymLab/mutpipe/blob/main/dndscv/dndscv.png)
 
-we strongly suggest installing dependencies via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_dndscv --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "mutpipe_dndscv" through this command:
- 
-  > $ conda activate mutpipe_dndscv
+Given that mutpipe is cloned, run
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- RefCDS objects to run dndscv: RefCDS_human_GRCh38.p12_dNdScv.0.1.0.rda  
-Note: We chose this RefCDS because our reference genome is hg38. You could change it as you need and download it from https://github.com/im3sanger/dndscv_data
+```{bash}
+cd mutpipe/dndscv
+```
 
-The required resource could be downloaded through running:
+We strongly suggest installing dependencies via mamba:
 
-> $bash download.sh
+Given that Mamba is installed, run
 
- Or you also can soft-link the file into the "resources" folder.
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_dndscv
+```
+
+## Step2: configure workflow
+
+### 1. Install package
+
+For `dndscv` in conda dont work. Please install they manually.
+
+```{bash}
+conda activate mutpipe_dndscv
+Rscript scripts/package_install.R
+conda deactivate
+```
+
+### 2. Modify config file
+
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
+
+-   `ref_file`
+
+    RefCDS object to run dndscv. Default of eference genome hg38.
+
+    You could change it as you need, referencing here:
+    <https://github.com/im3sanger/dndscv_data/tree/master/data>
+    
+    Required reference file prepared in [reference workflow](/reference)
+
+-   `ref_dir`
+
+    Directory path to save refdb_file
+
+-   `input`
+
+    Directory path for input files
+
+-   `output`
+
+    Directory path for output files
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_dndscv 
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "  
-    > OR \$ sbatch pipe.sbatch.sh
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
 
 ## Demo
+
+### config.yaml
+
+```{yaml}
+path:
+  ref_file: 'RefCDS_human_GRCh38_GencodeV18_recommended.rda'
+  ref_dir: '../reference/data'
+  input: '../demo_data/dndscv_input'
+  output: 'demo/output'
+```
+
 ### input:
-The input file is the output file from mutpipe's SelectPointMutation
-test inputfiles we provide under the "demo" folder
+
+The input file is the output file from mutpipe's [SelectPointMutation workflow](/SelectPointMutations).
+
+We provide under the "demo_data/dndscv_input" folder.
 
 ### output:
+
 outputdir/drivergene.csv
+
 |   |gene_name|qglobal_cv|
 |:---:|:---------:|:----------:|
 |17498|TP53|1.52027279654021E-11|
-
-
-

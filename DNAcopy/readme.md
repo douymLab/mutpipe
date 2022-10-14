@@ -1,38 +1,81 @@
+![DNAcopy](https://github.com/douymLab/mutpipe/blob/main/DNAcopy/dag.png)
+
 # Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/DNAcopy/dag.png)
-## Dependency:  
-- python 3.6.15
-- snakemake 5.3.0
-- mosdepth 0.3.3
-- R 4.1.2
-- DNAcopy 1.70.0
 
-we strongly suggest installing dependencies(expect DNAcopy) via conda:
+## Step1: deploy workflow
 
-  > $ conda create -n mutpipe_dnacopy --file environment.yaml
+Given that mutpipe is cloned, run
 
-Then you could activate the environment "mutpipe_dnacopy" through this command:
- 
-  > $ conda activate mutpipe_dnacopy
+```{bash}
+cd mutpipe/DNAcopy
+```
 
-DNAcopy is not included in conda environment, please install DNAcopy manually:
+We strongly suggest installing dependencies via mamba:
 
-  > \> if (!require("BiocManager", quietly = TRUE))   
-  > \> &nbsp;&nbsp;&nbsp;&nbsp;install.packages("BiocManager")   
-  > \> BiocManager::install("DNAcopy")   
+Given that Mamba is installed, run
+
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_dnacopy
+```
+
+## Step2: configure workflow
+
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
+
+-   `output`
+    
+    Directory path for output files
+    
+-   `bam_tumor`
+
+    Directory path for tumor bam files
+     
+-   `bam_normal`
+
+    Directory path for normal bam files
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_bicseq2  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
+
+## Demo
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  output: "demo/output"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+```
 
 ## Input
-path/to/BQSRTumorBamFolder/{sample}.tumor.bam
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
 ## Output
 results/{sample}.CNVs   
 results/{sample}.mapd   

@@ -1,55 +1,140 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/Mutect2/Mutect2.png)
-## Dependency:  
+![Mutect2](https://github.com/douymLab/mutpipe/blob/main/Mutect2/Mutect2.png)
 
-we strongly suggest installing dependencies via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_mutect2 --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "mutpipe_mutect2" through this command:
- 
-  > $ conda activate mutpipe_mutect2
+Given that mutpipe is cloned, run
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- Reference genome (hg38): Homo_sapiens_assembly38.fasta.gz
-- FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
-- FASTA index file: Homo_sapiens_assembly38.fasta.fai
-- Pannel of Normal:   
-    + 1000g_pon.hg38.vcf.gz   
-    + 1000g_pon.hg38.vcf.gz.tbi         
-    + small_exac_common_3.hg38.vcf.gz
-    + small_exac_common_3.hg38.vcf.gz.tbi
-    + af-only-gnomad.hg38.vcf.gz
-    + af-only-gnomad.hg38.vcf.gz.tbi
-- WES interval list: S31285117_Padded.list  
-Note: The interval list is based on our WES kit is Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
+```{bash}
+cd mutpipe/Mutect2
+```
 
-The required resource could be downloaded through running:
+We strongly suggest installing dependencies via mamba:
 
-> $bash download.sh
+Given that Mamba is installed, run
 
- Or you also can soft-link the file into the "resources" folder.
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_mutect2
+```
+
+## Step2: configure workflow
+
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
+
+-   `output`
+    
+    Directory name for output files
+    
+-   `bam_tumor`
+
+     Directory for tumor bam files
+     
+-   `bam_normal`
+
+    Directory for normal bam files
+
+  -  `ref_dir`
+  
+     Directory path for decompressed reference files
+  
+  -  `gz_ref_dir`
+  
+     Directory path for compressed reference files or do not need to decompress
+
+-   `gz_ref`
+
+    fa: "Homo_sapiens_assembly38.fasta.gz"
+    interval_list: "S31285117_Padded.list.gz"
+
+-   `ref`
+
+    + `fa` Reference genome (hg38): Homo_sapiens_assembly38.fasta
+    + `fai` FASTA index file: Homo_sapiens_assembly38.fasta.fai
+    + `dict` FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
+    - Pannel of Normal:
+      + `pon` 1000g_pon.hg38.vcf.gz
+      + `poni` 1000g_pon.hg38.vcf.gz.tbi
+    + `common_vcf` common_vcfsmall_exac_common_3.hg38.vcf.gz
+    + `common_vcfi` small_exac_common_3.hg38.vcf.gz.tbi
+    + `germline` af-only-gnomad.hg38.vcf.gz
+    + `germlinei` af-only-gnomad.hg38.vcf.gz.tbi
+    + `interval_list` WES interval list: S31285117_Padded.list
+
+    Note: The interval list is based on our WES kit Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
+
+    Required reference files prepared in [reference workflow](/reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_mutect2  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
 
 ## Demo
-### input:
-test bamfile we provide under the "demo" folder
-### output:
-> output_dir/test.somatic.mt2.SNVs.vcf.gz  
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  gz_ref_dir: '../reference/data'
+  ref_dir: reference
+  output: "demo/output"
+  bam_tumor: "../demo_data/test/"
+  bam_normal: "../demo_data/test/"
+
+gz_ref:
+  fa: "Homo_sapiens_assembly38.fasta.gz"
+  interval_list: "S31285117_Padded.list.gz"
+
+ref:
+  fa: "Homo_sapiens_assembly38.fasta"
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  interval_list: "S31285117_Padded.list"
+  germline: "af-only-gnomad.hg38.vcf.gz"
+  germlinei: af-only-gnomad.hg38.vcf.gz.tbi
+  pon: "1000g_pon.hg38.vcf.gz"
+  poni: 1000g_pon.hg38.vcf.gz.tbi
+  common_vcf: small_exac_common_3.hg38.vcf.gz
+  common_vcfi: small_exac_common_3.hg38.vcf.gz.tbi
+```
+
+## input:
+
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
+
+## output:
+> output_dir/{sample}.somatic.mt2.SNVs.vcf.gz
 
 > chr1	1045564	.	C	A	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=44,52|2,3;DP=101;ECNT=1;GERMQ=93;MBQ=34,24;MFRL=255,378;MMQ=60,60;MPOS=6;NALOD=1.15;NLOD=3.91;POPAF=4.00;ROQ=14;TLOD=7.85	GT:AD:AF:DP:F1R2:F2R1:SB	0/0:16,0:0.067:16:7,0:6,0:5,11,0,0	0/1:80,5:0.069:85:27,1:36,3:39,41,2,3
 
-> output_dir/test.somatic.mt2.INDELs.vcf.gz  
+> output_dir/{sample}.somatic.mt2.INDELs.vcf.gz
 
 > chr1	7745037	.	G	GGCT	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=25,82|3,3;DP=114;ECNT=1;GERMQ=93;MBQ=34,20;MFRL=220,210;MMQ=60,60;MPOS=43;NALOD=1.30;NLOD=5.72;POPAF=4.00;ROQ=93;TLOD=15.38	GT:AD:AF:DP:F1R2:F2R1:SB	0/0:31,0:0.048:31:9,0:7,0:13,18,0,0	0/1:76,6:0.055:82:38,3:30,0:12,64,3,3
 

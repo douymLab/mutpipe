@@ -1,42 +1,109 @@
+![strelka2](https://github.com/douymLab/mutpipe/blob/main/strelka2/strelka2.png)
+
 # Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/strelka2/strelka2.png)
-## Dependency:  
 
-we strongly suggest installing dependencies via conda:
+## Step1: deploy workflow
 
-  > $ conda create -n mutpipe_strelka --file environment.yaml
+Given that mutpipe is cloned, run
 
-Then you could activate the environment "mutpipe_strelka" through this command:
- 
-  > $ conda activate mutpipe_strelka
+```{bash}
+cd mutpipe/strelka2
+```
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- Reference genome (hg38): Homo_sapiens_assembly38.fasta.gz
-- FASTA index file: Homo_sapiens_assembly38.fasta.fai
-- WES interval list: S31285117_Padded.list.gz  
-Note: The interval list is based on our WES kit is Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
+We strongly suggest installing dependencies via mamba:
 
-The required resource could be downloaded through running:
+Given that Mamba is installed, run
 
-> $bash download.sh
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_strelka
+```
 
- Or you also can soft-link the file into the "resources" folder.
+## Step2: configure workflow
+
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
+
+-  path
+    
+    -   `output`
+        
+        Directory name for output files
+        
+    -   `bam_tumor`
+    
+        Directory for tumor bam files
+         
+    -   `bam_normal`
+    
+        Directory for normal bam files
+    
+    -   `ref_dir`
+    
+        Directory path for decompressed reference files
+    
+    -   `gz_ref_dir`
+    
+        Directory path for compressed reference files or do not need to decompress
+
+-   `gz_ref`
+
+    reference file need to decompress
+
+    - `fa`: "Homo_sapiens_assembly38.fasta.gz"
+
+-   ref
+
+    reference files
+
+    + `fa` Reference genome (hg38): Homo_sapiens_assembly38.fasta
+    + `fai` FASTA index file: Homo_sapiens_assembly38.fasta.fai
+    + `dict` FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
+    + `regionbed` WES interval list: region.bed.gz
+    + `regionbedi`  WES interval list index: region.bed.gz.tbi
+
+    Note: The interval list is based on our WES kit Sureselect Human All Exon V7. The list and other version kit's list can download from https://earray.chem.agilent.com/suredesign/
+
+    Required reference files prepared in [reference workflow](/reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_strelka  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
 
 ## Demo
-### input:
-test bamfile we provide under the "demo" folder
-### output:
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  ref_dir: "reference"
+  gz_ref_dir: '../reference/data'
+  output: "demo/output"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+
+gz_ref:
+  fa: "Homo_sapiens_assembly38.fasta.gz"
+
+ref:
+  fa: "Homo_sapiens_assembly38.fasta"
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  regionbed: "region.bed.gz"
+  regionbedi: "region.bed.gz.tbi"
+```
+
+## input:
+
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
+
+## output:
+
 > output_dir/results/variants/somatic.snvs.vcf.gz  
 
 > chr1	1045481	.	A	C	.	LowEVS	SOMATIC;QSS=1;TQSS=1;NT=ref;QSS_NT=1;TQSS_NT=1;SGT=AA->AA;DP=71;MQ=60.00;MQ0=0;ReadPosRankSum=-1.61;SNVSB=0.00;SomaticEVS=0.40	DP:FDP:SDP:SUBDP:AU:CU:GU:TU	10:0:0:0:10,10:0,0:0,0:0,0	60:0:0:0:58,59:2,2:0,0:0,0  

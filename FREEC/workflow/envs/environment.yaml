@@ -1,0 +1,16 @@
+channels:
+  - default
+  - conda-forge
+  - bioconda
+  - anaconda
+  - pwwang
+dependencies:
+  - control-freec
+  - r-stringr
+  - r-dplyr
+  - bioconductor-rtracklayer
+  - pwwang::bioconductor-genomeinfodbdata==1.2.7
+  - bedtools
+  - r-base=4.1
+  - samtools
+  - python=3.9

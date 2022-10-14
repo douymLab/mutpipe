@@ -1,0 +1,113 @@
+##MSIprofier
+#This pipeline run MSIprofiler on given bam sample every chromosomes
+#Then merge the MSIprofiler result and filter by (p value <0.01)&&(normal reads type <3)
+#Get the final as the MSI site
+configfile: "config/config.yaml"
+include: "rules/common.smk"
+
+sample_IDs, = glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+msi_path = os.path.abspath(msiprofiler)
+outPath = os.path.abspath(outPath)
+from tempfile import tempdir
+types = ["tumor", "normal"]
+#https://github.com/parklab/MSIprofiler
+
+# a pseudo-rule that collects the target files
+
+rule all:
+	input:
+		expand(os.path.join(outPath,"MSI/{sample}.unphased_MSI.txt"), sample=sample_IDs)
+
+rule decomp_chrs:
+	output: os.path.join(outPath,"check_chr_files.log")
+	shell:
+		"""
+		mkdir -p {fas_dir};
+		for i in {fas_files}; do 
+			
+			if [ ! -f $i ]; then
+				cp -r -n {gz_ref_dir}/$i.gz {fas_dir}
+				cd {fas_dir}
+				yes n | gunzip $i.gz;
+			else
+				echo "File $i exists" >> {output};
+			fi
+
+		done;
+		"""
+
+rule index_fas:
+	input: 
+		fas_files,
+		os.path.join(outPath,"check_chr_files.log")
+	output: os.path.join(outPath,"index_chr_files.log"),
+	conda: "mutpipe_msiprofiler",
+	shell:
+		"""
+		cd {fas_dir};
+		for i in {fas_files}; do 
+			if [ ! -f $i.fai ]; then
+				samtools faidx $i;
+				echo "File $i.fai created" >> {output};
+			else
+				echo "File $i.fai exists" >> {output};
+			fi
+		done;
+		"""
+
+rule get_ref_set:
+	input: 
+		ancient(os.path.join(outPath,"index_chr_files.log")),
+		ancient(os.path.join(outPath,"check_chr_files.log"))
+	output: 
+		ref_sort=os.path.join(msi_path,"reference_sets/reference_set_{chr_list}_sorted.txt"),
+	params: msi_path,
+	resources:
+		get_ref_threads=get_ref_threads,
+	threads: get_ref_threads
+	conda: "mutpipe_msiprofiler",
+	script: "scripts/parallel_get_ref.sh"
+
+rule unphased_MSIprofiler_perchrmosome:
+	input:
+		bam=os.path.abspath(os.path.join(tumor_path,"{sample}.tumor.bam")),
+		ref=ancient(os.path.join(msi_path,"reference_sets/reference_set_{chr_list}_sorted.txt")),
+	output:
+		os.path.join(outPath,"{sample}/{sample}.{chr_list}_unphased.txt"),
+	params: 
+		script=os.path.join(msi_path,"msi_profiler.py"),
+		normal_path=os.path.abspath(normal_path),
+		out_path=os.path.abspath(outPath),
+		fasta=fas_dir,
+		reference_set_dir=os.path.join(msi_path,"reference_sets"),
+	resources:
+		mem_mb=12000,
+		msi_threads=msi_threads,
+	threads: msi_threads
+	conda: "mutpipe_msiprofiler",
+	shell:
+		"""
+		mkdir -p {params.out_path}/{wildcards.sample}/;
+		python {params.script} \
+		--tumor_bam {input.bam} \
+		--normal_bam {params.normal_path}/{wildcards.sample}.normal.bam \
+		--bed None \
+		--chromosomes {wildcards.chr_list} \
+		--fasta {params.fasta}/ \
+		--output_prefix {params.out_path}/{wildcards.sample}/{wildcards.sample}.{wildcards.chr_list} \
+		--mode unphased \
+		--nprocs {nprocs} \
+		--reference_set {params.reference_set_dir}/ \
+		--min_coverage {min_coverage} \
+		--min_MS_length 6 \
+		--flank_size 5 \
+		--rus 1 2 3 4 5 6
+		"""
+
+rule merge_result:
+	input:
+		expand(os.path.join(outPath,"{sample}/{sample}.{chr_list}_unphased.txt"),sample=sample_IDs,chr_list=chr_list)
+	output:
+		os.path.join(outPath,"MSI/{sample}.unphased_MSI.txt"),
+	shell:
+		"cat {input} >> {output}"

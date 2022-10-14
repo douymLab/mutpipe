@@ -1,0 +1,6 @@
+name: mutpipe_dnacopy
+channels:
+  - bioconda
+dependencies:
+  - mosdepth
+  - bioconductor-dnacopy

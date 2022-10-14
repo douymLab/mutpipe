@@ -1,0 +1,12 @@
+path:
+  output: "demo/output"
+  index_dir: "../reference/data"
+  index_file: "Homo_sapiens_assembly38.fasta.fai"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+
+controlfreec_params: 
+  coefficientOfVariation: 0.062
+  threads: 16
+
+TEMPDIR: "tmp"

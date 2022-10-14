@@ -1,4 +1,0 @@
-[2022-05-16T03:11:42.682288Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+removeTmpDir] [wrapperSignal] wrapperStart
-[2022-05-16T03:11:42.688780Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+removeTmpDir] [wrapperSignal] taskStart
-[2022-05-16T03:11:42.701951Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+removeTmpDir] [wrapperSignal] taskExitCode 0
-[2022-05-16T03:11:42.711236Z] [dell-Precision-3650-Tower] [758862_1] [pyflowTaskWrapper:CallGenome+removeTmpDir] [wrapperSignal] taskElapsedSec 0

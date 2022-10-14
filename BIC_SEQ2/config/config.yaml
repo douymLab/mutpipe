@@ -1,0 +1,10 @@
+path:
+  output: demo/output
+  res_dir: reference
+  ref_gz_dir: ../reference/data
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+  nbicseq_seg: NBICseq-seg_v0.7.2
+  nbicseq_norm: NBICseq-norm_v0.2.4
+
+TEMPDIR: tmp

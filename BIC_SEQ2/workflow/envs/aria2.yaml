@@ -1,0 +1,8 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - aria2
+  - r-base
+  - pigz
+  - gzip

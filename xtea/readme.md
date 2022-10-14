@@ -1,44 +1,149 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/xtea/xtea.png)
-## Dependency:  
+![xtea](https://github.com/douymLab/mutpipe/blob/main/xtea/xtea.png)
 
-we strongly suggest installing dependencies via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_xtea --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "mutpipe_xtea" through this command:
- 
-  > $ conda activate mutpipe_xtea
+Given that mutpipe is cloned, run
 
-### Install xtea
-xTEA needs some scripts which not include conda environments. Please install xTEA manually.  
+```{bash}
+cd mutpipe/strelka2
+```
+
+We strongly suggest installing dependencies via mamba:
+
+Given that Mamba is installed, run
+
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_strelka
+```
+
+## Step2: configure workflow
+
+### 1. Install xTea
+
+xTEA needs some scripts which not include conda environments. Please install xTEA manually.
+
 To install xTEA:
-> $ git clone https://github.com/parklab/xTea.git  
 
-The scripts in the folder named "xtea" will use later. Remember the path to the diretory.
+```{bash}
+git clone https://github.com/parklab/xTea.git
+```
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- Reference genome (hg38): Homo_sapiens_assembly38.fasta.gz
-- FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
-- FASTA index file: Homo_sapiens_assembly38.fasta.fai
-- Comprehensive gene annotation: gencode.v33.annotation.gff3
-- pre-processed repeat library used by xTea: rep_lib_annotation   
-  (more informations: https://github.com/parklab/xTea )
+### 2. Modify config file
 
-The required resource could be downloaded through running:
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
-> $bash download.sh
+-   `path`
 
- Or you also can soft-link the file into the "resources" folder.
+    -   `output`
+
+        Directory path for output files
+
+    -   `bam_tumor`
+
+        Directory path for tumor bam files
+
+    -   `bam_normal`
+
+        Directory path for normal bam files
+
+    -   `ref_dir`
+
+        Directory path for decompress reference files
+
+    -   `gz_ref_dir`
+
+        Directory path for compress reference files or do not need to decompress
+
+    -   `xtea`
+
+        Directory path for [xTea](#1-install-xtea)
+
+-   `gz_ref`
+
+    reference file need to decompress
+
+    -   `fa`: Homo_sapiens_assembly38.fasta.gz
+    -   `gff`: gencode.v33.annotation.gff3.gz
+    -   `rep_lib`: rep_lib_annotation.tar.gz
+
+-   ref
+
+    reference files
+
+    -   `fa` Reference genome (hg38): Homo_sapiens_assembly38.fasta
+    -   `fai` FASTA index file: Homo_sapiens_assembly38.fasta.fai
+    -   `dict` FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
+    -   `gff` Comprehensive gene annotation: gencode.v33.annotation.gff3
+    -   `rep_lib_dir` pre-processed repeat library used by xTea: rep_lib_annotation\
+        (more informations: <https://github.com/parklab/xTea> )
+
+    \
+    Required reference files prepared in [reference workflow](/reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_xtea  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
 
+```{bash}
+sh workflow/run.slurm.sh
+```
+
+## Demo
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  ref_dir: reference
+  gz_ref_dir: ../reference/data
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+  output: demo/output
+  xtea: xTea
+
+gz_ref:
+  fa: Homo_sapiens_assembly38.fasta.gz
+  gff: gencode.v33.annotation.gff3.gz
+  rep_lib: rep_lib_annotation.tar.gz
+
+ref:
+  fa: Homo_sapiens_assembly38.fasta
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  gff: gencode.v33.annotation.gff3
+  rep_lib_dir: rep_lib_annotation
+```
+
+## input:
+
+path/to/{sample}.tumor.bam 
+
+path/to/{sample}.normal.bam
+
+## output:
+
+{sample}.tumor_LINE1.vcf

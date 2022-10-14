@@ -1,0 +1,16 @@
+path:
+  ref_dir: "reference"
+  gz_ref_dir: '../reference/data'
+  output: "demo/output"
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+
+gz_ref:
+  fa: "Homo_sapiens_assembly38.fasta.gz"
+
+ref:
+  fa: "Homo_sapiens_assembly38.fasta"
+  fai: "Homo_sapiens_assembly38.fasta.fai"
+  dict: "Homo_sapiens_assembly38.dict"
+  regionbed: "region.bed.gz"
+  regionbedi: "region.bed.gz.tbi"

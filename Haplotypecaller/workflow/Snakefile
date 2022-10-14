@@ -1,0 +1,306 @@
+##GATK: v4.2.2.0
+include: "rules/commons.smk"
+include: "rules/unzip.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+
+tissue_types=['tumor','normal']
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		os.path.join(outPath,"normal_cohort.snps.VQSR.vcf.gz"),
+		os.path.join(outPath,"tumor_cohort.snps.VQSR.vcf.gz"),
+		os.path.join(outPath,"normal_cohort.indels.VQSR.vcf.gz"),
+		os.path.join(outPath,"tumor_cohort.indels.VQSR.vcf.gz")
+
+rule HaplotypeCaller_single_tumor:
+	input:
+		bam=os.path.join(tumor_path,"{sample}.tumor.bam"),
+		fa=os.path.join(res_dir,fa),
+		interval=os.path.join(res_dir,interval_list),
+		fas_dict = os.path.join(res_dir,dict),
+		fas_idx=os.path.join(res_dir,fai),
+	output: os.path.join(outPath,"vcfs_germline/{sample}.tumor.unsorted.g.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx4g\" HaplotypeCaller -R {input.fa} \
+		-I {input.bam} -ERC GVCF -L {input.interval} -O {output}"
+
+
+rule HaplotypeCaller_single_normal:
+	input:
+		bam=os.path.join(normal_path,"{sample}.normal.bam"),
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		interval=os.path.join(res_dir,"S31285117_Padded.list"),
+		fas_dict=os.path.join(res_dir,"Homo_sapiens_assembly38.dict"),
+		fas_idx=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta.fai"),
+	output: os.path.join(outPath,"vcfs_germline/{sample}.normal.unsorted.g.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"""
+		gatk --java-options \"-Xmx4g\" HaplotypeCaller -R {input.fa} \
+		-I {input.bam} -ERC GVCF -L {input.interval} -O {output}
+		"""
+
+rule sorted g_vcf:
+	input:
+		os.path.join(outPath,"vcfs_germline/{sample}.{tissue_types}.unsorted.g.vcf.gz")
+	output:
+		os.path.join(outPath,"vcfs_germline/{sample}.{tissue_types}.g.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk SortVcf I={input} O={output}"
+
+rule list_all_vcfs:
+	input:
+		normal_vcfs=expand(os.path.join(outPath,"vcfs_germline/{sample}.normal.g.vcf.gz"),sample=sample_IDs),
+		tumor_vcfs=expand(os.path.join(outPath,"vcfs_germline/{sample}.tumor.g.vcf.gz"),sample=sample_IDs),
+	output:
+		normal_list=os.path.join(outPath,"normal.vcf.list"),
+		tumor_list=os.path.join(outPath,"tumor.vcf.list")
+	params:
+		dir=os.path.join(outPath,"vcfs_germline"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"find {params.dir}/ -name \"*.normal.g.vcf.gz\" > {output.normal_list};"
+		"find {params.dir}/ -name \"*.tumor.g.vcf.gz\" > {output.tumor_list};"
+
+rule CombineGVCFs_tumor:
+	input:
+		variant_list=os.path.join(outPath,"tumor.vcf.list"),
+		reference=os.path.join(res_dir,fa),
+		interval=os.path.join(res_dir,interval_list)
+	output:
+		vcf=os.path.join(outPath,"tumor.g.vcf.gz"),
+		index=os.path.join(outPath,"tumor.g.vcf.gz.tbi")
+	resources:
+		mem_mb=120000,
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk CombineGVCFs --java-options \"-Xmx120G -XX:ParallelGCThreads=8\" \
+		-R {input.reference} -L {input.interval} --variant {input.variant_list} \
+		-O {output.vcf}"
+
+rule CombineGVCFs_normal:
+	input:
+		variant_list=os.path.join(outPath,"normal.vcf.list"),
+		reference=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		interval=os.path.join(res_dir,"S31285117_Padded.list")
+	output:
+		vcf=os.path.join(outPath,"normal.g.vcf.gz"),
+		index=os.path.join(outPath,"normal.g.vcf.gz.tbi")
+	resources:
+		mem_mb=120000,
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk CombineGVCFs --java-options \"-Xmx120G -XX:ParallelGCThreads=8\" \
+		-R {input.reference} -L {input.interval} --variant {input.variant_list} \
+		-O {output.vcf}"
+
+rule GenotypeGVCFs_tumor:
+	input:
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		vcf=os.path.join(outPath,"tumor.g.vcf.gz"),
+		index=os.path.join(outPath,"tumor.g.vcf.gz.tbi")
+	output:
+		os.path.join(outPath,"all_tumor_samples.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx20g\" GenotypeGVCFs -R {input.fa} \
+		-V {input.vcf} -O {output}"
+
+rule GenotypeGVCFs_normal:
+	input:
+		fa=os.path.join(res_dir,"Homo_sapiens_assembly38.fasta"),
+		vcf=os.path.join(outPath,"normal.g.vcf.gz"),
+		index=os.path.join(outPath,"normal.g.vcf.gz.tbi"),
+	output:
+		os.path.join(outPath,"all_normal_samples.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx20g\" GenotypeGVCFs -R {input.fa} \
+		-V {input.vcf} -O {output}"
+
+rule VariantFiltration_tumor:
+	input:
+		os.path.join(outPath,"all_tumor_samples.vcf.gz"),
+	output:
+		os.path.join(outPath,"all_tumor_samples_excesshet.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx3g -Xms3g\" VariantFiltration -V {input} \
+		--filter-expression \"ExcessHet > 54.69\" \
+		--filter-name ExcessHet -O {output}"
+
+rule VariantFiltration_normal:
+	input:
+		os.path.join(outPath,"all_normal_samples.vcf.gz"),
+	output:
+		os.path.join(outPath,"all_normal_samples_excesshet.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx20g -Xms20g\" VariantFiltration -V {input} \
+		--filter-expression \"ExcessHet > 54.69\" \
+		--filter-name ExcessHet -O {output}"
+
+rule create_sites_only_vcf_normal:
+	input:
+		os.path.join(outPath,"all_normal_samples_excesshet.vcf.gz")
+	output:
+		os.path.join(outPath,"all_normal_samples_sitesonly.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk MakeSitesOnlyVcf -I {input} -O {output}"
+
+rule create_sites_only_vcf_tumor:
+	input:
+		os.path.join(outPath,"all_tumor_samples_excesshet.vcf.gz")
+	output:
+		os.path.join(outPath,"all_tumor_samples_sitesonly.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk MakeSitesOnlyVcf -I {input} -O {output}"
+
+rule VQSR_tumor_INDEL:
+	input:
+		vcf=os.path.join(outPath,"all_tumor_samples_sitesonly.vcf.gz"),
+		resource1=os.path.join(gz_ref_dir,"Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"),
+		resource2=os.path.join(gz_ref_dir,"Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz"),
+		resource3=os.path.join(gz_ref_dir,"Homo_sapiens_assembly38.dbsnp138.vcf")
+	output:
+		tumor_indel_recal=os.path.join(outPath,"tumor_cohort_indels.recal"),
+		tranches_file=os.path.join(outPath,"tumor_cohort_indels.tranches"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx8g -Xms6g\" VariantRecalibrator -V {input.vcf} \
+		--trust-all-polymorphic -tranche 100.0 -tranche 99.95 -tranche 99.9 \
+		-tranche 99.5 -tranche 99.0 -tranche 97.0 -tranche 96.0 -tranche 95.0 \
+		-tranche 94.0 -tranche 93.5 -tranche 93.0 -tranche 92.0 -tranche 91.0 -tranche 90.0 \
+		-an FS -an ReadPosRankSum -an MQRankSum -an QD -an SOR -an DP -mode INDEL --max-gaussians {maxGaussians} \
+		--resource:mills,known=false,training=true,truth=true,prior=12 {input.resource1} \
+		--resource:axiomPoly,known=false,training=true,truth=false,prior=10 {input.resource2} \
+		--resource:dbsnp,known=true,training=false,truth=false,prior=2 {input.resource3} \
+		-O {output.tumor_indel_recal} --tranches-file {output.tranches_file}"
+
+rule VQSR_tumor_SNP:
+	input:
+		vcf=os.path.join(outPath,"all_tumor_samples_sitesonly.vcf.gz"),
+		resource1=os.path.join(gz_ref_dir,"hapmap_3.3.hg38.vcf.gz"),
+		resource2=os.path.join(gz_ref_dir,"1000G_omni2.5.hg38.vcf.gz"),
+		resource3=os.path.join(gz_ref_dir,"1000G_phase1.snps.high_confidence.hg38.vcf.gz"),
+		resource4=os.path.join(gz_ref_dir,"Homo_sapiens_assembly38.dbsnp138.vcf"),
+	output:
+		tumor_SNP_recal=os.path.join(outPath,"tumor_cohort_snps.recal"),
+		tranches_file=os.path.join(outPath,"tumor_cohort_snps.tranches"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx3g -Xms3g\" VariantRecalibrator -V {input.vcf} \
+		--trust-all-polymorphic -tranche 100.0 -tranche 99.95 -tranche 99.9 \
+		-tranche 99.8 -tranche 99.6 -tranche 99.5 -tranche 99.4 -tranche 99.3 \
+		-tranche 99.0 -tranche 98.0 -tranche 97.0 -tranche 90.0 -an QD -an MQRankSum \
+		-an ReadPosRankSum -an FS -an MQ -an SOR -an DP -mode SNP --max-gaussians {maxGaussians} \
+		--resource:hapmap,known=false,training=true,truth=true,prior=15 {input.resource1} \
+		--resource:omni,known=false,training=true,truth=true,prior=12 {input.resource2} \
+		--resource:1000G,known=false,training=true,truth=false,prior=10 {input.resource3} \
+		--resource:dbsnp,known=true,training=false,truth=false,prior=7 {input.resource4} \
+		-O {output.tumor_SNP_recal} --tranches-file {output.tranches_file}"
+
+rule applyVQSR_tumor_INDEL:
+	input:
+		vcf=os.path.join(outPath,"all_tumor_samples_sitesonly.vcf.gz"),
+		recal_file=os.path.join(outPath,"tumor_cohort_indels.recal"),
+		tranches_file=os.path.join(outPath,"tumor_cohort_indels.tranches"),
+	output:
+		os.path.join(outPath,"tumor_cohort.indels.VQSR.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx5g -Xms5g\" ApplyVQSR -V {input.vcf} \
+		--recal-file {input.recal_file} --tranches-file {input.tranches_file} \
+		--truth-sensitivity-filter-level 99.7 --create-output-variant-index true \
+		-mode INDEL -O {output}"
+
+rule applyVQSR_tumor_SNP:
+	input:
+		vcf=os.path.join(outPath,"all_tumor_samples_sitesonly.vcf.gz"),
+		recal_file=os.path.join(outPath,"tumor_cohort_snps.recal"),
+		tranches_file=os.path.join(outPath,"tumor_cohort_snps.tranches"),
+	output:
+		os.path.join(outPath,"tumor_cohort.snps.VQSR.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx5g -Xms5g\" ApplyVQSR -V {input.vcf} \
+		--recal-file {input.recal_file} --tranches-file {input.tranches_file} \
+		--truth-sensitivity-filter-level 99.7 --create-output-variant-index true \
+		-mode SNP -O {output}"
+
+rule VQSR_normal_INDEL:
+	input:
+		vcf=os.path.join(outPath,"all_normal_samples_sitesonly.vcf.gz"),
+		resource1=os.path.join(gz_ref_dir,"Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"),
+		resource2=os.path.join(gz_ref_dir,"Axiom_Exome_Plus.genotypes.all_populations.poly.hg38.vcf.gz"),
+		resource3=os.path.join(gz_ref_dir,"Homo_sapiens_assembly38.dbsnp138.vcf")
+	output:
+		normal_indel_recal=os.path.join(outPath,"normal_cohort_indels.recal"),
+		tranches_file=os.path.join(outPath,"normal_cohort_indels.tranches"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx20g -Xms20g\" VariantRecalibrator -V {input.vcf} \
+		--trust-all-polymorphic -tranche 100.0 -tranche 99.95 -tranche 99.9 \
+		-tranche 99.5 -tranche 99.0 -tranche 97.0 -tranche 96.0 -tranche 95.0 \
+		-tranche 94.0 -tranche 93.5 -tranche 93.0 -tranche 92.0 -tranche 91.0 -tranche 90.0 \
+		-an FS -an ReadPosRankSum -an MQRankSum -an QD -an SOR -an DP -mode INDEL --max-gaussians {maxGaussians} \
+		--resource:mills,known=false,training=true,truth=true,prior=12 {input.resource1} \
+		--resource:axiomPoly,known=false,training=true,truth=false,prior=10 {input.resource2} \
+		--resource:dbsnp,known=true,training=false,truth=false,prior=2 {input.resource3} \
+		-O {output.normal_indel_recal} --tranches-file {output.tranches_file}"
+
+rule VQSR_normal_SNP:
+	input:
+		vcf=os.path.join(outPath,"all_normal_samples_sitesonly.vcf.gz"),
+		resource1=os.path.join(gz_ref_dir,"hapmap_3.3.hg38.vcf.gz"),
+		resource2=os.path.join(gz_ref_dir,"1000G_omni2.5.hg38.vcf.gz"),
+		resource3=os.path.join(gz_ref_dir,"1000G_phase1.snps.high_confidence.hg38.vcf.gz"),
+		resource4=os.path.join(gz_ref_dir,"Homo_sapiens_assembly38.dbsnp138.vcf")
+	output:
+		normal_SNP_recal=os.path.join(outPath,"normal_cohort_snps.recal"),
+		tranches_file=os.path.join(outPath,"normal_cohort_snps.tranches"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx3g -Xms3g\" VariantRecalibrator -V {input.vcf} \
+		--trust-all-polymorphic -tranche 100.0 -tranche 99.95 -tranche 99.9 \
+		-tranche 99.8 -tranche 99.6 -tranche 99.5 -tranche 99.4 -tranche 99.3 \
+		-tranche 99.0 -tranche 98.0 -tranche 97.0 -tranche 90.0 -an QD -an MQRankSum \
+		-an ReadPosRankSum -an FS -an MQ -an SOR -an DP -mode SNP --max-gaussians {maxGaussians} \
+		--resource:hapmap,known=false,training=true,truth=true,prior=15 {input.resource1} \
+		--resource:omni,known=false,training=true,truth=true,prior=12 {input.resource2} \
+		--resource:1000G,known=false,training=true,truth=false,prior=10 {input.resource3} \
+		--resource:dbsnp,known=true,training=false,truth=false,prior=7 {input.resource4} \
+		-O {output.normal_SNP_recal} --tranches-file {output.tranches_file}"
+
+rule applyVQSR_normal_INDEL:
+	input:
+		vcf=os.path.join(outPath,"all_normal_samples_sitesonly.vcf.gz"),
+		recal_file=os.path.join(outPath,"normal_cohort_indels.recal"),
+		tranches_file=os.path.join(outPath,"normal_cohort_indels.tranches"),
+	output:
+		os.path.join(outPath,"normal_cohort.indels.VQSR.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx5g -Xms5g\" ApplyVQSR -V {input.vcf} \
+		--recal-file {input.recal_file} --tranches-file {input.tranches_file} \
+		--truth-sensitivity-filter-level 99.7 --create-output-variant-index true \
+		-mode INDEL -O {output}"
+
+rule applyVQSR_normal_SNP:
+	input:
+		vcf=os.path.join(outPath,"all_normal_samples_sitesonly.vcf.gz"),
+		recal_file=os.path.join(outPath,"normal_cohort_snps.recal"),
+		tranches_file=os.path.join(outPath,"normal_cohort_snps.tranches"),
+	output:
+		os.path.join(outPath,"normal_cohort.snps.VQSR.vcf.gz"),
+	conda: "mutpipe_haplotypecaller"
+	shell:
+		"gatk --java-options \"-Xmx5g -Xms5g\" ApplyVQSR -V {input.vcf} \
+		--recal-file {input.recal_file} --tranches-file {input.tranches_file} \
+		--truth-sensitivity-filter-level 99.7 --create-output-variant-index true \
+		-mode SNP -O {output}"

@@ -1,0 +1,98 @@
+include: "rules/common.smk"
+
+donor_sample_IDs, =glob_wildcards(os.path.join(tumor_path,'{sample}.tumor.bam'))
+# a pseudo-rule that collects the target files
+rule all:
+	input:
+		expand(os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt.png"),sample=donor_sample_IDs),
+		expand(os.path.join(outPath,"result/{sample}_median_ratio.txt"),sample=donor_sample_IDs)
+
+rule config:
+	input:
+		fai=index_path,
+		tumor=os.path.join(tumor_path,'{sample}.tumor.bam'),
+		normal=os.path.join(normal_path,'{sample}.normal.bam')
+	output:
+		config=os.path.join(outPath,"config/{sample}.config")
+	params:
+		coefficientOfVariation = config["controlfreec_params"]['coefficientOfVariation'],
+		outputdir=os.path.join(outPath,"result"),
+		threads=config["controlfreec_params"]["threads"]
+	conda: "mutpipe_freec"
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		python workflow/scripts/gen_freec_config.py -fai {input.fai} -tumor {input.tumor} -normal {input.normal} -dir {params.outputdir} -config {output.config} -coefficientOfVariation {params.coefficientOfVariation} -numThreads {params.threads}
+		"""
+
+rule freec:
+	input: 
+		conf=os.path.join(outPath,"config/{sample}.config"),
+		sample=os.path.join(tumor_path,'{sample}.tumor.bam'),
+		control=os.path.join(normal_path,'{sample}.normal.bam')
+	output:
+		cnv=os.path.join(outPath,"result/{sample}.tumor.bam_CNVs"),
+		ratio=os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt"),
+		bam_info=os.path.join(outPath,"result/{sample}.tumor.bam_info.txt"),
+	log: os.path.join(outPath,"result/{sample}.tumor.bam_CNVs.log")
+	conda: "mutpipe_freec",
+	resources:tmpdir=TEMPDIR,
+	threads: config["controlfreec_params"]["threads"]
+	shell:
+		"freec -maxThreads {threads} -conf {input.conf} -sample {input.sample} -control {input.control} > {log} 2>&1"
+
+rule assessSignificance:
+	input:
+		cnv=os.path.join(outPath,"result/{sample}.tumor.bam_CNVs"),
+		ratio=os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt")
+	output:
+		os.path.join(outPath,"result/{sample}.tumor.bam_CNVs.p.value.txt")
+	conda: "mutpipe_freec",
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		cat workflow/scripts/assess_significance.R | R --slave --args {input.cnv} {input.ratio}
+		"""
+
+rule makeGraph:
+	input:
+		ratio=os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt")
+	output:
+		png=os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt.png")
+	conda: "mutpipe_freec"
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		cat workflow/scripts/makeGraph.R | R --slave --args 2 {input.ratio}
+		"""
+rule filter_main_chr:
+	input:
+		bam_CNVs = os.path.join(outPath,"result/{sample}.tumor.bam_CNVs.p.value.txt"),
+		bam_ratio = os.path.join(outPath,"result/{sample}.tumor.bam_ratio.txt"),
+	output:
+		bam_mc_CNVs=os.path.join(outPath,"result/{sample}.tumor.mainchr.bam_CNVs.p.value.txt"),
+		bam_mc_ratio=os.path.join(outPath,"result/{sample}.tumor.mainchr.bam_ratio.txt"),
+	resources:tmpdir=TEMPDIR,
+	shell:
+		"""
+		awk -F "\\t" '{{if(length($1)<=2 && $1!="M") print}}' {input.bam_CNVs} > {output.bam_mc_CNVs}
+		awk -F "\\t" '{{if(length($1)<=2 && $1!="M") print}}' {input.bam_ratio} > {output.bam_mc_ratio}
+		"""
+
+rule cal_median_ratio:
+	input:
+		bam_info=os.path.join(outPath,"result/{sample}.tumor.bam_info.txt"),
+		bam_CNVs=os.path.join(outPath,"result/{sample}.tumor.mainchr.bam_CNVs.p.value.txt"),
+		bam_ratio=os.path.join(outPath,"result/{sample}.tumor.mainchr.bam_ratio.txt"),
+	output:
+		median_ratio=os.path.join(outPath,"result/{sample}_median_ratio.txt"),
+		tmp = temp(directory(os.path.join(outPath,"tmp_cal_median_ratio_{sample}")))
+	params:
+		sample="{sample}",
+		script_dir="workflow/scripts",
+	resources:tmpdir=TEMPDIR,
+	conda: "mutpipe_freec"
+	shell:
+		"""
+		sh workflow/scripts/freec_cal_median_ratio.sh {params.sample} {input.bam_info} {input.bam_CNVs} {input.bam_ratio} {output.median_ratio} {params.script_dir} {output.tmp}
+		"""

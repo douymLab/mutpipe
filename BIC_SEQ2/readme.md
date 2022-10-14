@@ -1,52 +1,139 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/BIC_SEQ2/dag.png)
-## Dependency:  
-- python 3.6.15
-- snakemake 5.3.0
-- samtools 1.8
-- R 4.1.2
-- genmap 1.2.0
-- NBICseq-norm 0.2.4
-- NBICseq-seg 0.7.2
+![BIC_SEQ2](https://github.com/douymLab/mutpipe/blob/main/BIC_SEQ2/dag.png)
 
-we strongly suggest installing dependencies(expect BIC-seq2) via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_bicseq2 --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "mutpipe_bicseq2" through this command:
- 
-  > $ conda activate mutpipe_bicseq2
+Given that mutpipe is cloned, run
 
-BIC-seq2 is not included in conda environment, please install BIC-seq2 manually:
+```{bash}
+cd mutpipe/BIC_SEQ2
+```
 
-  > $ cd tools   
-  > $ wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-norm_v0.2.4.tar.gz   
-  > $ tar -zxvf NBICseq-norm_v0.2.4.tar.gz   
-  > $ wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-seg_v0.7.2.tar.gz   
-  > $ tar -zxvf NBICseq-seg_v0.7.2.tar.gz   
+We strongly suggest installing dependencies via mamba:
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- FASTA sequence of each chromosome of reference genome (hg38): chr*.fa
-- Index for hg38: grch38-no-alt.tar.gz
+Given that Mamba is installed, run
 
-The required resource could be downloaded through running:
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_bicseq
+```
 
-> $bash download.sh
+## Step2: configure workflow
 
- Or you also can soft-link the file into the "resources" folder.
+### 1. Download and unzip dependencies
+
+For `NBICseq-seg` and `NBICseq-norm` in conda dont work. Please install they manually.
+
+#### NBICseq-seg_v0.7.2
+
+```{bash}
+wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-seg_v0.7.2.tar.gz
+tar -zxvf NBICseq-seg_v0.7.2.tar.gz
+```
+
+#### NBICseq-norm_v0.2.4
+
+```{bash}
+wget http://compbio.med.harvard.edu/BIC-seq/NBICseq-norm_v0.2.4.tar.gz
+tar -zxvf NBICseq-norm_v0.2.4.tar.gz
+```
+
+### 2. Modify config file
+
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
+
+-   `output`
+
+    Directory path for output files
+
+-   `bam_tumor`
+
+    Directory path for tumor bam files
+
+-   `bam_normal`
+
+    Directory path for normal bam files
+
+-   `res_dir`
+
+    Directory path for decompress reference files including:
+
+    -   FASTA sequence of each chromosome of reference genome (hg38): chr\*.fa
+    -   Index directory for hg38: grch38-no-alt
+
+-   `ref_gz_dir`
+
+    Directory path for compress reference files including:
+
+    -   FASTA sequence of each chromosome of reference genome (hg38): chr\*.fa.gz
+    -   Index for hg38: grch38-no-alt.tar.gz
+    
+    Required reference files prepared in [reference workflow](/reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
+
+-   `nbicseq_seg`
+
+    Directory for [NBICseq-seg_v0.7.2](#nbicseq-seg_v072)
+
+-   `nbicseq_norm`
+
+    Directory for [NBICseq-norm_v0.2.4](#nbicseq-norm_v024).
+
+-   `TEMPDIR`
+
+    Temporary directory for temporary files. A large space required in this workflow.
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_bicseq2  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
+
+## Demo
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  output: demo/output
+  res_dir: reference
+  ref_gz_dir: ../reference/data
+  bam_tumor: "../demo_data/test"
+  bam_normal: "../demo_data/test"
+  nbicseq_seg: NBICseq-seg_v0.7.2
+  nbicseq_norm: NBICseq-norm_v0.2.4
+
+TEMPDIR: tmp
+```
 
 ## Input
-path/to/BQSRTumorBamFolder/{sample}.tumor.bam
+
+path/to/{sample}.tumor.bam
+path/to/{sample}.normal.bam
+
 ## Output
-results/{sample}_pvalue.CNVs
+
+results/{sample}\_pvalue.CNVs

@@ -1,0 +1,56 @@
+#xTEA v0.1 for short and linked reads on hg38
+include: "rules/commons.smk"
+include: "rules/unzip.smk"
+
+sample_IDs, =glob_wildcards(os.path.join(tumor_path,"{sample}.tumor.bam"))
+
+rule all:
+    input:
+        expand(os.path.join(outPath,"working/{sample}/L1/{sample}.tumor_LINE1.vcf"),sample=sample_IDs)
+
+rule generate_list:
+    input:
+        tp=os.path.abspath(tumor_path),
+        np=os.path.abspath(normal_path),
+    output:
+        id="sample_id.txt",
+        list="case_ctrl_bam_list.txt"
+    shell:
+        "ls {input.tp}/*.tumor.bam|sed 's/.tumor.bam//g'|sed 's/.*\///' >> {output.id}; "
+        "paste <(basename {input.tp}/*.tumor.bam .tumor.bam) "
+        "<(ls {input.tp}/*.tumor.bam) "
+        "<(ls {input.np}/*.normal.bam) >> {output.list}"
+
+rule generate_xTea:
+    input:
+        id="sample_id.txt",
+        list="case_ctrl_bam_list.txt",
+        rep_lib=rules.decomreplib.output,
+        ref=os.path.join(ref_dir,fa),
+        gff3=os.path.join(ref_dir,gff),
+        xtea=os.path.join(xtea,"xtea"),
+    output:
+        os.path.join(outPath,"working/{sample}/L1/run_xTEA_pipeline.sh"),
+    params:
+        working=os.path.join(outPath,"working"),
+    conda:
+        "mutpipe_xtea"
+    shell:
+        """
+        {xtea}/bin/xtea --case_control --tumor -i {input.id} -b {input.list} -p {params.working} -x null \
+        -o submit_jobs.sh -l {input.rep_lib} -r {input.ref} -g {input.gff3} --xtea {input.xtea} \
+        -y 1 -f 5907 --slurm -t 2-00:00 -q intel-e5,amd_ep2 -n 2 -m 32
+        """
+
+rule run_xTEA:
+    input:
+        os.path.join(outPath,"working/{sample}/L1/run_xTEA_pipeline.sh"),
+    output:
+        os.path.join(outPath,"working/{sample}/L1/{sample}.tumor_LINE1.vcf"),
+    resources:
+        mem_mb=25000,
+    conda:
+        "mutpipe_xtea"
+    shell:
+        "sh {input}>>run_xtea.log 2>&1"
+

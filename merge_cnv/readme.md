@@ -1,49 +1,154 @@
-# Quick Start 
-![avatar](https://github.com/douymLab/mutpipe/blob/main/merge_cnv/dag.png)
-## Dependency:  
-- python 3.6
-- snakemake 5.3.0
-- R 4.1.2
-- ANNOVAR
+![merge_cnv](https://github.com/douymLab/mutpipe/blob/main/merge_cnv/dag.png)
 
-we strongly suggest installing dependencies via conda:
+# Quick Start
 
-  > $ conda create -n mutpipe_merge_cnv --file environment.yaml
+## Step1: deploy workflow
 
-Then you could activate the environment "mutpipe_merge_cnv" through this command:
- 
-  > $ conda activate mutpipe_merge_cnv
+Given that mutpipe is cloned, run
 
-### install ANNOVAR
-ANNOVAR not includ in conda package, please install ANNOVAR manually.
+```{bash}
+cd mutpipe/merge_cnv
+```
+
+We strongly suggest installing dependencies via mamba:
+
+Given that Mamba is installed, run
+
+```{bash}
+mamba env create --file workflow/envs/environment.yaml -n mutpipe_mergecnv
+```
+
+## Step2: configure workflow
+
+### 1. Install ANNOVAR
+
+We cannot redistribute ANNOVAR to other users.
+
 To insall ANNOVAR, please apply a ueser license agreement via http://www.openbioinformatics.org/annovar/annovar_download_form.php.
+
 Since we use hg38 reference, ANNOVAR need addition annotation resources for hg38. The download example is as follows:
-> $ perl path/to/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGene path/to/humandb/
+
+```{bash}
+conda activate mutpipe_dndscv
+perl annovar/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGene annovar/humandb/
+conda deactivate
+```
 
 The other annotation resources can be found in: https://annovar.openbioinformatics.org/en/latest/user-guide/download/
 
-**NOTE: If you have installed ANNOVAR or downloaded the humandb resources already, please remember the directory to the `ANNOVAR` and `humandb/`**
+### 2. Modify config file
 
-## Resource:
-To run this pipeline, the below resources must exit under the "resources" folder:
-- Fasta index file of reference genome (hg38): Homo_sapiens_assembly38.fasta.fai
-- Centromeres (hg38): centromeric.txt
-- Telomeres (hg38): telomere.txt
-The required resource could be downloaded through running:
+To configure this workflow, modify `config/config.yaml` according to your needs, following the explanations provided below.
 
-> $bash download.sh
+-   `path`
+    
+    -   `ref_dir`
+    
+        Directory path for decompress reference files
+    
+    -   `gz_ref_dir`
+    
+        Directory path for compress reference files or do not need to decompress
+    
+    -  `ANNOVAR`
+    
+        Directory path for [ANNOVAR](#1-install-annovar)
+    
+    -  `humandb`
+    
+        Directory path for [humandb](#1-install-annovar)
+    
+    -  `output`
+    
+        Directory path for output files
 
- Or you also can soft-link the file into the "resources" folder.
+-  `gz_ref`
+
+    -  `fa` Homo_sapiens_assembly38.fasta.gz
+
+-  `ref`
+
+    -  `fa` Homo_sapiens_assembly38.fasta
+
+    -  `fai` Fasta index file of reference genome (hg38): Homo_sapiens_assembly38.fasta.fai
+
+    -  `dict` FASTA sequence dictionary file: Homo_sapiens_assembly38.dict
+
+    -  `centromeric` Centromeres (hg38): centromeric.txt
+
+    -  `telomere` Telomeres (hg38): telomere.txt
+
+    -  `hg38_len` hg38_len.txt
+
+    -  `hg38_len_offset` hg38_len_offset.sorted.txt
+
+    Required reference files prepared in [reference workflow](/reference)
+
+    Reference files need to decompress will be extracted automatically in workflow.
+
+-  `pre_res`
+
+    -  `bic_seq2_res`: path/to/BIC_SEQ2/output
+    -  `dnacopy_res`: path/to/DNAcopy/output
+    -  `freec_res`: path/to/FREEC/output
+
+## Step3: run workflow
+
+Given that snakemake is installed, run
+
+```{bash}
+conda activate snakemake
+```
+
+1.  dry run test
+
+```{bash}
+snakemake -np
+```
+
+2.  actual run
+
+```{bash}
+snakemake --cores 1 --use-conda
+```
 
 ## Run on slurm
 
-1. Change all directory names in the "Snakefile".
-2. dry run test
-    > snakemake -np
-3. actual run
-    > \$ source {your_dir}/miniconda3/etc/profile.d/conda.sh  
-    > \$ conda activate mutpipe_merge_cnv  
-    > \$ snakemake --unlock snakemake --rerun-incomplete -j {job_num} --latency-wait 120 --cluster-config slurm.json --cluster "sbatch -p {queue} -c 1 -t 12:00:00 --mem=5000 -o logs/%j.out -e logs/%j.err "
+modify `workflow/scripts/slurm.json` according to your needs
+
+```{bash}
+sh workflow/run.slurm.sh
+```
+
+## Demo
+
+### `config/config.yaml`
+
+```{yaml}
+path:
+  gz_ref_dir: '../reference/data'
+  ref_dir: reference
+  ANNOVAR: annovar
+  humandb: annovar/humandb
+  output: demo/output
+
+gz_ref:
+  fa: "Homo_sapiens_assembly38.fasta.gz"
+
+ref:
+  fa: Homo_sapiens_assembly38.fasta
+  fai: Homo_sapiens_assembly38.fasta.fai
+  dict: Homo_sapiens_assembly38.dict
+  centromeric: centromeric.txt
+  telomere: telomere.txt
+  hg38_len: hg38_len.txt
+  hg38_len_offset: hg38_len_offset.sorted.txt
+
+pre_res:
+  bic_seq2_res: ../BIC_SEQ2/demo/output
+  dnacopy_res: ../DNAcopy/demo/output
+  freec_res: ../FREEC/demo/output
+```
 
 ## Input
 path/to/BIC_SEQ2/results/{sample}_pvalue.CNVs   
