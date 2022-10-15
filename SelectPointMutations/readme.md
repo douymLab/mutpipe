@@ -10,14 +10,14 @@
 2. We combine multiple callers by a voting approch.  
 
 - For SNVs, we manually examined 588 sites by using IGV.  
-  ![SNV](https://github.com/douymLab/mutpipe/blob/main/SelectPonitMutations/SNV.png)  
+  ![SNV](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutations/SNV.png)  
   Variants called by >=2 software has a ~86% precision. Based on the precision, we choose the SNVs voted by >=2 software as the consensus SNVs.
     
 - For Indels, we manually examined 85 sites by using IGV.  
-  ![Indel](https://github.com/douymLab/mutpipe/blob/main/SelectPonitMutations/Indel.png)  
+  ![Indel](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutations/Indel.png)  
   Variants called by >=2 software has a ~89% precision. Based on the precision, we choose the SNVs voted by >=2 software as the consensus Indels.
 
-![SelectPonitMutations](https://github.com/douymLab/mutpipe/blob/main/SelectPonitMutations/mutpipe_SelectPointMutation.png)
+![SelectPonitMutations](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutations/mutpipe_SelectPointMutation.png)
 
 # Quick Start 
 
