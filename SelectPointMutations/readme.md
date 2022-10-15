@@ -19,8 +19,6 @@
 
 ![SelectPonitMutations](https://github.com/douymLab/mutpipe/blob/main/SelectPointMutations/mutpipe_SelectPointMutation.png)
 
-# Quick Start 
-
 # Quick Start
 
 ## Step1: deploy workflow
