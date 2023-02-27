@@ -1,6 +1,6 @@
 conda activate snakemake
 ## submit to cluster
-snakemake -j 671 \
+snakemake -j 1 \
     --use-conda \
     --cluster-config workflow/scripts/slurm.json \
     --cluster "sbatch -p {cluster.partition} \
